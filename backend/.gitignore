@@ -21,12 +21,6 @@ build/
 *.ipr
 out/
 
-### macOS ###
-# General
-.DS_Store
-.AppleDouble
-.LSOverride
-
 ### NetBeans ###
 /nbproject/private/
 /nbbuild/
