@@ -5,10 +5,6 @@
     <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <meta name="theme-color" content="#000000"/>
-    <!--
-      manifest.json provides metadata used when your web app is installed on a
-      user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
-    -->
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json"/>
     <meta name="google-signin-scope" content="profile email">
     <meta id="googleMeta" name="google-signin-client_id"
@@ -16,38 +12,24 @@
     <script type="text/JavaScript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
     <script type="text/JavaScript" src="oAuth.js"></script>
     <script src="https://apis.google.com/js/platform.js" async defer></script>
-
-    <!--
-      Notice the use of %PUBLIC_URL% in the tags above.
-      It will be replaced with the URL of the `public` folder during the build.
-      Only files inside the `public` folder can be referenced from the HTML.
-
-      Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
-      work correctly both with client-side routing and a non-root public URL.
-      Learn how to configure a non-root public URL by running `npm run build`.
-    -->
+    <script src="https://unpkg.com/react@16/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js"></script>
     <title>Colleter</title>
-
 </head>
 <body>
 <div id="root"></div>
-<div class="g-signin2" data-onsuccess="onSignIn" data-theme="dark"></div>
 
 <script>
     function onSignIn(googleUser) {
         // Useful data for your client-side scripts:
-        var profile = googleUser.getBasicProfile();
-        console.log("ID: " + profile.getId()); // Don't send this directly to your server!
-        console.log('Full Name: ' + profile.getName());
-        console.log('Given Name: ' + profile.getGivenName());
-        console.log('Family Name: ' + profile.getFamilyName());
-        console.log("Image URL: " + profile.getImageUrl());
-        console.log("Email: " + profile.getEmail());
-
+        let profile = googleUser.getBasicProfile();
         // The ID token you need to pass to your backend:
-        var id_token = googleUser.getAuthResponse().id_token;
-        console.log("ID Token: " + id_token);
+        let id_token = googleUser.getAuthResponse().id_token;
+        localStorage.setItem('id_token', id_token);
+        localStorage.setItem('name', profile.getName());
+        window.location.href = '/home';
     }
+
 </script>
 </body>
 </html>
