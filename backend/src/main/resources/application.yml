@@ -1,0 +1,28 @@
+spring:
+  datasource:
+    test:
+      jdbc-url: jdbc:mysql://localhost:3306/Colletter?serverTimezone=UTC&characterEncoding=UTF-8
+      username: root
+      password: 1234
+      driver-class-name: com.mysql.cj.jdbc.Driver
+
+  jpa:
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+    properties:
+      hibernate:
+        format_sql: true
+        ddl-auto: update
+    generate-ddl: true
+
+logging:
+  level:
+    org:
+      hibernate:
+        SQL: DEBUG
+        type:
+          descriptor:
+            sql:
+              BasicBinder: TRACE
+
+server:
+  port: 8080
