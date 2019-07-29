@@ -3,6 +3,8 @@ package com.nexters.colletter.domain.model;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "news")
@@ -30,6 +32,9 @@ public class News {
     @OneToOne
     @JoinColumn(name = "category_id")
     private Category category;
+    @ManyToMany(mappedBy = "bookmarks")
+    @Builder.Default
+    private List<User> bookmarked = new ArrayList<>();
 
     @Builder
     public News(
@@ -48,5 +53,10 @@ public class News {
         this.title = title;
         this.content = content;
         this.category = category;
+    }
+
+    // TODO : add verification logic
+    public void bookmarkedBy(User user) {
+        bookmarked.add(user);
     }
 }

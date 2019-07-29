@@ -3,6 +3,7 @@ package com.nexters.colletter.domain.model;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -30,13 +31,14 @@ public class User {
     private String access_token;
     @Column(name = "refresh_token")
     private String refresh_token;
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
             name = "user_news",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "new_id")
     )
-    private List<News> news;
+    @Builder.Default
+    private List<News> bookmarks = new ArrayList<>();
 
     @Builder
     public User(
@@ -55,5 +57,10 @@ public class User {
         this.theme = theme;
         this.access_token = access_token;
         this.refresh_token = refresh_token;
+    }
+
+    // TODO : add verification logic
+    public void bookmark(News news) {
+        bookmarks.add(news);
     }
 }

@@ -1,9 +1,14 @@
 package com.nexters.colletter.domain;
 
+import com.nexters.colletter.domain.model.Category;
 import com.nexters.colletter.domain.model.News;
 import com.nexters.colletter.domain.model.User;
+import com.nexters.colletter.domain.repository.CategoryRepository;
 import com.nexters.colletter.domain.repository.NewsRepository;
 import com.nexters.colletter.domain.repository.UserRepository;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +20,8 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import javax.transaction.Transactional;
+import java.util.Arrays;
+import java.util.Optional;
 
 @RunWith(SpringRunner.class)
 @DataJpaTest
@@ -24,12 +31,22 @@ public class ModelTest {
     UserRepository userRepository;
     @Autowired
     NewsRepository newsRepository;
+    @Autowired
+    CategoryRepository categoryRepository;
+
+    @Before
+    public void initCategory() {
+        categoryRepository.saveAll(Arrays.asList(
+                new Category("c_0", "음식"),
+                new Category("c_1", "게임"),
+                new Category("c_2", "교육")
+        ));
+    }
 
     @Test
     @Transactional
-    @Rollback(false)
     public void createUser() {
-        User user = User.builder()
+        long id = userRepository.save(User.builder()
                 .email("leesd556@gmail.com")
                 .name("KIM")
                 .sex(true)
@@ -37,24 +54,70 @@ public class ModelTest {
                 .theme(true)
                 .access_token(null)
                 .refresh_token(null)
-                .build();
+                .build())
+                .getId();
 
-        userRepository.save(user);
+        Optional<User> option = userRepository.findById(id);
+
+        Assert.assertTrue(option.isPresent());
+        User user = option.get();
+
+        Assert.assertEquals(id, user.getId());
     }
 
     @Test
     @Transactional
-    @Rollback(false)
     public void createNews() {
-        News news = News.builder()
+        long id = newsRepository.save(News.builder()
                 .name("news")
                 .uri("localhost.com")
                 .view(100)
                 .image(null)
                 .title("title")
                 .content("content")
+                .build())
+                .getId();
+
+        Optional<News> option = newsRepository.findById(id);
+
+        Assert.assertTrue(option.isPresent());
+        News news = option.get();
+
+        Assert.assertEquals(id, news.getId());
+    }
+
+    @Test
+    @Transactional
+    public void userBookmarkFoodNews() {
+        Category foodCategory = categoryRepository.findById("c_0").get();
+        News news = News.builder()
+                .name("food")
+                .uri("food.com")
+                .view(100)
+                .image(null)
+                .title("food")
+                .content("delicious")
+                .category(foodCategory)
                 .build();
 
-        newsRepository.save(news);
+        User user = User.builder()
+                .name("kim")
+                .email("leesd556@gmail.com")
+                .sex(true)
+                .image(null)
+                .theme(true)
+                .build();
+
+        user.bookmark(news);
+        news.bookmarkedBy(user);
+
+        long userId = userRepository.save(user).getId();
+        long newsId = newsRepository.save(news).getId();
+
+        user = userRepository.findById(userId).get();
+        news = newsRepository.findById(newsId).get();
+
+        Assert.assertEquals(1, user.getBookmarks().size());
+        Assert.assertEquals(1, news.getBookmarked().size());
     }
 }
