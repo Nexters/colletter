@@ -24,7 +24,7 @@ spring:
   datasource:
     test:
       jdbc-url: jdbc:h2:mem:testdb
-      username: sa
+      username:
       password:
       driver-class-name: org.h2.Driver
 
@@ -48,7 +48,7 @@ logging:
         type:
           descriptor:
             sql:
-              BasicBinder: TRACE
+              BasicBinder:
 
 server:
   port: 8080
