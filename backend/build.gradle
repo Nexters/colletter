@@ -35,6 +35,10 @@ dependencies {
     testCompile 'org.junit.jupiter:junit-jupiter-engine:5.2.0'
     testCompile 'org.mockito:mockito-junit-jupiter:2.23.0'
 
+    // doc
+    compile group: 'io.springfox', name: 'springfox-swagger2', version: '2.9.2'
+    compile group: 'io.springfox', name: 'springfox-swagger-ui', version: '2.9.2'
+    
     implementation 'org.springframework.boot:spring-boot-starter-web'
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
