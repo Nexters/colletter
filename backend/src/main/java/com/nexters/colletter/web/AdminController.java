@@ -2,7 +2,7 @@ package com.nexters.colletter.web;
 
 import com.nexters.colletter.app.NewsService;
 import com.nexters.colletter.app.dto.NewsDto;
-import com.nexters.colletter.domain.error.AlreadyExsistException;
+import com.nexters.colletter.domain.error.AlreadyExistException;
 import com.nexters.colletter.domain.error.InvalidValueException;
 import com.nexters.colletter.domain.value.NewsStatus;
 import com.nexters.colletter.domain.value.Response;
@@ -24,7 +24,7 @@ public class AdminController {
                     NewsStatus.REGISTERED
             );
             return new Response("Success", null, null);
-        } catch (AlreadyExsistException | InvalidValueException ex) {
+        } catch (AlreadyExistException | InvalidValueException ex) {
             return new Response("Fail", ex.toString(), null);
         }
     }

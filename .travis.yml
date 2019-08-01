@@ -1,3 +1,6 @@
+os:
+  - linux
+
 language: java
 jdk:
 - openjdk8
@@ -7,6 +10,9 @@ branches:
   - master
   - dev
   - backend
+
+services:
+  - docker
 
 cache:
   directories:
@@ -19,18 +25,8 @@ script:
   # BUILD
   - "./gradlew clean build"
   
-  # CONFIG
-  - PRJ_GROUP=$(gradle properties -q | grep "group:" | awk '{print $2}')
-  - PRJ_NAME=$(gradle properties -q | grep "name:" | awk '{print $2}')
-  - PRJ_VERSION=$(gradle properties -q | grep "version:" | awk '{print $2}')
-  - echo "## PROJECT_GROUP - ${PRJ_GROUP}"
-  - echo "## PROJECT_NAME - ${PRJ_NAME}"
-  - echo "## PROJECT_VERSION - ${PRJ_VERSION}"
-  - PRJ_JAR=${PRJ_NAME}-${PRJ_VERSION}.ja
-  
   # DOCKER
-  - docker login -u ${DOCKER_USERNAME} -p ${DOCKER_PASSWORD}
-  - docker build -t ${PRJ_NAME}:${PRJ_VERSION} --build-arg JAR_FILE=build/libs/${PRJ_JAR} .
-  - docker tag ${PRJ_NAME}:${PRJ_VERSION} ${DOCKER_USER}/${PRJ_NAME}:latest
-  - docker push ${DOCKER_USER}/${PRJ_NAME}:latest
-  
+  - echo ${DOCKER_PASSWORD} | docker login --username ${DOCKER_USERNAME} --password-stdin
+  - docker build -t colletter:latest --build-arg JAR_FILE=build/libs/*.jar .
+  - docker tag colletter:latest ${DOCKER_USERNAME}/colletter:latest
+  - docker push ${DOCKER_USERNAME}/colletter:latest

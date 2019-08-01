@@ -1,12 +1,11 @@
 package com.nexters.colletter.app;
 
 import com.nexters.colletter.app.dto.NewsDto;
-import com.nexters.colletter.domain.error.AlreadyExsistException;
+import com.nexters.colletter.domain.error.AlreadyExistException;
 import com.nexters.colletter.domain.error.InvalidValueException;
 import com.nexters.colletter.domain.model.News;
 import com.nexters.colletter.domain.repository.NewsRepository;
 import com.nexters.colletter.domain.value.NewsStatus;
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,8 +13,6 @@ import org.springframework.stereotype.Service;
 public class NewsService {
     @Autowired
     private NewsRepository newsRepository;
-    @Autowired
-    private ModelMapper modelMapper;
 
     public long newNews(NewsDto newsDto, NewsStatus newsStatus) {
         News news = News.builder()
@@ -27,7 +24,7 @@ public class NewsService {
                 .status(newsStatus)
                 .build();
         if (isRegistered(news)) {
-            throw new AlreadyExsistException("Already registered news");
+            throw new AlreadyExistException("Already registered news");
         }
 
         return newsRepository.save(news).getId();
@@ -35,7 +32,7 @@ public class NewsService {
 
     public void setToRegister(News news){
         if (isRegistered(news)) {
-            throw new AlreadyExsistException("Already registered news");
+            throw new AlreadyExistException("Already registered news");
         }
         news.setStatus(NewsStatus.REGISTERED);
     }
