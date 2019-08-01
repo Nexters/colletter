@@ -38,4 +38,5 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
+    compile('org.modelmapper:modelmapper:0.7.8')
 }

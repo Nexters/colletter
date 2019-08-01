@@ -1,4 +1,4 @@
-package com.nexters.colletter.domain.service;
+package com.nexters.colletter.app;
 
 import org.springframework.stereotype.Service;
 

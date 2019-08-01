@@ -1,8 +1,11 @@
 package com.nexters.colletter.domain.model;
 
+import com.nexters.colletter.domain.value.NewsStatus;
 import lombok.*;
 
 import javax.persistence.*;
+import java.sql.Date;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,6 +24,7 @@ public class News {
     private String name;
     @Column(name = "uri")
     private String uri;
+    // TODO
     @Column(name = "view")
     private int view;
     @Column(name = "image")
@@ -29,6 +33,12 @@ public class News {
     private String title;
     @Column(name = "content")
     private String content;
+    @Column(name = "date")
+    private LocalDateTime updatedAt;
+
+    // request / registered
+    @Column(name = "status")
+    private NewsStatus status;
     @OneToOne
     @JoinColumn(name = "category_id")
     private Category category;
@@ -53,6 +63,18 @@ public class News {
         this.title = title;
         this.content = content;
         this.category = category;
+    }
+
+    public void setStatus(NewsStatus newsStatus) {
+        this.status = newsStatus;
+    }
+
+    /**
+     * called before insert
+     */
+    @PrePersist
+    public void updatedAt() {
+        this.updatedAt = LocalDateTime.now();
     }
 
     // TODO : add verification logic

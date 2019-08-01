@@ -1,4 +1,4 @@
-package com.nexters.colletter.domain;
+package com.nexters.colletter.domain.model;
 
 import com.nexters.colletter.domain.model.Category;
 import com.nexters.colletter.domain.model.News;
@@ -49,7 +49,6 @@ public class ModelTest {
         long id = userRepository.save(User.builder()
                 .email("leesd556@gmail.com")
                 .name("KIM")
-                .sex(true)
                 .image(null)
                 .theme(true)
                 .access_token(null)
@@ -103,7 +102,6 @@ public class ModelTest {
         User user = User.builder()
                 .name("kim")
                 .email("leesd556@gmail.com")
-                .sex(true)
                 .image(null)
                 .theme(true)
                 .build();

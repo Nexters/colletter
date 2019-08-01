@@ -3,6 +3,7 @@ package com.nexters.colletter.domain.model;
 import lombok.*;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,12 +22,12 @@ public class User {
     private String email;
     @Column(name = "name", nullable = false)
     private String name;
-    @Column(name = "sex")
-    private boolean sex;
     @Column(name = "image")
     private String image;
     @Column(name = "theme")
     private boolean theme;
+    @Column(name = "date")
+    private LocalDateTime signUpAt;
     @Column(name = "access_token")
     private String access_token;
     @Column(name = "refresh_token")
@@ -44,7 +45,6 @@ public class User {
     public User(
             String email,
             String name,
-            boolean sex,
             String image,
             boolean theme,
             String access_token,
@@ -52,11 +52,18 @@ public class User {
     ) {
         this.email = email;
         this.name = name;
-        this.sex = sex;
         this.image = image;
         this.theme = theme;
         this.access_token = access_token;
         this.refresh_token = refresh_token;
+    }
+
+    /**
+     * called before insert
+     */
+    @PrePersist
+    public void signUpAt() {
+        this.signUpAt = LocalDateTime.now();
     }
 
     // TODO : add verification logic
