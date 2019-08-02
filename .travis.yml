@@ -10,6 +10,7 @@ branches:
   - master
   - dev
   - backend
+  - staging
 
 services:
   - docker
@@ -21,12 +22,15 @@ cache:
 
 before_script: cd backend
 
-script:
-  # BUILD
-  - "./gradlew clean build"
-  
-  # DOCKER
-  - echo ${DOCKER_PASSWORD} | docker login --username ${DOCKER_USERNAME} --password-stdin
-  - docker build -t colletter:latest --build-arg JAR_FILE=build/libs/*.jar .
-  - docker tag colletter:latest ${DOCKER_USERNAME}/colletter:latest
-  - docker push ${DOCKER_USERNAME}/colletter:latest
+jobs:
+  include:
+    - stage: test
+      script:
+        - "./gradlew clean build"
+    - stage: deploy
+      if: branch = staging
+      script:
+        - echo ${DOCKER_PASSWORD} | docker login --username ${DOCKER_USERNAME} --password-stdin
+        - docker build -t colletter:latest --build-arg JAR_FILE=build/libs/*.jar .
+        - docker tag colletter:latest ${DOCKER_USERNAME}/colletter:latest
+        - docker push ${DOCKER_USERNAME}/colletter:latest
