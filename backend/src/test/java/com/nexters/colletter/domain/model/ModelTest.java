@@ -6,6 +6,7 @@ import com.nexters.colletter.domain.model.User;
 import com.nexters.colletter.domain.repository.CategoryRepository;
 import com.nexters.colletter.domain.repository.NewsRepository;
 import com.nexters.colletter.domain.repository.UserRepository;
+import com.nexters.colletter.domain.value.CategoryValue;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -37,9 +38,12 @@ public class ModelTest {
     @Before
     public void initCategory() {
         categoryRepository.saveAll(Arrays.asList(
-                new Category("c_0", "음식"),
-                new Category("c_1", "게임"),
-                new Category("c_2", "교육")
+                CategoryValue.design,
+                CategoryValue.game,
+                CategoryValue.food,
+                CategoryValue.education,
+                CategoryValue.development,
+                CategoryValue.plan
         ));
     }
 
@@ -70,7 +74,6 @@ public class ModelTest {
         long id = newsRepository.save(News.builder()
                 .name("news")
                 .uri("localhost.com")
-                .view(100)
                 .image(null)
                 .title("title")
                 .content("content")
@@ -92,7 +95,6 @@ public class ModelTest {
         News news = News.builder()
                 .name("food")
                 .uri("food.com")
-                .view(100)
                 .image(null)
                 .title("food")
                 .content("delicious")

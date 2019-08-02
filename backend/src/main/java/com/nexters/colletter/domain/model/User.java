@@ -1,5 +1,7 @@
 package com.nexters.colletter.domain.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -39,6 +41,7 @@ public class User {
             inverseJoinColumns = @JoinColumn(name = "new_id")
     )
     @Builder.Default
+    @JsonIgnore
     private List<News> bookmarks = new ArrayList<>();
 
     @Builder

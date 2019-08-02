@@ -1,5 +1,6 @@
 package com.nexters.colletter.domain.model;
 
+import com.fasterxml.jackson.annotation.*;
 import com.nexters.colletter.domain.value.NewsStatus;
 import lombok.*;
 
@@ -8,6 +9,7 @@ import java.sql.Date;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 @Table(name = "news")
@@ -24,9 +26,6 @@ public class News {
     private String name;
     @Column(name = "uri")
     private String uri;
-    // TODO
-    @Column(name = "view")
-    private int view;
     @Column(name = "image")
     private String image;
     @Column(name = "title")
@@ -36,7 +35,7 @@ public class News {
     @Column(name = "date")
     private LocalDateTime updatedAt;
 
-    // request / registered
+    // request / register / pick
     @Column(name = "status")
     private NewsStatus status;
     @OneToOne
@@ -44,13 +43,15 @@ public class News {
     private Category category;
     @ManyToMany(mappedBy = "bookmarks")
     @Builder.Default
+    @JsonIgnore
     private List<User> bookmarked = new ArrayList<>();
+    @Column(name = "bookmarks_count")
+    private int bookmarkedCount;
 
     @Builder
     public News(
             String name,
             String uri,
-            int view,
             String image,
             String title,
             String content,
@@ -58,7 +59,6 @@ public class News {
     ) {
         this.name = name;
         this.uri = uri;
-        this.view = view;
         this.image = image;
         this.title = title;
         this.content = content;
@@ -80,5 +80,24 @@ public class News {
     // TODO : add verification logic
     public void bookmarkedBy(User user) {
         bookmarked.add(user);
+        bookmarkedCount++;
+    }
+
+    public void bookmarkCanceldBy(User user) {
+        bookmarked.remove(user);
+        bookmarkedCount--;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        News news = (News) o;
+        return id == news.id;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 }

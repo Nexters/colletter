@@ -21,7 +21,7 @@ public class AdminController {
         try {
             newsService.newNews(
                     newsDto,
-                    NewsStatus.REGISTERED
+                    NewsStatus.REGISTER
             );
             return new Response("Success", null, null);
         } catch (AlreadyExistException | InvalidValueException ex) {

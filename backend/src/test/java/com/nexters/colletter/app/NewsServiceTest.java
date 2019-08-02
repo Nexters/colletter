@@ -35,7 +35,7 @@ public class NewsServiceTest {
         );
 
         // when
-        long id = newsService.newNews(newsDto, NewsStatus.REGISTERED);
+        long id = newsService.newNews(newsDto, NewsStatus.REGISTER);
 
         // then
         Assert.assertTrue(newsRepository.findById(id).isPresent());
