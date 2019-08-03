@@ -39,11 +39,13 @@ public class NewsService {
         return newsRepository.save(news).getId();
     }
 
-    public void setToRegister(News news){
+    public void changeNewsStatus(long newsId, NewsStatus status) {
+        News news = getNewsById(newsId);
         if (isRegistered(news)) {
             throw new AlreadyExistException("Already registered news");
         }
-        news.setStatus(NewsStatus.REGISTER);
+        news.setStatus(status);
+        newsRepository.save(news);
     }
 
     public void modify(News news){

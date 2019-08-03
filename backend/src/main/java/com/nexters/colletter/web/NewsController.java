@@ -23,7 +23,7 @@ public class NewsController {
     NewsService newsService;
 
     @GetMapping("/{id}")
-    public News getNewsById(@PathVariable long id) {
+    public News getNews(@PathVariable long id) {
         return newsService.getNewsById(id);
     }
 
