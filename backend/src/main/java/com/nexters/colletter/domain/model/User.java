@@ -25,7 +25,7 @@ public class User {
     @Column(name = "user_id")
     private long id;
     @Column(name = "role")
-    private UserRole role = UserRole.NORMAL;
+    private UserRole role;
     @Column(name = "email")
     private String email;
     @Column(name = "name", nullable = false)

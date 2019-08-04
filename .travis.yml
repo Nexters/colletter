@@ -4,7 +4,7 @@ os:
 language: java
 jdk:
 - openjdk8
-dist: trusty
+
 branches:
   only:
   - master
@@ -20,17 +20,9 @@ cache:
   - "$HOME/.m2/repository"
   - "$HOME/.gradle"
 
-before_script: cd backend
+before_script:
+  - cd backend
 
-jobs:
-  include:
-    - stage: test
-      script:
-        - "./gradlew clean build"
-    - stage: deploy
-      if: branch = staging
-      script:
-        - echo ${DOCKER_PASSWORD} | docker login --username ${DOCKER_USERNAME} --password-stdin
-        - docker build -t colletter:latest --build-arg JAR_FILE=build/libs/*.jar .
-        - docker tag colletter:latest ${DOCKER_USERNAME}/colletter:latest
-        - docker push ${DOCKER_USERNAME}/colletter:latest
+script:
+  - './gradlew clean build'
+  - 'if [ "$TRAVIS_BRANCH" = "staging" ]; then bash ./travis/docker_deploy.sh; fi'
