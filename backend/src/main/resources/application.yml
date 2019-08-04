@@ -1,3 +1,12 @@
+app:
+  name: colletter
+
+security:
+  jwt:
+    secret: colletter
+    expires_in: 3600000
+    header: Bearer
+
 spring:
   profiles:
     active: test
@@ -7,7 +16,7 @@ spring:
   datasource:
     develop:
       initialize: true
-      jdbc-url: jdbc:mysql://localhost:3306/Colletter?serverTimezone=UTC&characterEncoding=UTF-8
+      jdbc-url: jdbc:mysql://localhost:3306/colletter?serverTimezone=UTC&characterEncoding=UTF-8
       username: root
       password: 1234
       driver-class-name: com.mysql.cj.jdbc.Driver
@@ -30,6 +39,7 @@ spring:
       driver-class-name: org.h2.Driver
 
   jpa:
+    show-sql: true
     database-platform: org.hibernate.dialect.H2Dialect
     properties:
       hibernate:
@@ -50,6 +60,8 @@ logging:
           descriptor:
             sql:
               BasicBinder:
+---
+
 
 server:
   port: 8080

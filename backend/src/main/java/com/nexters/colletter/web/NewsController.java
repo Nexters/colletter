@@ -7,13 +7,11 @@ import com.nexters.colletter.app.NewsService;
 import com.nexters.colletter.domain.model.News;
 import com.nexters.colletter.domain.value.NewsStatus;
 import com.nexters.colletter.domain.value.Response;
+import com.nexters.colletter.web.dto.CustomUserDetail;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
-import java.nio.file.Path;
-import java.util.Arrays;
 import java.util.List;
 
 @RestController
@@ -48,14 +46,10 @@ public class NewsController {
     @PostMapping("/")
     public Response requestNews(@RequestBody NewsDto newsDto) {
         // TODO : validation
-        try {
-            newsService.newNews(
-                    newsDto,
-                    NewsStatus.REQUEST
-            );
-            return new Response("Success", null, null);
-        } catch (AlreadyExistException | InvalidValueException ex) {
-            return new Response("Fail", ex.toString(), null);
-        }
+        newsService.newNews(
+                newsDto,
+                NewsStatus.REQUEST
+        );
+        return new Response("Success", null);
     }
 }

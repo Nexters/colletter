@@ -45,11 +45,9 @@ public class NewsTest {
     @Autowired
     private WebApplicationContext context;
     @Autowired
-    NewsService newsService;
+    private NewsRepository newsRepository;
     @Autowired
-    NewsRepository newsRepository;
-    @Autowired
-    UserRepository userRepository;
+    private UserRepository userRepository;
 
     @Before
     public void setup() {

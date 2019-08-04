@@ -18,15 +18,11 @@ public class AdminController {
     @PostMapping("/news")
     public Response registerNews(@RequestBody NewsDto newsDto) {
         // TODO : validation
-        try {
-            newsService.newNews(
-                    newsDto,
-                    NewsStatus.REGISTER
-            );
-            return new Response("Success", null, null);
-        } catch (AlreadyExistException | InvalidValueException ex) {
-            return new Response("Fail", ex.toString(), null);
-        }
+        newsService.newNews(
+                newsDto,
+                NewsStatus.REGISTER
+        );
+        return new Response("Success", null);
     }
 
     @PutMapping("/news/{id}")

@@ -7,9 +7,7 @@ import lombok.*;
 import javax.persistence.*;
 import java.sql.Date;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 @Entity
 @Table(name = "news")
@@ -44,7 +42,7 @@ public class News {
     @ManyToMany(mappedBy = "bookmarks")
     @Builder.Default
     @JsonIgnore
-    private List<User> bookmarked = new ArrayList<>();
+    private Set<User> bookmarked = new HashSet<>();
     @Column(name = "bookmarks_count")
     private int bookmarkedCount;
 
@@ -83,9 +81,16 @@ public class News {
         bookmarkedCount++;
     }
 
-    public void bookmarkCanceldBy(User user) {
+    public void bookmarkCanceledBy(User user) {
         bookmarked.remove(user);
         bookmarkedCount--;
+    }
+
+    public boolean isBookmarkedBy(User user) {
+        if (bookmarked.contains(user)) {
+            return true;
+        }
+        return false;
     }
 
     @Override

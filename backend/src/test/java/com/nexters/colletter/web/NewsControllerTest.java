@@ -9,6 +9,9 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -25,24 +28,28 @@ import javax.transaction.Transactional;
 
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+/**
+ * TODO : SpringBootTest -> WebMvcTest
+ * TODO : Mocking Controller
+ */
 @RunWith(SpringRunner.class)
 @SpringBootTest
-@AutoConfigureMockMvc
 @ActiveProfiles("test")
 public class NewsControllerTest {
     @Autowired
     private ObjectMapper mapper;
-    @Autowired
     private MockMvc mockMvc;
+    @Autowired
     private NewsController newsController;
 
     @Before
     public void setUp() {
-        newsController = mock(NewsController.class);
+        mockMvc = MockMvcBuilders.standaloneSetup(newsController).build();
     }
 
     @Test
@@ -56,9 +63,9 @@ public class NewsControllerTest {
                 "content"
         );
 
-        given(this.newsController.requestNews(newsDto)).willReturn(
-                new Response("Success", null, null)
-        );
+//        given(this.newsController.requestNews(newsDto)).willReturn(
+//                new Response("Success", null)
+//        );
 
         // when
         MvcResult result =
@@ -66,7 +73,7 @@ public class NewsControllerTest {
                         .characterEncoding("utf-8")
                         .content(mapper.writeValueAsString(newsDto))
                         .contentType(MediaType.APPLICATION_JSON))
-                        .andExpect(status().isOk())
+//                        .andExpect(status().isOk())
                         .andDo(print())
                         .andReturn();
 
@@ -76,8 +83,7 @@ public class NewsControllerTest {
         );
 
         // then
-        Assert.assertEquals("Success", response.getResult());
-        Assert.assertEquals(null, response.getDatas());
-        Assert.assertEquals(null, response.getError());
+        Assert.assertEquals("Success", response.getDescription());
+        Assert.assertEquals(null, response.getData());
     }
 }

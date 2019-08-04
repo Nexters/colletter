@@ -7,6 +7,8 @@ import com.nexters.colletter.domain.repository.CategoryRepository;
 import com.nexters.colletter.domain.repository.NewsRepository;
 import com.nexters.colletter.domain.repository.UserRepository;
 import com.nexters.colletter.domain.value.CategoryValue;
+import com.nexters.colletter.domain.value.ThemeStatus;
+import com.nexters.colletter.domain.value.UserRole;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -54,7 +56,7 @@ public class ModelTest {
                 .email("leesd556@gmail.com")
                 .name("KIM")
                 .image(null)
-                .theme(true)
+                .theme(ThemeStatus.WHITE)
                 .access_token(null)
                 .refresh_token(null)
                 .build())
@@ -105,7 +107,7 @@ public class ModelTest {
                 .name("kim")
                 .email("leesd556@gmail.com")
                 .image(null)
-                .theme(true)
+                .theme(ThemeStatus.WHITE)
                 .build();
 
         user.bookmark(news);
