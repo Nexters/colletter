@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import BookmarkCnt from './mypage_bookmarkCnt'
 import BookmarkList from './mypage_bookmarkList'
 
-class Header extends Component {
+class Body extends Component {
     render() {
         return (
             <div>
@@ -14,4 +14,4 @@ class Header extends Component {
     }
 }
 
-export default Header;
+export default Body;
