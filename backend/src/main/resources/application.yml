@@ -34,7 +34,7 @@ spring:
   datasource:
     test:
       jdbc-url: jdbc:h2:mem:colletter
-      username:
+      username: sa
       password:
       driver-class-name: org.h2.Driver
 
@@ -49,7 +49,7 @@ spring:
   h2:
     console:
       enabled: true
-      path: /console
+      path: /h2-console
 ---
 logging:
   level:

@@ -61,9 +61,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/users/login").permitAll()
                 .antMatchers("/admin").hasRole("ADMIN")
-//                .antMatchers("/users/v1/deregister/**").hasRole("ADMIN")
+                .antMatchers("/admin/login").permitAll()
+//                  .antMatchers("/users/v1/deregister/**").hasRole("ADMIN")
 //                .antMatchers("/healthz").permitAll()
-//                .antMatchers("/h2-console/**/**").permitAll()
+                .antMatchers("/h2-console/**/**").permitAll()
                 .antMatchers(AUTH_WHITELIST).permitAll()
                 .anyRequest().authenticated();
 

@@ -16,12 +16,12 @@ public class CustomUserDetailsService implements UserDetailsService {
     private UserRepository userRepository;
 
     @Override
-    public UserDetails loadUserByUsername(String id) throws UsernameNotFoundException {
-        User user = getUserById(Long.valueOf(id));
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+        User user = getUserByEmail(email);
         return new CustomUserDetail(user);
     }
 
-    private User getUserById(long id) {
-        return userRepository.findById(id).orElseThrow(() -> new InvalidValueException("No Matched user id"));
+    private User getUserByEmail(String email) {
+        return userRepository.findByEmail(email).orElseThrow(() -> new InvalidValueException("No Matched user id"));
     }
 }

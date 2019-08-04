@@ -16,6 +16,13 @@ public class AuthenticationService {
     @Autowired
     JwtTokenHelper jwtTokenHelper;
 
+    // TODO : polish
+    public String adminLogin(String identifier) {
+        getUserByEmail(identifier);
+        String jwt = jwtTokenHelper.generateToken(identifier);
+        return "Bearer " + jwt;
+    }
+
     public String login(UserDto userDto) {
         // TODO : OAuth2.0 validation logic
         validation();
@@ -43,5 +50,9 @@ public class AuthenticationService {
 
     private User getUserById(long id) {
         return userRepository.findById(id).orElseThrow(() -> new InvalidValueException("No Matched user id"));
+    }
+
+    private User getUserByEmail(String email) {
+        return userRepository.findByEmail(email).orElseThrow(() -> new InvalidValueException("No Matched user email"));
     }
 }
