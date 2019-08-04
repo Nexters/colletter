@@ -27,6 +27,7 @@
         let id_token = googleUser.getAuthResponse().id_token;
         localStorage.setItem('id_token', id_token);
         localStorage.setItem('name', profile.getName());
+        localStorage.setItem('img', profile.getImageUrl());
         window.location.href = '/home';
     }
 
