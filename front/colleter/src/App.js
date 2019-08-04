@@ -7,7 +7,7 @@ import styled from 'styled-components';
 import logo from './img/logo.png'
 import jQuery from "jquery";
 import footer from './img/footer.PNG';
-
+import mypage from './views/mypage/mypage';
 const $ = jQuery;
 
 const LogoImg = styled.img`
@@ -99,6 +99,7 @@ class App extends React.Component {
                 <Router>
                     <div>
                         <Route exact path="/" component={home}/>
+                        <Route exact path="/mypage" component={mypage} />
                     </div>
                 </Router>
                 <Footer src={footer} alt="footer"/>
