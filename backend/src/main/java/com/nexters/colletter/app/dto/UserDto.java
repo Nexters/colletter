@@ -11,14 +11,20 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class UserDto {
+    @JsonIgnore
     private long id;
+    @JsonIgnore
     private UserRole role;
     private String email;
     private String name;
     private String image;
+    @JsonIgnore
     private boolean theme;
+    @JsonIgnore
     private LocalDateTime signUpAt;
+    @JsonIgnore
     private String access_token;
+    @JsonIgnore
     private String refresh_token;
 
     @Builder

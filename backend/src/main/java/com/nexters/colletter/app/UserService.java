@@ -1,11 +1,15 @@
 package com.nexters.colletter.app;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.nexters.colletter.app.dto.UserDto;
 import com.nexters.colletter.domain.error.InvalidValueException;
 import com.nexters.colletter.domain.model.User;
 import com.nexters.colletter.domain.repository.UserRepository;
 import com.nexters.colletter.domain.service.BookmarkService;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.ModelMap;
 
 import java.util.Optional;
 
@@ -13,8 +17,16 @@ import java.util.Optional;
 public class UserService {
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    ModelMapper mapper;
 
-    public User getUserById(long id) {
-        return userRepository.findById(id).orElseThrow(() -> new InvalidValueException("No Matched user id"));
+    public UserDto getUserProfile(long userId) {
+        User user = getUserById(userId);
+        UserDto userDto = mapper.map(user, UserDto.class);
+        return userDto;
+    }
+
+    private User getUserById(long userId) {
+        return userRepository.findById(userId).orElseThrow(() -> new InvalidValueException("No Matched user id"));
     }
 }

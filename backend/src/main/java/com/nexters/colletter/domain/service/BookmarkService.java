@@ -9,6 +9,9 @@ import com.nexters.colletter.domain.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.Set;
+
 @Service
 public class BookmarkService {
     @Autowired
@@ -34,6 +37,16 @@ public class BookmarkService {
         user.bookmark(news);
         news.bookmarkedBy(user);
         return true;
+    }
+
+    public Set<News> getBookmarkNews(long userId) {
+        User user = getUserById(userId);
+        return user.getBookmarks();
+    }
+
+    public int getBookmarkCount(long userId) {
+        User user = getUserById(userId);
+        return user.getBookmarkCount();
     }
 
     private boolean isBookmarked(User user, News news) {
