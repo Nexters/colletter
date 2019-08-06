@@ -1,5 +1,6 @@
 package com.nexters.colletter.domain.model;
 
+import com.nexters.colletter.domain.value.CategoryType;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

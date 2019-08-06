@@ -18,11 +18,11 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
     @Autowired
-    ModelMapper mapper;
+    ModelMapper modelMapper;
 
     public UserDto getUserProfile(long userId) {
         User user = getUserById(userId);
-        UserDto userDto = mapper.map(user, UserDto.class);
+        UserDto userDto = new UserDto(user);
         return userDto;
     }
 

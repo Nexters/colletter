@@ -11,5 +11,7 @@ import java.util.List;
 
 public interface NewsRepository extends JpaRepository<News, Long> {
     boolean existsByNameAndUri(String name, String uri);
+    int countAllByStatus(NewsStatus status);
     Page<News> findAllByStatus(NewsStatus status, Pageable p);
+    List<News> findAllByStatus(NewsStatus status);
 }

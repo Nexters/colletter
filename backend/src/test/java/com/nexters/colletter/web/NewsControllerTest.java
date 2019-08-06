@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.nexters.colletter.app.NewsService;
 import com.nexters.colletter.app.dto.NewsDto;
 import com.nexters.colletter.domain.repository.NewsRepository;
+import com.nexters.colletter.domain.value.CategoryType;
 import com.nexters.colletter.domain.value.Response;
 import org.junit.Assert;
 import org.junit.Before;
@@ -59,6 +60,7 @@ public class NewsControllerTest {
                 "name",
                 "uri",
                 "image",
+                CategoryType.DESIGN,
                 "title",
                 "content"
         );

@@ -40,14 +40,11 @@ public class NewsService {
 
     public void changeNewsStatus(long newsId, NewsStatus status) {
         News news = getNewsById(newsId);
-        if (isRegistered(news)) {
-            throw new AlreadyExistException("Already registered news");
-        }
         news.setStatus(status);
         newsRepository.save(news);
     }
 
-    public void modify(News news){
+    public void modifyNews(News news){
 
     }
 
@@ -65,6 +62,7 @@ public class NewsService {
         return page.getContent();
     }
 
+    // TODO : bookmark의 수가 같으면 랜덤으로
     public List<News> getBestNews(int count) {
         Pageable pageable = PageRequest.of(0, count, new Sort(Sort.Direction.DESC, "bookmarkedCount"));
         Page<News> page = newsRepository.findAll(pageable);
@@ -77,25 +75,34 @@ public class NewsService {
 
     private List<News> getRandomNewsListByStatus(NewsStatus newsStatus, int count) {
         List<News> newsList = new ArrayList<>();
-        for(int idx = 0 ; idx < count ; idx++) {
-            newsList.add(getRandomNewsByStatus(newsStatus));
-        }
-        // 빈 객체 제거
-        newsList.remove(News.builder().build());
-        // 중복 제거
-        return newsList.parallelStream().distinct().collect(Collectors.toList());
-    }
+        int statusCount = newsRepository.countAllByStatus(newsStatus);
+        List<Integer> randomIdxList = new ArrayList<>();
 
-    private News getRandomNewsByStatus(NewsStatus newsStatus) {
-        Long idxAll = newsRepository.count();
-        int idx = (int)(Math.random() * idxAll);
-
-        Pageable pageable = PageRequest.of(idx, 1);
-        Page<News> page = newsRepository.findAllByStatus(newsStatus, pageable);
-        if (page.hasContent()){
-            return page.getContent().get(0);
+        // count보다 status의 개수가 많을 때 count 만큼만
+        if (statusCount < count) {
+            newsList.addAll(newsRepository.findAllByStatus(newsStatus));
+            return newsList;
         }
-        return News.builder().build();
+
+        while(true) {
+            if (randomIdxList.size() == count) {
+                break;
+            }
+
+            int randIdx = (int)(Math.random() * statusCount);
+            if (!randomIdxList.contains(randIdx)) {
+                randomIdxList.add(randIdx);
+            }
+        }
+
+        for(Integer idx : randomIdxList) {
+            Pageable pageable = PageRequest.of(idx, 1);
+            Page<News> page = newsRepository.findAllByStatus(newsStatus, pageable);
+            if (page.hasContent()) {
+                newsList.add(page.getContent().get(0));
+            }
+        }
+        return newsList;
     }
 
     // TODO : 중복되는 조건?

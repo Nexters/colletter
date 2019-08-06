@@ -32,10 +32,14 @@ public class BookmarkService {
         if (isBookmarked(user, news)) {
             user.bookmarkCancel(news);
             news.bookmarkCanceledBy(user);
+            userRepository.save(user);
+            newsRepository.save(news);
             return false;
         }
         user.bookmark(news);
         news.bookmarkedBy(user);
+        userRepository.save(user);
+        newsRepository.save(news);
         return true;
     }
 

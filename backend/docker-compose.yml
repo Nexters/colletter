@@ -1,0 +1,48 @@
+version: '3'
+services:
+  nginx:
+    container_name: colletter-nginx
+    image: nginx:1.14
+    restart: always
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - /home/ubuntu/colletter/nginx/nginx.conf:/etc/nginx/nginx.conf
+    networks:
+      - back
+    depends_on:
+      - app
+  mysql:
+    container_name: colletter-mysql
+    image: mysql:latest
+    volumes:
+      - /home/ubuntu/colletter/mysql:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${DB_NAME}
+      MYSQL_USER: ${DB_USERNAME}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+    #    ports:
+    #      - "3306:3306"
+    networks:
+      - back
+    restart: always
+
+  app:
+    container_name: colletter-jar
+    image: leesd556/colletter:latest
+    #    build:
+    #      context: .
+    #      dockerfile: ./Dockerfile
+    #    ports:
+    #      - "8080:8080"
+    depends_on:
+      - mysql
+    networks:
+      - back
+    restart: always
+
+networks:
+  back:
+    driver: bridge

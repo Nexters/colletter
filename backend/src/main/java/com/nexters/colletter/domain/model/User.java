@@ -71,6 +71,18 @@ public class User {
         this.refresh_token = refresh_token;
     }
 
+    public User(UserDto userDto) {
+        this.id = userDto.getId();
+        this.role = userDto.getRole();
+        this.email = userDto.getEmail();
+        this.name = userDto.getName();
+        this.image = userDto.getImage();
+        this.theme = userDto.getTheme();
+        this.signUpAt = userDto.getSignUpAt();
+        this.access_token = userDto.getAccess_token();
+        this.refresh_token = userDto.getRefresh_token();
+    }
+
     /**
      * called before insert
      */

@@ -15,6 +15,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
@@ -30,21 +34,16 @@ public class UserController {
     private AuthenticationService authenticationService;
 
     @PostMapping("/login")
-    public Response login(String email, String name, String image) {
-        UserDto userDto = UserDto.builder()
-                .email(email)
-                .name(name)
-                .image(image)
-                .build();
+    public Response login(@RequestBody @Valid UserDto userDto) {
         // TODO : null check
         return new Response("access_token", authenticationService.login(userDto));
     }
 
     @ApiOperation(value = "북마크 등록 / 취소")
-    @PostMapping("/bookmark/{newsId}")
+    @PutMapping("/bookmark/{newsId}")
     public Response bookmark(
             @AuthenticationPrincipal CustomUserDetail userDetail,
-            @PathVariable long newsId) {
+            @PathVariable @NotNull @Min(1) long newsId) {
         boolean onOrOff = bookmarkService.bookmark(userDetail.getId(), newsId);
         return new Response("Status", onOrOff);
     }

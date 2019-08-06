@@ -21,7 +21,7 @@ public class AdminController {
 
     // TODO : polish
     @PostMapping("/login")
-    public Response login(String identifier) {
+    public Response login(@RequestBody String identifier) {
         return new Response("access_token", authenticationService.adminLogin(identifier));
     }
 

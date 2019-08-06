@@ -5,6 +5,7 @@ import com.nexters.colletter.config.H2Config;
 import com.nexters.colletter.config.RepositoryConfig;
 import com.nexters.colletter.domain.model.News;
 import com.nexters.colletter.domain.repository.NewsRepository;
+import com.nexters.colletter.domain.value.CategoryType;
 import com.nexters.colletter.domain.value.NewsStatus;
 import org.junit.Assert;
 import org.junit.Test;
@@ -30,6 +31,7 @@ public class NewsServiceTest {
                 "name",
                 "uri",
                 "image",
+                CategoryType.DESIGN,
                 "title",
                 "content"
         );

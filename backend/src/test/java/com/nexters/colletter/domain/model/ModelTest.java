@@ -1,24 +1,20 @@
 package com.nexters.colletter.domain.model;
 
-import com.nexters.colletter.domain.model.Category;
-import com.nexters.colletter.domain.model.News;
-import com.nexters.colletter.domain.model.User;
+import com.nexters.colletter.app.dto.UserDto;
 import com.nexters.colletter.domain.repository.CategoryRepository;
 import com.nexters.colletter.domain.repository.NewsRepository;
 import com.nexters.colletter.domain.repository.UserRepository;
-import com.nexters.colletter.domain.value.CategoryValue;
+import com.nexters.colletter.domain.value.CategoryType;
 import com.nexters.colletter.domain.value.ThemeStatus;
 import com.nexters.colletter.domain.value.UserRole;
 import org.junit.Assert;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 
@@ -27,7 +23,7 @@ import java.util.Arrays;
 import java.util.Optional;
 
 @RunWith(SpringRunner.class)
-@DataJpaTest
+@SpringBootTest
 @ActiveProfiles("test")
 public class ModelTest {
     @Autowired
@@ -40,12 +36,12 @@ public class ModelTest {
     @Before
     public void initCategory() {
         categoryRepository.saveAll(Arrays.asList(
-                CategoryValue.design,
-                CategoryValue.game,
-                CategoryValue.food,
-                CategoryValue.education,
-                CategoryValue.development,
-                CategoryValue.plan
+                new Category("c_0", CategoryType.DESIGN.getName(), null),
+                new Category("c_1", CategoryType.GAME.getName(), null),
+                new Category("c_2", CategoryType.FOOD.getName(), null),
+                new Category("c_3", CategoryType.EDUCATION.getName(), null),
+                new Category("c_4", CategoryType.DEVELOPMENT.getName(), null),
+                new Category("c_5", CategoryType.PLAN.getName(), null)
         ));
     }
 

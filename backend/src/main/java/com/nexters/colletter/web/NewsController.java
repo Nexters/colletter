@@ -10,12 +10,19 @@ import com.nexters.colletter.domain.value.Response;
 import com.nexters.colletter.web.dto.CustomUserDetail;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.List;
 
 @RestController
 @RequestMapping(value = "/news", produces = "application/json")
+@Validated
 public class NewsController {
     @Autowired
     NewsService newsService;
@@ -26,25 +33,22 @@ public class NewsController {
     }
 
     @GetMapping("/latest/{count}")
-    public List<News> getLatestNews(@PathVariable int count) {
-        // TODO : count가 음수일 때
+    public List<News> getLatestNews(@PathVariable @Min(1) int count) {
         return newsService.getLatestNews(count);
     }
 
     @GetMapping("/best/{count}")
-    public List<News> getBestNews(@PathVariable int count) {
-        // TODO : count가 음수일 때
+    public List<News> getBestNews(@PathVariable @Min(1) int count) {
         return newsService.getBestNews(count);
     }
 
     @GetMapping("/pick/{count}")
-    public List<News> getPickedNews(@PathVariable int count) {
-        // TODO : count가 음수일 때
+    public List<News> getPickedNews(@PathVariable @Min(1) int count) {
         return newsService.getPickedNews(count);
     }
 
     @PostMapping("/")
-    public Response requestNews(@RequestBody NewsDto newsDto) {
+    public Response requestNews(@RequestBody @Valid NewsDto newsDto) {
         // TODO : validation
         newsService.newNews(
                 newsDto,
