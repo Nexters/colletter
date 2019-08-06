@@ -15,7 +15,7 @@ spring:
   profiles: develop
   datasource:
     develop:
-      jdbc-url: jdbc:mysql://localhost:3306/colletter?serverTimezone=UTC&characterEncoding=UTF-8&createDatabaseIfNotExist=true
+      jdbc-url: jdbc:mysql://colletter-mysql:3306/colletter?serverTimezone=UTC&characterEncoding=UTF-8&createDatabaseIfNotExist=true
       username: root
       password: 1234
       driver-class-name: com.mysql.cj.jdbc.Driver
