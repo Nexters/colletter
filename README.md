@@ -1,8 +1,13 @@
 # colletter
-branch 구조 
 
+## Front
+React
 
-dev 에서 
-ㄴ front 프론트 
-ㄴ backend 백 
-    ㄴ 개인용 작업 브렌치
+## Back
+Spring-boot
+
+## branch 구조 
+
+<p align="center">
+    	<img src="./img/branch.png" width="300" height="500"></img>
+</p>
