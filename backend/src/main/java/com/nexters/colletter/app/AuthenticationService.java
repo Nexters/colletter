@@ -9,6 +9,9 @@ import com.nexters.colletter.web.jwt.JwtTokenHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Objects;
+import java.util.Optional;
+
 @Service
 public class AuthenticationService {
     @Autowired
@@ -23,6 +26,13 @@ public class AuthenticationService {
         return "Bearer " + jwt;
     }
 
+    /**
+     *
+     * @param userDto
+     * @return "Bearer " + jwt
+     *
+     * 이미 가입 된 유저면 token만 교체, 아니면 유저 생성
+     */
     public String login(UserDto userDto) {
         // TODO : OAuth2.0 validation logic
         validation();
@@ -30,18 +40,19 @@ public class AuthenticationService {
 
         String jwt = jwtTokenHelper.generateToken(userDto.getEmail());
 
-        User user = User.builder()
-                .name(userDto.getName())
-                .role(UserRole.NORMAL)
-                .email(userDto.getEmail())
-                .image(userDto.getImage())
-                .access_token(jwt)
-                .build();
+        User user = userRepository.findByEmail(userDto.getEmail())
+                .orElseGet(() -> User.builder()
+                        .name(userDto.getName())
+                        .role(UserRole.NORMAL)
+                        .email(userDto.getEmail())
+                        .image(userDto.getImage())
+                        .access_token(jwt)
+                        .build());
+        user.changeImage(userDto.getImage());
+        user.changeName(userDto.getName());
+        user.changeAccessToken(jwt);
 
-        if (!userRepository.existsByEmail(userDto.getEmail())) {
-            userRepository.save(user);
-        }
-
+        userRepository.save(user);
         return "Bearer " + jwt;
     }
 

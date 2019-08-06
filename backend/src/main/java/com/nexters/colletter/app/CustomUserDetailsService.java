@@ -1,4 +1,4 @@
-package com.nexters.colletter.domain.service;
+package com.nexters.colletter.app;
 
 import com.nexters.colletter.domain.error.InvalidValueException;
 import com.nexters.colletter.domain.model.User;

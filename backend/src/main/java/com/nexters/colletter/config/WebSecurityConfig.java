@@ -1,6 +1,6 @@
 package com.nexters.colletter.config;
 
-import com.nexters.colletter.domain.service.CustomUserDetailsService;
+import com.nexters.colletter.app.CustomUserDetailsService;
 import com.nexters.colletter.web.jwt.JwtAuthenticationEntryPoint;
 import com.nexters.colletter.web.jwt.JwtTokenFilter;
 import org.springframework.context.annotation.Bean;

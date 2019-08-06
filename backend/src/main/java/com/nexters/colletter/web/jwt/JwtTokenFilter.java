@@ -1,6 +1,6 @@
 package com.nexters.colletter.web.jwt;
 
-import com.nexters.colletter.domain.service.CustomUserDetailsService;
+import com.nexters.colletter.app.CustomUserDetailsService;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;

@@ -14,43 +14,19 @@ import java.util.Set;
 
 @Service
 public class BookmarkService {
-    @Autowired
-    private UserRepository userRepository;
-    @Autowired
-    private NewsRepository newsRepository;
-
     /**
      *
-     * @param userId
-     * @param newsId
      * @return 취소 시 false, 등록 시 true
      */
-    public Boolean bookmark(long userId, long newsId) {
-        User user = getUserById(userId);
-        News news = getNewsById(newsId);
-
+    public boolean bookmark(User user, News news) {
         if (isBookmarked(user, news)) {
             user.bookmarkCancel(news);
             news.bookmarkCanceledBy(user);
-            userRepository.save(user);
-            newsRepository.save(news);
             return false;
         }
         user.bookmark(news);
         news.bookmarkedBy(user);
-        userRepository.save(user);
-        newsRepository.save(news);
         return true;
-    }
-
-    public Set<News> getBookmarkNews(long userId) {
-        User user = getUserById(userId);
-        return user.getBookmarks();
-    }
-
-    public int getBookmarkCount(long userId) {
-        User user = getUserById(userId);
-        return user.getBookmarkCount();
     }
 
     private boolean isBookmarked(User user, News news) {
@@ -58,13 +34,5 @@ public class BookmarkService {
             return true;
         }
         return false;
-    }
-
-    private User getUserById(long userId) {
-        return userRepository.findById(userId).orElseThrow(() -> new InvalidValueException("No Matched user id"));
-    }
-
-    private News getNewsById(long newsId) {
-        return newsRepository.findById(newsId).orElseThrow(() -> new InvalidValueException("No Matched news id"));
     }
 }

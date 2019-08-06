@@ -116,6 +116,22 @@ public class User {
         return false;
     }
 
+    public void changeImage(String newImage) {
+        this.image = image;
+    }
+
+    public void changeName(String name) {
+        this.name = name;
+    }
+
+    public void changeAccessToken(String newAccessToken) {
+        this.access_token = newAccessToken;
+    }
+
+    public void changeRefreshToken(String newRefreshToken) {
+        this.refresh_token = newRefreshToken;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

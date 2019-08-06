@@ -29,13 +29,11 @@ public class UserController {
     @Autowired
     private UserService userService;
     @Autowired
-    private BookmarkService bookmarkService;
-    @Autowired
     private AuthenticationService authenticationService;
 
+    // TODO : third-party에서 image가 없을 때 어떤 것을 반환하는지?
     @PostMapping("/login")
     public Response login(@RequestBody @Valid UserDto userDto) {
-        // TODO : null check
         return new Response("access_token", authenticationService.login(userDto));
     }
 
@@ -44,18 +42,18 @@ public class UserController {
     public Response bookmark(
             @AuthenticationPrincipal CustomUserDetail userDetail,
             @PathVariable @NotNull @Min(1) long newsId) {
-        boolean onOrOff = bookmarkService.bookmark(userDetail.getId(), newsId);
-        return new Response("Status", onOrOff);
+        boolean onOff = userService.bookmark(userDetail.getId(), newsId);
+        return new Response("Status", onOff);
     }
 
     @GetMapping("/bookmark")
     public Set<News> getBookmarkNews(@AuthenticationPrincipal CustomUserDetail userDetail){
-        return bookmarkService.getBookmarkNews(userDetail.getId());
+        return userService.getBookmarkNews(userDetail.getId());
     }
 
     @GetMapping("/bookmark/count")
     public Response getBookmarkCount(@AuthenticationPrincipal CustomUserDetail userDetail) {
-        return new Response("Bookmark count", bookmarkService.getBookmarkCount(userDetail.getId()));
+        return new Response("Bookmark count", userService.getBookmarkCount(userDetail.getId()));
     }
 
     @GetMapping("/profile")
