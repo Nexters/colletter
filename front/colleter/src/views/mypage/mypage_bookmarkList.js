@@ -37,7 +37,7 @@ const CardFavText = styled.span`
 class BookmarkList extends Component {
     render() {
         return (
-            <CardColumns>
+            <CardColumns className='list'>
                 <Card>
                     <Card.Body>
                         <Card.Img variant="right" className="heartImg" src={heart} />
