@@ -1,7 +1,8 @@
-<!DOCTYPE html>
+<!DOCTYPE>
 <html lang="en">
 <head>
     <meta charset="utf-8"/>
+
     <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico"/>
     <link
         rel="stylesheet"
@@ -33,11 +34,29 @@
         // The ID token you need to pass to your backend:
         let id_token = googleUser.getAuthResponse().id_token;
 
+        let name = profile.getName();
+        let email = profile.getEmail();
+        let img = profile.getImageUrl();
         localStorage.setItem('id_token', id_token);
-        localStorage.setItem('name', profile.getName());
-        localStorage.setItem('img', profile.getImageUrl());
+        localStorage.setItem('name', name);
+        localStorage.setItem('img', img);
 
-        location.reload();
+        $.ajax({
+            type: "POST",
+            url: "http://15.164.112.144/users/login",
+            dataType: "json",
+            data: {
+                email: email,
+                image: img,
+                name: name,
+            },
+            success: function (data) {
+                console.log(data);
+            },
+            error: function (error) {
+                alert(error);
+            }
+        });
     }
 </script>
 </body>
