@@ -1,39 +1,71 @@
 package com.nexters.colletter.app;
 
 import com.nexters.colletter.app.dto.NewsDto;
+import com.nexters.colletter.app.dto.RequestNewsDto;
 import com.nexters.colletter.domain.error.AlreadyExistException;
 import com.nexters.colletter.domain.error.InvalidValueException;
+import com.nexters.colletter.domain.model.Category;
 import com.nexters.colletter.domain.model.News;
+import com.nexters.colletter.domain.model.RequestNews;
+import com.nexters.colletter.domain.repository.CategoryRepository;
 import com.nexters.colletter.domain.repository.NewsRepository;
+import com.nexters.colletter.domain.repository.RequestNewsRepository;
+import com.nexters.colletter.domain.value.CategoryType;
 import com.nexters.colletter.domain.value.NewsStatus;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
 public class NewsService {
-    @Autowired
-    private NewsRepository newsRepository;
+    private final String NEWS_DIRECTORY = "news";
 
-    public long newNews(NewsDto newsDto, NewsStatus newsStatus) {
+    private final NewsRepository newsRepository;
+    private final RequestNewsRepository requestNewsRepository;
+    private final CategoryRepository categoryRepository;
+    private final S3Service s3Service;
+
+    public NewsService(NewsRepository newsRepository, RequestNewsRepository requestNewsRepository, CategoryRepository categoryRepository, S3Service s3Service) {
+        this.newsRepository = newsRepository;
+        this.requestNewsRepository = requestNewsRepository;
+        this.categoryRepository = categoryRepository;
+        this.s3Service = s3Service;
+    }
+
+    public long requestNews(RequestNewsDto newsDto) {
+        RequestNews requestNews = RequestNews.builder()
+                .category(toCategoryEntity(newsDto.getCategoryType()))
+                .uri(newsDto.getUri())
+                .description(newsDto.getDescription())
+                .build();
+
+        return requestNewsRepository.save(requestNews).getId();
+    }
+
+    public long registerNews(NewsDto newsDto, MultipartFile imageFile) throws IOException {
         News news = News.builder()
+                .category(toCategoryEntity(newsDto.getCategoryType()))
                 .name(newsDto.getName())
                 .uri(newsDto.getUri())
-                .image(newsDto.getImage())
                 .title(newsDto.getTitle())
                 .content(newsDto.getContent())
-                .status(newsStatus)
+                .status(NewsStatus.REGISTER)
                 .build();
         if (isRegistered(news)) {
             throw new AlreadyExistException("Already registered news");
         }
+        String name = s3Service.upload(imageFile, NEWS_DIRECTORY, imageName(newsDto));
+        news.addImage(name);
 
         return newsRepository.save(news).getId();
     }
@@ -112,5 +144,14 @@ public class NewsService {
         }
 
         return false;
+    }
+
+    private Category toCategoryEntity(CategoryType categoryType) {
+        return categoryRepository.findByName(categoryType.getName()).orElseThrow(() -> new InvalidValueException("No Match category name"));
+    }
+
+    // TODO
+    private String imageName(NewsDto newsDto) {
+        return newsDto.getName() + "." + newsDto.getCategoryType().getName();
     }
 }

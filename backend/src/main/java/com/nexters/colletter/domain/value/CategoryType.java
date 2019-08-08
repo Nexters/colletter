@@ -17,6 +17,6 @@ public enum CategoryType {
     }
 
     public String getName() {
-        return name;
+        return this.name;
     }
 }

@@ -53,6 +53,7 @@ public class News {
             String image,
             String title,
             String content,
+            NewsStatus status,
             Category category
     ) {
         this.name = name;
@@ -60,6 +61,7 @@ public class News {
         this.image = image;
         this.title = title;
         this.content = content;
+        this.status = status;
         this.category = category;
     }
 
@@ -67,6 +69,9 @@ public class News {
         this.status = newsStatus;
     }
 
+    public void addImage(String imageUrl) {
+        this.image = imageUrl;
+    }
     /**
      * called before insert
      */

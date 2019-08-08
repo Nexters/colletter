@@ -1,6 +1,7 @@
 package com.nexters.colletter.web;
 
 import com.nexters.colletter.app.dto.NewsDto;
+import com.nexters.colletter.app.dto.RequestNewsDto;
 import com.nexters.colletter.domain.error.AlreadyExistException;
 import com.nexters.colletter.domain.error.InvalidValueException;
 import com.nexters.colletter.app.NewsService;
@@ -48,11 +49,10 @@ public class NewsController {
     }
 
     @PostMapping("/")
-    public Response requestNews(@RequestBody @Valid NewsDto newsDto) {
+    public Response requestNews(@RequestBody @Valid RequestNewsDto requestNewsDto) {
         // TODO : validation
-        newsService.newNews(
-                newsDto,
-                NewsStatus.REQUEST
+        newsService.requestNews(
+                requestNewsDto
         );
         return new Response("Success", null);
     }

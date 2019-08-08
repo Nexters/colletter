@@ -1,5 +1,6 @@
 package com.nexters.colletter.app.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.nexters.colletter.domain.model.Category;
 import com.nexters.colletter.domain.value.CategoryType;
 import com.nexters.colletter.domain.value.NewsStatus;
@@ -23,6 +24,7 @@ public class NewsDto {
     private String uri;
     @NotNull
     @NotBlank
+    @JsonIgnore
     private String image;
     @NotNull
     private CategoryType categoryType;

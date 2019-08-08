@@ -10,6 +10,9 @@ import com.nexters.colletter.domain.value.NewsStatus;
 import com.nexters.colletter.domain.value.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.IOException;
 
 @RestController
 @RequestMapping("/admin")
@@ -26,11 +29,11 @@ public class AdminController {
     }
 
     @PostMapping("/news")
-    public Response registerNews(@RequestBody NewsDto newsDto) {
+    public Response registerNews(@RequestBody NewsDto newsDto, @RequestParam("image") MultipartFile imageFile) throws IOException {
         // TODO : validation
-        newsService.newNews(
+        newsService.registerNews(
                 newsDto,
-                NewsStatus.REGISTER
+                imageFile
         );
         return new Response("Success", null);
     }

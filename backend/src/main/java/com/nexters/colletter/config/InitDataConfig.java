@@ -41,7 +41,6 @@ public class InitDataConfig {
                 .access_token("")
                 .refresh_token("")
                 .theme(ThemeStatus.WHITE)
-                .bookmarkCount(0)
                 .build()
         );
     }

@@ -3,6 +3,8 @@ package com.nexters.colletter.web;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.nexters.colletter.app.NewsService;
 import com.nexters.colletter.app.dto.NewsDto;
+import com.nexters.colletter.app.dto.RequestNewsDto;
+import com.nexters.colletter.domain.model.RequestNews;
 import com.nexters.colletter.domain.repository.NewsRepository;
 import com.nexters.colletter.domain.value.CategoryType;
 import com.nexters.colletter.domain.value.Response;
@@ -56,14 +58,11 @@ public class NewsControllerTest {
     @Test
     public void requestNewsTest() throws Exception {
         // given
-        NewsDto newsDto = new NewsDto(
-                "name",
-                "uri",
-                "image",
-                CategoryType.DESIGN,
-                "title",
-                "content"
-        );
+        RequestNewsDto requestNewsDto = RequestNewsDto.builder()
+                .uri("uri")
+                .categoryType(CategoryType.DESIGN)
+                .description("description")
+                .build();
 
 //        given(this.newsController.requestNews(newsDto)).willReturn(
 //                new Response("Success", null)
@@ -73,7 +72,7 @@ public class NewsControllerTest {
         MvcResult result =
                 mockMvc.perform(MockMvcRequestBuilders.post("/news/")
                         .characterEncoding("utf-8")
-                        .content(mapper.writeValueAsString(newsDto))
+                        .content(mapper.writeValueAsString(requestNewsDto))
                         .contentType(MediaType.APPLICATION_JSON))
 //                        .andExpect(status().isOk())
                         .andDo(print())

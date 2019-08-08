@@ -7,6 +7,15 @@ security:
     expires_in: 3600000
     header: Bearer
 
+cloud:
+  aws:
+    s3:
+      bucket: colletter
+    region:
+      static: ap-northeast-2
+    stack:
+      auto: false
+
 spring:
   profiles:
     active: develop

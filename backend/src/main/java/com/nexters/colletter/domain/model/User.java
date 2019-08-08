@@ -49,8 +49,9 @@ public class User {
     @Builder.Default
     @JsonIgnore
     private Set<News> bookmarks = new HashSet<>();
+    @Builder.Default
     @Column(name = "bookmarks_count")
-    private int bookmarkCount;
+    private int bookmarkCount = 0;
 
     @Builder
     public User(
