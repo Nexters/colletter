@@ -43,4 +43,9 @@ public class AdminController {
         newsService.changeNewsStatus(newsId, status);
         return new Response("Success", null);
     }
+
+    /**
+     * TODO : register, modify, delete banner
+     * TODO : modify, delete news
+      */
 }

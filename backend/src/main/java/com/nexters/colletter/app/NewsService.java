@@ -76,7 +76,11 @@ public class NewsService {
         newsRepository.save(news);
     }
 
-    public void modifyNews(News news){
+    public void modifyNews(long newsId, News news) {
+
+    }
+
+    public void deleteNews(long newsId) {
 
     }
 
