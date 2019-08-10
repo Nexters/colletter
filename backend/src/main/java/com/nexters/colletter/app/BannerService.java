@@ -6,10 +6,14 @@ import com.nexters.colletter.domain.error.InvalidValueException;
 import com.nexters.colletter.domain.model.Banner;
 import com.nexters.colletter.domain.repository.BannerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.List;
 
 @Service
 public class BannerService {
@@ -21,6 +25,15 @@ public class BannerService {
     public BannerService(BannerRepository bannerRepository, S3Service s3Service) {
         this.bannerRepository = bannerRepository;
         this.s3Service = s3Service;
+    }
+
+    public List<Banner> getAllBanners() {
+        return bannerRepository.findAll();
+    }
+
+    public List<Banner> getBanners(int count) {
+        Pageable pageable = PageRequest.of(0, count, new Sort(Sort.Direction.ASC, "priority"));
+        return bannerRepository.findAll(pageable).getContent();
     }
 
     public long registerBanner(BannerDto bannerDto, MultipartFile imageFile) throws IOException {
@@ -37,7 +50,7 @@ public class BannerService {
 
     public void changeBannerPriotiry(long bannerId, int priority) {
         Banner banner = getBannerById(bannerId);
-        banner.changePriotiry(priority);
+        banner.changePriority(priority);
         bannerRepository.save(banner);
     }
 

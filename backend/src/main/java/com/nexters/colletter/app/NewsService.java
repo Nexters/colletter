@@ -92,10 +92,18 @@ public class NewsService {
         return newsRepository.findById(id).get();
     }
 
+    public List<News> getAllLatestNews() {
+        return newsRepository.findAll(new Sort(Sort.Direction.DESC, "updatedAt"));
+    }
+
     public List<News> getLatestNews(int count) {
         Pageable pageable = PageRequest.of(0, count, new Sort(Sort.Direction.DESC, "updatedAt"));
         Page<News> page = newsRepository.findAll(pageable);
         return page.getContent();
+    }
+
+    public List<News> getAllBestNews() {
+        return newsRepository.findAll(new Sort(Sort.Direction.DESC, "bookmarkedCount"));
     }
 
     // TODO : bookmark의 수가 같으면 랜덤으로
@@ -103,6 +111,10 @@ public class NewsService {
         Pageable pageable = PageRequest.of(0, count, new Sort(Sort.Direction.DESC, "bookmarkedCount"));
         Page<News> page = newsRepository.findAll(pageable);
         return page.getContent();
+    }
+
+    public List<News> getAllPickedNews() {
+        return newsRepository.findAllByStatus(NewsStatus.PICK);
     }
 
     public List<News> getPickedNews(int count) {

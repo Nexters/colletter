@@ -33,14 +33,29 @@ public class NewsController {
         return newsService.getNewsById(id);
     }
 
+    @GetMapping("/latest/")
+    public List<News> getLatestNews() {
+        return newsService.getAllLatestNews();
+    }
+
     @GetMapping("/latest/{count}")
     public List<News> getLatestNews(@PathVariable @Min(1) int count) {
         return newsService.getLatestNews(count);
     }
 
+    @GetMapping("/best/")
+    public List<News> getAllBestNews() {
+        return newsService.getAllBestNews();
+    }
+
     @GetMapping("/best/{count}")
     public List<News> getBestNews(@PathVariable @Min(1) int count) {
         return newsService.getBestNews(count);
+    }
+
+    @GetMapping("/pick/")
+    public List<News> getAllPickedNews() {
+        return newsService.getAllPickedNews();
     }
 
     @GetMapping("/pick/{count}")

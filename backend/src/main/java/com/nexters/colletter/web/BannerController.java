@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.constraints.Min;
 import java.util.List;
 
 @RestController
@@ -16,15 +17,13 @@ public class BannerController {
     @Autowired
     private BannerService bannerService;
 
-    // TODO
     @GetMapping("/")
     public List<Banner> getAllBanners() {
-        return null;
+        return bannerService.getAllBanners();
     }
 
-    // TODO
     @GetMapping("/{count}")
-    public List<Banner> getBanners(@PathVariable int count) {
-        return null;
+    public List<Banner> getBanners(@PathVariable @Min(1) int count) {
+        return bannerService.getBanners(count);
     }
 }

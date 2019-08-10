@@ -5,7 +5,7 @@ import lombok.*;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "banner")
+@Table(name = "banners")
 @Getter
 @Builder
 @AllArgsConstructor
@@ -19,10 +19,10 @@ public class Banner {
     private String name;
     @Column(name = "image")
     private String image;
-    @Column(name = "order")
+    @Column(name = "priority")
     private int priority;
 
-    public void changePriotiry(int priority) {
+    public void changePriority(int priority) {
         this.priority = priority;
     }
 }
