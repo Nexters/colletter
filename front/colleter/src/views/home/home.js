@@ -10,7 +10,7 @@ import styled from 'styled-components';
 import category from '../../img/category.PNG';
 import register from '../../img/register.PNG';
 import Popup from '../popup/popup';
-import CardDeck from '../cardDeck/cardDeck';
+import CardDeck from '../card/cardDeck';
 import Carousel from './carousel';
 
 import jQuery from "jquery";
@@ -22,7 +22,9 @@ const Container = styled.div`
   align-items: left;
   justify-content: left;
   margin-top: 5%;
-  margin-left:21%;
+  margin-left:320px;
+  margin-right:320px;
+  width:1280px;
   flex-direction: column;
 `;
 
@@ -58,17 +60,30 @@ const MinTitle = styled.div`
   line-height: normal;
   letter-spacing: normal;
   color: #686868;
-  margin-bottom: 6%;
+  margin-bottom:80px;
+  `;
+
+const CardMinTitle = styled.div`
+ font-family: NotoSansCJKkr;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  color: #686868;
   `;
 
 const Category = styled.div`
-   margin-bottom: 6%;
+margin-bottom:150px;
 `;
 
 const CategoryImg = styled.img`
-  width: 18%;
-  height: 18%;
+   width: 308px;
+  height: 308px;
   background-color: #ed754a;
+  margin-left:16px;
+  margin-top:25px;
 `;
 
 const Register = styled.img`
@@ -90,11 +105,13 @@ class home extends React.Component {
     }
 
     componentDidMount() {
-        $('.cardBody').click(function () {
-            console.log('asd');
-        });
-    }
+        $('#btnShowPopup').hide();
 
+        $('.cardBody').click(function () {
+            $('#btnShowPopup').trigger('click');
+        });
+
+    }
 
     render() {
         return (
@@ -114,30 +131,34 @@ class home extends React.Component {
                     <ColletterPick>Category</ColletterPick>
                     <Category>
                         <CategoryImg src={category} alt="category"/>
+                        <CategoryImg src={category} alt="category"/>
+                        <CategoryImg src={category} alt="category"/>
                     </Category>
 
                     <ColletterPick>Lastest Update</ColletterPick>
-                    <MinTitle>
+                    <CardMinTitle>
                         가장 최근 업데이트 된 뉴스레터들을 살펴보세요
-                    </MinTitle>
+                    </CardMinTitle>
 
                     <CardDeck/>
 
                     <ColletterPick>Lastest Update</ColletterPick>
-                    <MinTitle>
+                    <CardMinTitle>
                         가장 최근 업데이트 된 뉴스레터들을 살펴보세요
-                    </MinTitle>
+                    </CardMinTitle>
 
                     <CardDeck/>
 
                     <ColletterPick>Lastest Update</ColletterPick>
-                    <MinTitle>
+                    <CardMinTitle>
                         가장 최근 업데이트 된 뉴스레터들을 살펴보세요
-                    </MinTitle>
+                    </CardMinTitle>
 
                     <CardDeck/>
                 </Container>
                 <Register src={register} alt="register"/>
+
+                <button id="btnShowPopup" onClick={this.togglePopup.bind(this)}>show popup</button>
 
                 {this.state.showPopup ?
                     <Popup

@@ -13,6 +13,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <meta name="theme-color" content="#000000"/>
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json"/>
+    <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
+    </style>
     <meta name="google-signin-scope" content="profile email">
     <meta id="googleMeta" name="google-signin-client_id"
           content="">
@@ -40,18 +44,24 @@
         localStorage.setItem('id_token', id_token);
         localStorage.setItem('name', name);
         localStorage.setItem('img', img);
+//        console.log(email);
 
         $.ajax({
             type: "POST",
             url: "http://15.164.112.144/users/login",
             dataType: "json",
-            data: {
+            contentType: "application/json",
+            data: JSON.stringify({
                 email: email,
                 image: img,
                 name: name,
+            }),
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader("accept", "*/*");
             },
             success: function (data) {
-                console.log(data);
+                localStorage.setItem('access_token', data.data);
+                window.location.reload();
             },
             error: function (error) {
                 alert(error);

@@ -32,7 +32,7 @@ const CardCount = styled.span`
 const CardFavText = styled.span`
     font-weight: 300;
     color: #686868;
-`
+`;
 
 class BookmarkList extends Component {
     render() {

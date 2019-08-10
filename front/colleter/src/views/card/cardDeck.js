@@ -43,18 +43,21 @@ const CardCount = styled.span`
 class cardDeck extends React.Component {
     news = [
         {
+            id: 1,
             title: '뉴닉',
             content: '금주의 핫한 디자인을 빠르게 받아볼 수 있는 디자인 뉴스레터 입니다.',
             category: '정치/경제',
             bookmarkedCount: 34
         },
         {
+            id: 2,
             title: '뉴닉',
             content: '금주의 핫한 디자인을 빠르게 받아볼 수 있는 디자인 뉴스레터 입니다.',
             category: '정치/경제',
             bookmarkedCount: 34
         },
         {
+            id: 3,
             title: '뉴닉',
             content: '금주의 핫한 디자인을 빠르게 받아볼 수 있는 디자인 뉴스레터 입니다.',
             category: '정치/경제',
@@ -67,14 +70,14 @@ class cardDeck extends React.Component {
         return (
             <CardDeck>
                 {this.news.map((news) => {
-                    return <Card style={{width: '18rem'}}>
+                    return <Card style={{width: '415px'}} key={news.id}>
                         <Card.Body className="cardBody">
                             <Card.Img variant="right" className="heartImg" src={heart}/>
                             <Card.Img variant="right" className="cardImg" src={card}/>
 
                             <Card.Title className="cardTitle">{news.title}</Card.Title>
-                            <Card.Text className="cardText">
-                                {news.contents}
+                            <Card.Text className="cardText cardMinTitle">
+                                {news.content}
                             </Card.Text>
 
                             <Card.Text className="cardText">
