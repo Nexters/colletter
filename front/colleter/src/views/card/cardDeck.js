@@ -70,13 +70,13 @@ class cardDeck extends React.Component {
         return (
             <CardDeck>
                 {this.news.map((news) => {
-                    return <Card style={{width: '18rem'}} key={news.id}>
+                    return <Card style={{width: '415px'}} key={news.id}>
                         <Card.Body className="cardBody">
                             <Card.Img variant="right" className="heartImg" src={heart}/>
                             <Card.Img variant="right" className="cardImg" src={card}/>
 
                             <Card.Title className="cardTitle">{news.title}</Card.Title>
-                            <Card.Text className="cardText">
+                            <Card.Text className="cardText cardMinTitle">
                                 {news.content}
                             </Card.Text>
 

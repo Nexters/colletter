@@ -33,8 +33,24 @@
     }
 }
 
+.nav {
+    border-bottom: solid 1px #e8e8e8;
+    height: 90px;
+}
+.navText {
+    height: 33px;
+    padding-bottom: 32px;
+    padding-top: 32px;
+}
 .nav-item {
-    margin-top: 15px;
+    font-family: Roboto;
+    font-size: 18px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.33;
+    letter-spacing: normal;
+    color: #121212;
 }
 .nav-item > a {
     color: black;
@@ -42,22 +58,26 @@
 }
 
 .about {
-    margin-left: 15%;
+    margin-left: 129px;
+}
+.navImg {
+    margin-top: 21px;
 }
 .nav-item > .newsRegister {
-    width: 128px;
-    height: 48px;
+    width: 132px;
+    display: flex;
+    height: 38px;
     border-radius: 24px;
     box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.3);
     background-color: #000000;
     position: absolute;
     right: 30px;
     color: white;
-    /*margin-top: 10px;*/
+    margin-top: 6px;
 }
 
 .slider {
-    width: 80%;
+    width: 100%;
     margin-bottom: 10%;
 }
 .heartImg {
@@ -69,7 +89,7 @@
 }
 
 .cardTitle {
-    font-family: NotoSansCJKkr;
+    font-family: Roboto;
     font-size: 20px;
     font-weight: 300;
     font-style: normal;
@@ -80,7 +100,7 @@
 }
 
 .cardText {
-    font-family: NotoSansCJKkr;
+    font-family: Roboto;
     font-size: 15px;
     font-weight: 300;
     font-style: normal;
@@ -88,11 +108,15 @@
     line-height: normal;
     letter-spacing: normal;
     color: #686868;
+    margin-top: 0px !important;
+}
+.cardMinTitle {
+    margin-bottom: 60px !important;
 }
 
 .card-deck {
-    width: 93%;
-    margin-bottom: 10%;
+    width: 1280px;
+    margin-bottom: 110px;
 }
 
 
@@ -115,4 +139,40 @@
     bottom: 25%;
     margin: auto;
     background: white;
+    height: 612px;
+    width: 1070px;
+}
+.popupCardTitle {
+    font-family: NotoSansCJKkr;
+    font-size: 38px;
+    font-weight: 300;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    color: #121212;
+}
+.popupCardMinTitle {
+    font-family: NotoSansCJKkr;
+    font-size: 23px;
+    font-weight: 300;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    color: #3bd277;
+}
+.popupCardText {
+    font-family: NotoSansCJKkr;
+    font-size: 23px;
+    font-weight: 300;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.76;
+    letter-spacing: normal;
+    color: #686868;
+}
+
+img:hover {
+    cursor: pointer;
 }
