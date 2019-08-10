@@ -9,6 +9,7 @@ import logo from './img/logo.png'
 import footer from './img/footer.PNG';
 import mypage from './views/mypage/mypage';
 import jQuery from "jquery";
+
 const $ = jQuery;
 
 const LogoImg = styled.img`
@@ -66,7 +67,7 @@ class App extends React.Component {
             <div className="app">
                 <Nav>
                     <Nav.Item>
-                        <LogoImg src={logo} alt="logo"/>
+                        <LogoImg src={logo} alt="logo" href="/"/>
                     </Nav.Item>
                     <Nav.Item className="about">
                         <Nav.Link href="/about">

@@ -90,11 +90,13 @@ class home extends React.Component {
     }
 
     componentDidMount() {
-        $('.cardBody').click(function () {
-            console.log('asd');
-        });
-    }
+        $('#btnShowPopup').hide();
 
+        $('.cardBody').click(function () {
+            $('#btnShowPopup').trigger('click');
+        });
+
+    }
 
     render() {
         return (
@@ -138,6 +140,8 @@ class home extends React.Component {
                     <CardDeck/>
                 </Container>
                 <Register src={register} alt="register"/>
+
+                <button id="btnShowPopup" onClick={this.togglePopup.bind(this)}>show popup</button>
 
                 {this.state.showPopup ?
                     <Popup
