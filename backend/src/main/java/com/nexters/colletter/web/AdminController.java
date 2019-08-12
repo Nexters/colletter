@@ -1,13 +1,16 @@
 package com.nexters.colletter.web;
 
 import com.nexters.colletter.app.AuthenticationService;
+import com.nexters.colletter.app.BannerService;
 import com.nexters.colletter.app.NewsService;
+import com.nexters.colletter.app.dto.BannerDto;
 import com.nexters.colletter.app.dto.NewsDto;
 import com.nexters.colletter.app.dto.UserDto;
 import com.nexters.colletter.domain.error.AlreadyExistException;
 import com.nexters.colletter.domain.error.InvalidValueException;
 import com.nexters.colletter.domain.value.NewsStatus;
 import com.nexters.colletter.domain.value.Response;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -20,6 +23,8 @@ public class AdminController {
     @Autowired
     private AuthenticationService authenticationService;
     @Autowired
+    private BannerService bannerService;
+    @Autowired
     private NewsService newsService;
 
     // TODO : polish
@@ -28,6 +33,9 @@ public class AdminController {
         return new Response("access_token", authenticationService.adminLogin(identifier));
     }
 
+    /*
+        News Create, Update, Delete
+     */
     @PostMapping("/news")
     public Response registerNews(@RequestBody NewsDto newsDto, @RequestParam("image") MultipartFile imageFile) throws IOException {
         // TODO : validation
@@ -38,14 +46,49 @@ public class AdminController {
         return new Response("Success", null);
     }
 
+    // TODO : implements me!
+    // TODO : s3 modify process
+    @PutMapping("/news")
+    @ApiOperation(value = "미완성")
+    public Response modifyNews(@RequestBody NewsDto newsDto, @RequestParam("image") MultipartFile imageFile) {
+        return null;
+    }
+
+    // TODO : implements me!
+    @DeleteMapping("/news/{newsId}")
+    @ApiOperation(value = "미완성")
+    public Response deleteNews(@PathVariable long newsId){
+        return null;
+    }
+
     @PutMapping("/news/{newsId}/status/{status}/")
     public Response changeNewsStatus(@PathVariable long newsId, @PathVariable NewsStatus status) {
         newsService.changeNewsStatus(newsId, status);
         return new Response("Success", null);
     }
 
-    /**
-     * TODO : register, modify, delete banner
-     * TODO : modify, delete news
-      */
+    /*
+        Banner Create, Update, Delete
+     */
+    // TODO : implements me!
+    @ApiOperation(value = "미완성")
+    @PostMapping("/banner")
+    public Response registerBanner(@RequestBody BannerDto bannerDto, @RequestParam("image") MultipartFile imageFile) {
+        return null;
+    }
+
+    // TODO : implements me!
+    // TODO : s3 modify process
+    @ApiOperation(value = "미완성")
+    @PutMapping("/banner")
+    public Response modifyBanner(@RequestBody BannerDto bannerDto, @RequestParam("image") MultipartFile imageFile) {
+        return null;
+    }
+
+    // TODO : implements me!
+    @ApiOperation(value = "미완성")
+    @DeleteMapping("/banner/{bannerId}")
+    public Response deleteBanner(@PathVariable long bannerId) {
+        return null;
+    }
 }
