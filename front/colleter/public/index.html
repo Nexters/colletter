@@ -17,11 +17,9 @@
     <style>
         @import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
     </style>
-    <meta name="google-signin-scope" content="profile email">
-    <meta id="googleMeta" name="google-signin-client_id"
-          content="">
+  
     <script type="text/JavaScript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
-    <script type="text/JavaScript" src="oAuth.js"></script>
+
     <script src="https://apis.google.com/js/platform.js" async defer></script>
     <script src="https://unpkg.com/react@16/umd/react.production.min.js"></script>
     <script src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js"></script>
@@ -30,44 +28,5 @@
 <body>
 <div id="root"></div>
 
-<script>
-    function onSignIn(googleUser) {
-        // Useful data for your client-side scripts:
-        let profile = googleUser.getBasicProfile();
-
-        // The ID token you need to pass to your backend:
-        let id_token = googleUser.getAuthResponse().id_token;
-
-        let name = profile.getName();
-        let email = profile.getEmail();
-        let img = profile.getImageUrl();
-        localStorage.setItem('id_token', id_token);
-        localStorage.setItem('name', name);
-        localStorage.setItem('img', img);
-//        console.log(email);
-
-        $.ajax({
-            type: "POST",
-            url: "http://15.164.112.144/users/login",
-            dataType: "json",
-            contentType: "application/json",
-            data: JSON.stringify({
-                email: email,
-                image: img,
-                name: name,
-            }),
-            beforeSend: function (xhr) {
-                xhr.setRequestHeader("accept", "*/*");
-            },
-            success: function (data) {
-                localStorage.setItem('access_token', data.data);
-                window.location.reload();
-            },
-            error: function (error) {
-                alert(error);
-            }
-        });
-    }
-</script>
 </body>
 </html>

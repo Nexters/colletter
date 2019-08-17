@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "admin-on-rest": "^1.4.1",
     "components": "^0.1.0",
     "fragment": "^0.3.0",
     "jquery": "^3.4.1",

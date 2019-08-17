@@ -1,12 +1,15 @@
 import React from 'react';
-import { List, Datagrid, TextField } from 'react-admin';
+import { List, Datagrid, TextField, EditButton } from 'react-admin';
 
-export const bannerList = props => (
+const bannerList = props => (
     <List {...props}>
-        <Datagrid rowClick="edit">
+        <Datagrid>
             <TextField source="id" />
             <TextField source="name" />
             <TextField source="priority" />
+            <EditButton />
         </Datagrid>
     </List>
 );
+
+export default bannerList;

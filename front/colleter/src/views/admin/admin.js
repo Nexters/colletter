@@ -1,25 +1,19 @@
 import React from 'react';
-import { Admin, Resource, ListGuesser } from 'react-admin';
-import jsonServerProvider from 'ra-data-json-server';
-import { bannerList } from '../../data/banner/banner';
-import { newsList } from '../../data/news/news';
-import { requestList } from '../../data/news/request';
-// import { UserList } from '../../data/user/user';
+import { Admin, Resource,jsonServerRestClient } from 'admin-on-rest';
 import user from '../../data/user';
-const dataProvider = jsonServerProvider("https://jsonplaceholder.typicode.com");
-// const dataProvider = jsonServerProvider("https://colletter.com/v2/api-docs/admin");
+import banner from '../../data/banner';
+import news from '../../data/news';
 
 class admin extends React.Component {
     render() {
         return(
-            <Admin dataProvider={dataProvider}>
+            <Admin restClient={jsonServerRestClient('https://colletter.com/v2/api-docs/admin')}>
                 <Resource name='users' {...user} />
-                <Resource name='banner' list={bannerList} />
-                <Resource name='news' list={newsList} />
-                <Resource name='request' list={requestList} />
+                <Resource name='banner' {...banner} />
+                <Resource name='news' />
             </Admin>
         )
     }
-}
+} 
 
 export default admin;
