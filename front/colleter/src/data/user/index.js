@@ -1,7 +1,9 @@
-import userList from './user';
-import userCreate from './userCreate';
+import UserList from './User';
+import UserCreate from './UserCreate';
+import UserEdit from './UserEdit';
 
 export default {
-    list: userList,
-    create: userCreate
+    list: UserList,
+    create: UserCreate,
+    edit: UserEdit
 };

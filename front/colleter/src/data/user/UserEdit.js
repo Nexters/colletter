@@ -1,8 +1,8 @@
 import React from 'react';
-import { Create, TextInput, FileInput, FileField, SimpleForm, required } from 'react-admin';
+import { Edit, TextInput, FileInput, FileField, SimpleForm, required } from 'react-admin';
 
-const UserCreate = props => (
-    <Create {...props}>
+const UserEdit = props => (
+    <Edit {...props}>
         <SimpleForm>
             <TextInput source="name" validate={required()} />
             <FileInput source="files" label="Related files">
@@ -14,7 +14,7 @@ const UserCreate = props => (
             <TextInput source="website" />
             <TextInput source="company.name" />
         </SimpleForm>
-    </Create>
+    </Edit>
 );
 
-export default UserCreate;
+export default UserEdit;
