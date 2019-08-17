@@ -19,6 +19,10 @@ public class Banner {
     private String name;
     @Column(name = "image")
     private String image;
+    @Column(name = "title")
+    private String title;
+    @Column(name = "sub_title")
+    private String subTitle;
     @Column(name = "priority")
     private int priority;
 

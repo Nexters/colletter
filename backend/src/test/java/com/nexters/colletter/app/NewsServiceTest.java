@@ -37,7 +37,6 @@ public class NewsServiceTest {
                 "uri",
                 "image",
                 CategoryType.DESIGN,
-                "title",
                 "content"
         );
         s3Service = mock(S3Service.class);
@@ -63,7 +62,6 @@ public class NewsServiceTest {
         Assert.assertEquals("imageUrl", news.getImage());
         Assert.assertEquals(newsDto.getName(), news.getName());
         Assert.assertEquals(newsDto.getUri(), news.getUri());
-        Assert.assertEquals(newsDto.getTitle(), news.getTitle());
         Assert.assertEquals(newsDto.getContent(), news.getContent());
     }
 }

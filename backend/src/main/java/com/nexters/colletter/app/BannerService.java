@@ -42,6 +42,8 @@ public class BannerService {
         Banner banner = Banner.builder()
                 .name(bannerDto.getName())
                 .image(imageUrl)
+                .title(bannerDto.getTitle())
+                .subTitle(bannerDto.getSubTitle())
                 .priority(bannerDto.getPriority())
                 .build();
 

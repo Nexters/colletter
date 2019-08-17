@@ -28,12 +28,22 @@ public class NewsController {
     @Autowired
     NewsService newsService;
 
+    @GetMapping()
+    public List<News> getAllNews() {
+        return newsService.getAllNews();
+    }
+
+    @GetMapping("/request")
+    public List<News> getAllRequestNews() {
+        return newsService.getAllRequestNews();
+    }
+
     @GetMapping("/{id}")
     public News getNews(@PathVariable long id) {
         return newsService.getNewsById(id);
     }
 
-    @GetMapping("/latest/")
+    @GetMapping("/latest")
     public List<News> getLatestNews() {
         return newsService.getAllLatestNews();
     }
@@ -43,7 +53,7 @@ public class NewsController {
         return newsService.getLatestNews(count);
     }
 
-    @GetMapping("/best/")
+    @GetMapping("/best")
     public List<News> getAllBestNews() {
         return newsService.getAllBestNews();
     }
@@ -53,7 +63,7 @@ public class NewsController {
         return newsService.getBestNews(count);
     }
 
-    @GetMapping("/pick/")
+    @GetMapping("/pick")
     public List<News> getAllPickedNews() {
         return newsService.getAllPickedNews();
     }
@@ -63,7 +73,7 @@ public class NewsController {
         return newsService.getPickedNews(count);
     }
 
-    @PostMapping("/")
+    @PostMapping()
     public Response requestNews(@RequestBody @Valid RequestNewsDto requestNewsDto) {
         // TODO : validation
         newsService.requestNews(

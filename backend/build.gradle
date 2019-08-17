@@ -25,6 +25,7 @@ repositories {
 
 dependencies {
     // db
+    compile group: 'org.hibernate.validator', name: 'hibernate-validator', version: '6.0.17.Final'
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     compile group: 'com.zaxxer', name: 'HikariCP', version: '3.2.0'
     runtimeOnly 'mysql:mysql-connector-java'
@@ -48,9 +49,14 @@ dependencies {
     compile group: 'org.springframework.cloud', name: 'spring-cloud-aws-context', version: '2.1.2.RELEASE'
     compile group: 'org.springframework.cloud', name: 'spring-cloud-aws-autoconfigure', version: '2.1.2.RELEASE'
 
+    // jackson
+    compile group: 'com.fasterxml.jackson.core', name: 'jackson-core', version: '2.9.8'
+    compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.9.9.3'
+    
+    compile group: 'commons-fileupload', name: 'commons-fileupload', version: '1.3.3'
+
     implementation 'org.springframework.boot:spring-boot-starter-web'
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
     compile('org.modelmapper:modelmapper:2.3.0')
-    compile group: 'org.hibernate.validator', name: 'hibernate-validator', version: '6.0.17.Final'
 }

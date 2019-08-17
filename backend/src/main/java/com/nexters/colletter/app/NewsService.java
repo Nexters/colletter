@@ -57,7 +57,6 @@ public class NewsService {
                 .category(toCategoryEntity(newsDto.getCategoryType()))
                 .name(newsDto.getName())
                 .uri(newsDto.getUri())
-                .title(newsDto.getTitle())
                 .content(newsDto.getContent())
                 .status(NewsStatus.REGISTER)
                 .build();
@@ -90,6 +89,14 @@ public class NewsService {
         }
 
         return newsRepository.findById(id).get();
+    }
+
+    public List<News> getAllNews() {
+        return newsRepository.findAll();
+    }
+
+    public List<News> getAllRequestNews() {
+        return newsRepository.findAllByStatus(NewsStatus.REQUEST);
     }
 
     public List<News> getAllLatestNews() {

@@ -18,7 +18,7 @@ cloud:
 
 spring:
   profiles:
-    active: develop
+    active: test
 ---
 spring:
   profiles: develop

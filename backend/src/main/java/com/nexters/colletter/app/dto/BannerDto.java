@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.Column;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
@@ -20,6 +21,12 @@ public class BannerDto {
     @NotBlank
     @JsonIgnore
     private String image;
+    @NotNull
+    @NotBlank
+    private String title;
+    @NotNull
+    @NotBlank
+    private String subTitle;
     @NotNull
     private int priority;
 }

@@ -17,7 +17,7 @@ public class BannerController {
     @Autowired
     private BannerService bannerService;
 
-    @GetMapping("/")
+    @GetMapping()
     public List<Banner> getAllBanners() {
         return bannerService.getAllBanners();
     }

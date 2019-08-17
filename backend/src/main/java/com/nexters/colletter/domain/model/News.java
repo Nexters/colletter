@@ -26,8 +26,6 @@ public class News {
     private String uri;
     @Column(name = "image")
     private String image;
-    @Column(name = "title")
-    private String title;
     @Column(name = "content")
     private String content;
     @Column(name = "date")
@@ -51,7 +49,6 @@ public class News {
             String name,
             String uri,
             String image,
-            String title,
             String content,
             NewsStatus status,
             Category category
@@ -59,7 +56,6 @@ public class News {
         this.name = name;
         this.uri = uri;
         this.image = image;
-        this.title = title;
         this.content = content;
         this.status = status;
         this.category = category;

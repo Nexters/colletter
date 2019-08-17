@@ -73,7 +73,6 @@ public class ModelTest {
                 .name("news")
                 .uri("localhost.com")
                 .image(null)
-                .title("title")
                 .content("content")
                 .build())
                 .getId();
@@ -94,7 +93,6 @@ public class ModelTest {
                 .name("food")
                 .uri("food.com")
                 .image(null)
-                .title("food")
                 .content("delicious")
                 .category(foodCategory)
                 .build();

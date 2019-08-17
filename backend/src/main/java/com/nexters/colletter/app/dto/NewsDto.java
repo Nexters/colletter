@@ -8,6 +8,7 @@ import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -28,9 +29,6 @@ public class NewsDto {
     private String image;
     @NotNull
     private CategoryType categoryType;
-    @NotNull
-    @NotBlank
-    private String title;
     @NotNull
     @NotBlank
     private String content;
