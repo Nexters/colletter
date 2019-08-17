@@ -56,9 +56,9 @@ public class AdminController {
 
     // TODO : implements me!
     @DeleteMapping("/news/{newsId}")
-    @ApiOperation(value = "미완성")
-    public Response deleteNews(@PathVariable long newsId){
-        return null;
+    public Response deleteNewsById(@PathVariable long newsId){
+        newsService.deleteNewsById(newsId);
+        return new Response("Success", null);
     }
 
     @PutMapping("/news/{newsId}/status/{status}/")
@@ -70,11 +70,13 @@ public class AdminController {
     /*
         Banner Create, Update, Delete
      */
-    // TODO : implements me!
-    @ApiOperation(value = "미완성")
     @PostMapping("/banner")
-    public Response registerBanner(@RequestBody BannerDto bannerDto, @RequestParam("image") MultipartFile imageFile) {
-        return null;
+    public Response registerBanner(@RequestBody BannerDto bannerDto, @RequestParam("image") MultipartFile imageFile) throws IOException {
+        bannerService.registerBanner(
+                bannerDto,
+                imageFile
+        );
+        return new Response("Success", null);
     }
 
     // TODO : implements me!
@@ -85,10 +87,9 @@ public class AdminController {
         return null;
     }
 
-    // TODO : implements me!
-    @ApiOperation(value = "미완성")
     @DeleteMapping("/banner/{bannerId}")
-    public Response deleteBanner(@PathVariable long bannerId) {
-        return null;
+    public Response deleteBannerById(@PathVariable long bannerId) {
+        bannerService.deleteBannerById(bannerId);
+        return new Response("Success", null);
     }
 }

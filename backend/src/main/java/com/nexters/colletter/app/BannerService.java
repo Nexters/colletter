@@ -54,7 +54,7 @@ public class BannerService {
         bannerRepository.save(banner);
     }
 
-    public void deleteBanner(long bannerId) {
+    public void deleteBannerById(long bannerId) {
         bannerRepository.deleteById(bannerId);
     }
 

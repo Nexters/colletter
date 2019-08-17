@@ -80,8 +80,8 @@ public class NewsService {
 
     }
 
-    public void deleteNews(long newsId) {
-
+    public void deleteNewsById(long newsId) {
+        newsRepository.deleteById(newsId);
     }
 
     public News getNewsById(long id) {
