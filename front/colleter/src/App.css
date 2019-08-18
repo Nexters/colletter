@@ -1,0 +1,232 @@
+.App {
+    text-align: center;
+}
+
+.App-logo {
+    animation: App-logo-spin infinite 20s linear;
+    height: 40vmin;
+    pointer-events: none;
+}
+
+.App-header {
+    background-color: #282c34;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: calc(10px + 2vmin);
+    color: white;
+}
+
+.App-link {
+    color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.link {
+    color: black;
+}
+
+.loginAfter {
+    position: absolute;
+    right: 100px;
+}
+.lastCategory {
+    margin-right: 0px !important;
+}
+.nav {
+    border-bottom: solid 1px #e8e8e8;
+    height: 90px;
+}
+.navText {
+    height: 33px;
+    padding-bottom: 32px;
+    padding-top: 32px;
+}
+.nav-item {
+    font-family: Roboto;
+    font-size: 18px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.33;
+    letter-spacing: normal;
+    color: #121212;
+    margin-top: 2px;
+}
+.nav-item > a {
+    color: black;
+    margin-right: 45px;
+}
+
+.about {
+    margin-left: 3%;
+}
+.navImg {
+    margin-top: 21px;
+}
+.nav-item > .newsRegister {
+    width: 128px;
+    display: flex;
+    height: 48px;
+    border-radius: 24px;
+    box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.3);
+    background-color: #000000;
+    position: absolute;
+    right: 30px;
+    color: white;
+    margin-right: 16%;
+}
+
+.slider {
+    width: 100%;
+    margin-bottom: 180px;
+}
+.heartImg {
+    margin-left: 90%;
+}
+.card {
+    margin-bottom: 10px;
+}
+.cardImg {
+    margin-bottom: 10px;
+}
+
+.cardTitle {
+    font-family: Roboto;
+    font-size: 20px;
+    font-weight: 300;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    color: #000000;
+}
+
+.cardText {
+    font-family: Roboto;
+    font-size: 15px;
+    font-weight: 300;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    color: #686868;
+    margin-top: 0px !important;
+}
+.cardMinTitle {
+    margin-bottom: 60px !important;
+}
+
+.card-deck {
+    margin-bottom: 110px;
+}
+
+.popup {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+.popup_inner {
+    position: absolute;
+    left: 25%;
+    right: 25%;
+    top: 25%;
+    bottom: 25%;
+    margin: auto;
+    background: white;
+    height: 612px;
+    width: 1070px;
+}
+.popupCardTitle {
+    font-family: NotoSansCJKkr;
+    font-size: 38px;
+    font-weight: 300;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    color: #121212;
+}
+.popupCardMinTitle {
+    font-family: NotoSansCJKkr;
+    font-size: 23px;
+    font-weight: 300;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    color: #3bd277;
+}
+.popupCardText {
+    font-family: NotoSansCJKkr;
+    font-size: 23px;
+    font-weight: 300;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.76;
+    letter-spacing: normal;
+    color: #686868;
+}
+
+img:hover {
+    cursor: pointer;
+}
+
+
+.nav_user > #user_profile {
+    width: 40px;
+    height: 40px;
+    border-radius: 40px;
+    margin-top: 18px;
+}
+
+.nav_user {
+    position: absolute;
+    right: 107px;
+    top: 6px;
+    display: flex;
+}
+
+.nav_user > #user_name {
+    width: 100px;
+    height: 16px;
+    font-family: NotoSansCJKkr;
+    font-size: 12px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.33;
+    letter-spacing: normal;
+    color: #121212;
+    margin-top: 20px;
+}
+
+.nav_user > #user_email {
+    width: 62px;
+    height: 16px;
+    font-family: NotoSansCJKkr;
+    font-size: 12px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.33;
+    letter-spacing: normal;
+    color: #121212;
+    margin-top: 20px;
+}

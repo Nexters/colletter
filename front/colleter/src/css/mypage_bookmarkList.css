@@ -1,0 +1,49 @@
+.list {
+    margin-bottom: 200px;
+}
+
+.heartImg {
+    margin-left: 90%;
+}
+
+.cardImg {
+    width: 98px;
+    height: 98px;
+    margin-bottom: 10px;
+}
+
+.cardTitle {
+    margin-top: 24px;
+    font-family: NotoSansCJKkr;
+    font-size: 26px;
+    font-weight: 300;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    color: #000000;
+}
+
+.cardDesc {
+    margin-top: 10px;
+    font-family: NotoSansCJKkr;
+    font-size: 20px;
+    font-weight: 300;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    color: #686868
+}
+
+.cardText {
+    margin-top: 60px;
+}
+
+.card-deck {
+    margin-bottom: 10%;
+}
+
+.card {
+    margin-top: 18px;
+}

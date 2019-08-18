@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+
+    <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico"/>
+    <link
+        rel="stylesheet"
+        href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+        crossorigin="anonymous"
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta name="theme-color" content="#000000"/>
+    <link rel="manifest" href="%PUBLIC_URL%/manifest.json"/>
+    <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
+    </style>
+    <meta name="google-signin-scope" content="profile email">
+    <meta id="googleMeta" name="google-signin-client_id"
+          content="">
+    <script type="text/JavaScript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+    <script type="text/JavaScript" src="oAuth.js"></script>
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <script src="https://unpkg.com/react@16/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js"></script>
+    <title>Colleter</title>
+</head>
+<body>
+<div id="root"></div>
+
+<script>
+    function onSignIn(googleUser) {
+        // Useful data for your client-side scripts:
+        let profile = googleUser.getBasicProfile();
+
+        return false;
+
+        // The ID token you need to pass to your backend:
+        let id_token = googleUser.getAuthResponse().id_token;
+
+        let name = profile.getName();
+        let email = profile.getEmail();
+        let img = profile.getImageUrl();
+        localStorage.setItem('id_token', id_token);
+        localStorage.setItem('name', name);
+        localStorage.setItem('img', img);
+        localStorage.setItem('email', email);
+
+        $.ajax({
+            type: "POST",
+            url: "https://colletter.com/users/login",
+            dataType: "json",
+            contentType: "application/json",
+            data: JSON.stringify({
+                email: email,
+                image: img,
+                name: name,
+            }),
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader("accept", "*/*");
+            },
+            success: function (data) {
+                localStorage.setItem('access_token', data.data);
+                window.location.reload();
+            },
+            error: function (error) {
+                alert(error);
+            }
+        });
+    }
+</script>
+</body>
+</html>
