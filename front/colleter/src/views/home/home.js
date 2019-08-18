@@ -176,7 +176,8 @@ class home extends React.Component {
             showPopup: false,
             bestNews: [],
             latestNews: [],
-            pickNews: []
+            pickNews: [],
+            url: 'http://15.164.112.144:8080'
         };
     }
 
@@ -189,7 +190,7 @@ class home extends React.Component {
     componentDidMount() {
         $('#btnShowPopup').hide();
 
-        axios.get(`https://colletter.com/news/best/3`).then(
+        axios.get(this.state.url + `/news/best/3`).then(
             r => {
                 this.setState({
                     bestNews: r.data
@@ -197,7 +198,7 @@ class home extends React.Component {
             }
         );
 
-        axios.get(`https://colletter.com/news/latest/3`).then(
+        axios.get(this.state.url + `/news/latest/3`).then(
             r => {
                 this.setState({
                     latestNews: r.data
@@ -205,7 +206,7 @@ class home extends React.Component {
             }
         );
 
-        axios.get(`https://colletter.com/news/pick/3`).then(
+        axios.get(this.state.url + `/news/pick/3`).then(
             r => {
                 this.setState({
                     pickNews: r.data
