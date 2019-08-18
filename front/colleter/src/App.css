@@ -153,6 +153,18 @@
     height: 40%;
     width: 50%;
 }
+
+.popup_inner_register {
+    position: absolute;
+    left: 25%;
+    right: 25%;
+    top: 25%;
+    bottom: 25%;
+    margin: auto;
+    background: white;
+    height: 70%;
+    width: 40%;
+}
 .popupCardTitle {
     font-family: NotoSansCJKkr;
     font-size: 1.5em;
@@ -192,7 +204,7 @@ img:hover {
     display: none;
 }
 
-#btnShowRegisterPopup{
+#btnShowRegisterPopup {
     display: none;
 }
 .nav_user > #user_profile {

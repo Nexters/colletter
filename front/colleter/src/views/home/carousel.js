@@ -5,7 +5,6 @@ import leftImg from '../../img/leftImg.PNG';
 import rightImg from '../../img/rightImg.PNG';
 import styled from 'styled-components';
 
-
 /**
  * colleter
  *
@@ -23,7 +22,7 @@ const Left = styled.img`
 `;
 
 const Right = styled.img`
-position: absolute;
+    position: absolute;
     right: 0px;
     top: 450px;
     width: 16%;
@@ -32,7 +31,7 @@ position: absolute;
 `;
 
 const Center = styled.img`
-width: 1280px;
+width: 100%;
   height: 480px;
 `;
 
@@ -44,7 +43,6 @@ class carousel extends React.Component {
     render() {
         return (
             <Container>
-                <Left className="imgSide" src={leftImg}/>
                 <Carousel className="slider">
                     <Carousel.Item>
                         <Center
@@ -68,7 +66,6 @@ class carousel extends React.Component {
                         />
                     </Carousel.Item>
                 </Carousel>
-                <Right className="imgSide" src={rightImg}/>
             </Container>
         );
     }

@@ -26,15 +26,30 @@ const CloseImg = styled.img`
     top: 46px;
 `;
 
+const Title = styled.div`
+ width: 566px;
+  height: 48px;
+  font-family: NotoSansCJKkr;
+  font-size: 38px;
+  font-weight: 300;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 1.26;
+  letter-spacing: normal;
+  color: #121212;
+   `;
+
 
 class RegisterPopup extends React.Component {
 
     render() {
         return (
             <div className='popup'>
-                <div className='popup_inner'>
+                <div className='popup_inner_register'>
                     <CloseImg onClick={this.props.closePopup} src={close} alt="close" href="/"/>
-
+                    <Title>
+                        등록요청
+                    </Title>
 
                 </div>
             </div>

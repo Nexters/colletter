@@ -68,7 +68,6 @@ const googleLogin = (
     <Login className="g-signin2" data-onsuccess="onSignIn" data-theme="dark"></Login>
 );
 
-
 const loginComplete = (
     <div className='nav_user'><img id='user_profile' src={localStorage.getItem('img')} alt='user'/>
         <p id='user_name'>{localStorage.getItem('name')} <br/> <span
@@ -84,7 +83,6 @@ function rightNavHide() {
     }
 
 }
-
 
 class App extends React.Component {
     constructor(props) {
@@ -103,7 +101,7 @@ class App extends React.Component {
     componentDidMount() {
         rightNavHide();
 
-        $('#loginButton').click(function () {
+        $('.newsRegister').click(function () {
             $('#btnShowRegisterPopup').trigger('click');
         });
     }
@@ -117,7 +115,6 @@ class App extends React.Component {
         $(window).resize(function () {
             rightNavHide();
         });
-
 
         return (
             <div className="app">
