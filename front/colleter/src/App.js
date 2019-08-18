@@ -65,7 +65,7 @@ const LoginButton = styled.p`
 `;
 
 const googleLogin = (
-    <LoginButton id='loginButton'>로그인</LoginButton>
+    <Login className="g-signin2" data-onsuccess="onSignIn" data-theme="dark"></Login>
 );
 
 
@@ -104,7 +104,7 @@ class App extends React.Component {
         rightNavHide();
 
         $('#loginButton').click(function () {
-            $('#btnShowPopup').trigger('click');
+            $('#btnShowRegisterPopup').trigger('click');
         });
     }
 
@@ -166,7 +166,7 @@ class App extends React.Component {
                     <FooterImg src={footerImg}/>
                 </Footer>
 
-                <button id="btnShowPopup" onClick={this.togglePopup.bind(this)}>show popup</button>
+                <button id="btnShowRegisterPopup" onClick={this.togglePopup.bind(this)}>show popup</button>
                 {this.state.showPopup ?
                     <RegisterPopup
                         text='Close Me'

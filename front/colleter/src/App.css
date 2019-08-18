@@ -150,12 +150,12 @@
     bottom: 25%;
     margin: auto;
     background: white;
-    height: 612px;
-    width: 1070px;
+    height: 40%;
+    width: 50%;
 }
 .popupCardTitle {
     font-family: NotoSansCJKkr;
-    font-size: 38px;
+    font-size: 1.5em;
     font-weight: 300;
     font-style: normal;
     font-stretch: normal;
@@ -175,7 +175,7 @@
 }
 .popupCardText {
     font-family: NotoSansCJKkr;
-    font-size: 23px;
+    font-size: 1.0em;
     font-weight: 300;
     font-style: normal;
     font-stretch: normal;
@@ -188,7 +188,13 @@ img:hover {
     cursor: pointer;
 }
 
+#btnShowPopup {
+    display: none;
+}
 
+#btnShowRegisterPopup{
+    display: none;
+}
 .nav_user > #user_profile {
     width: 40px;
     height: 40px;

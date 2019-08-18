@@ -37,7 +37,7 @@ width: 144px;
 
 const CardCategory = styled.span`
   font-family: NotoSansCJKkr;
-  font-size: 23px;
+  font-size: 1.3em;
   font-weight: 300;
   font-style: normal;
   font-stretch: normal;
@@ -48,7 +48,7 @@ const CardCategory = styled.span`
 
 const CardCount = styled.span`
   font-family: NotoSansCJKkr;
-  font-size: 23px;
+  font-size: 1.3em;
   font-weight: 300;
   font-style: normal;
   font-stretch: normal;
@@ -66,18 +66,18 @@ const Container = styled.div`
 `;
 
 const ContainerCardText = styled.div`
-    margin-top:99px;
+    margin-top:6%;
     margin-right:134px;
 `;
 
 const ContainerCardTextFooter = styled.div`
- margin-top:90px;
+ margin-top:5%;
  display:flex;
 `;
 
 
 const ContainerCardImg = styled.div`
-    margin-top:99px;
+    margin-top:6%;
 `;
 
 const Rectangle = styled.div`
@@ -87,7 +87,7 @@ const Rectangle = styled.div`
     border: solid 2px #3bd277;
 `;
 const RectangleRegister = styled.div`
-    width: 90%;
+    width: 80%;
     height: 60px;
     border-radius: 3.4px;
     background-color: #3bd277;

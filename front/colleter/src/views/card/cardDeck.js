@@ -42,35 +42,44 @@ const CardCount = styled.span`
 
 
 class cardDeck extends React.Component {
-    news = [
-        {
-            id: 1,
-            title: '뉴닉',
-            content: '금주의 핫한 디자인을 빠르게 받아볼 수 있는 디자인 뉴스레터 입니다.',
-            category: '정치/경제',
-            bookmarkedCount: 34
-        },
-        {
-            id: 2,
-            title: '뉴닉',
-            content: '금주의 핫한 디자인을 빠르게 받아볼 수 있는 디자인 뉴스레터 입니다.',
-            category: '정치/경제',
-            bookmarkedCount: 34
-        },
-        {
-            id: 3,
-            title: '뉴닉',
-            content: '금주의 핫한 디자인을 빠르게 받아볼 수 있는 디자인 뉴스레터 입니다.',
-            category: '정치/경제',
-            bookmarkedCount: 34
-        },
-    ];
 
+    constructor(props) {
+        super(props);
+        let news = props.news;
+        if (!news) news = [
+            {
+                id: 1,
+                title: '뉴닉',
+                content: '금주의 핫한 디자인을 빠르게 받아볼 수 있는 디자인 뉴스레터 입니다.',
+                category: '정치/경제',
+                bookmarkedCount: 34
+            },
+            {
+                id: 2,
+                title: '뉴닉',
+                content: '금주의 핫한 디자인을 빠르게 받아볼 수 있는 디자인 뉴스레터 입니다.',
+                category: '정치/경제',
+                bookmarkedCount: 34
+            },
+            {
+                id: 3,
+                title: '뉴닉',
+                content: '금주의 핫한 디자인을 빠르게 받아볼 수 있는 디자인 뉴스레터 입니다.',
+                category: '정치/경제',
+                bookmarkedCount: 34
+            },
+        ];
+
+        this.state = {
+            showPopup: false,
+            news: news,
+        };
+    }
 
     render() {
         return (
             <CardDeck>
-                {this.news.map((news) => {
+                {this.state.news.map((news) => {
                     return <Card style={{width: '100%', height: '100%'}} key={news.id}>
                         <Card.Body className="cardBody">
                             <Card.Img variant="right" className="heartImg" src={heart}/>

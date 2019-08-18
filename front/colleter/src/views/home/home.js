@@ -9,12 +9,15 @@ import React from 'react';
 import styled from 'styled-components';
 import category from '../../img/category.PNG';
 import Popup from '../popup/popup';
-import CardDeck from '../card/cardDeck';
+import {CardDeck} from 'react-bootstrap';
 import Carousel from './carousel';
 import bg from '../../img/bg.png';
 import mailBox from '../../img/img_mailbox.png';
-
+import axios from 'axios';
 import jQuery from "jquery";
+import {Card} from 'react-bootstrap';
+import heart from '../../img/ic-heart-default.png';
+import card from '../../img/cardImg.PNG';
 
 const $ = jQuery;
 
@@ -142,12 +145,38 @@ const RegisterMailLetter = styled.p`
       margin: 17px;    
       display:flex;
 `;
+const CardCategory = styled.span`
+  font-family: NotoSansCJKkr;
+  font-size: 14px;
+  font-weight: 300;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  color: #3bd277;
+`;
+
+const CardCount = styled.span`
+   font-family: NotoSansCJKkr;
+  font-size: 14px;
+  font-weight: 300;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  color: #686868;
+  margin-left : 15px;
+`;
+
 
 class home extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            showPopup: false
+            showPopup: false,
+            bestNews: [],
+            latestNews: [],
+            pickNews: []
         };
     }
 
@@ -160,12 +189,38 @@ class home extends React.Component {
     componentDidMount() {
         $('#btnShowPopup').hide();
 
-        $('.cardBody').click(function () {
+        axios.get(`https://colletter.com/news/best/3`).then(
+            r => {
+                this.setState({
+                    bestNews: r.data
+                });
+            }
+        );
+
+        axios.get(`https://colletter.com/news/latest/3`).then(
+            r => {
+                this.setState({
+                    latestNews: r.data
+                });
+            }
+        );
+
+        axios.get(`https://colletter.com/news/pick/3`).then(
+            r => {
+                this.setState({
+                    pickNews: r.data
+                });
+            }
+        );
+
+
+        $('.cardBody').on("click", function () {
             $('#btnShowPopup').trigger('click');
         });
     }
 
     render() {
+
         return (
             <div>
                 <Container>
@@ -192,21 +247,76 @@ class home extends React.Component {
                         가장 최근 업데이트 된 뉴스레터들을 살펴보세요
                     </CardMinTitle>
 
-                    <CardDeck/>
+                    <CardDeck>
+                        {this.state.latestNews.map((news) => {
+                            return <Card style={{width: '100%', height: '100%'}} key={news.id}>
+                                <Card.Body className="cardBody">
+                                    <Card.Img variant="right" className="heartImg" src={heart}/>
+                                    <Card.Img variant="right" className="cardImg" src={card}/>
 
-                    <ColletterPick>Lastest Update</ColletterPick>
+                                    <Card.Title className="cardTitle">{news.name}</Card.Title>
+                                    <Card.Text className="cardText cardMinTitle">
+                                        {news.content}
+                                    </Card.Text>
+
+                                    <Card.Text className="cardText">
+                                        <CardCategory>{news.category.name}</CardCategory><CardCount>좋아요 {news.bookmarkedCount}</CardCount>
+                                    </Card.Text>
+                                </Card.Body>
+                            </Card>
+                        })}
+                    </CardDeck>
+
+
+                    <ColletterPick>Best Newsletter</ColletterPick>
                     <CardMinTitle>
-                        가장 최근 업데이트 된 뉴스레터들을 살펴보세요
+                        콜레티언에게 가장 많은 좋아요를 받은 뉴스레터예요
                     </CardMinTitle>
 
-                    <CardDeck/>
+                    <CardDeck>
+                        {this.state.bestNews.map((news) => {
+                            return <Card style={{width: '100%', height: '100%'}} key={news.id}>
+                                <Card.Body className="cardBody">
+                                    <Card.Img variant="right" className="heartImg" src={heart}/>
+                                    <Card.Img variant="right" className="cardImg" src={card}/>
 
-                    <ColletterPick>Lastest Update</ColletterPick>
+                                    <Card.Title className="cardTitle">{news.name}</Card.Title>
+                                    <Card.Text className="cardText cardMinTitle">
+                                        {news.content}
+                                    </Card.Text>
+
+                                    <Card.Text className="cardText">
+                                        <CardCategory>{news.category.name}</CardCategory><CardCount>좋아요 {news.bookmarkedCount}</CardCount>
+                                    </Card.Text>
+                                </Card.Body>
+                            </Card>
+                        })}
+                    </CardDeck>
+
+                    <ColletterPick>Colletter’s Pick</ColletterPick>
                     <CardMinTitle>
-                        가장 최근 업데이트 된 뉴스레터들을 살펴보세요
+                        콜레터가 직접 선정한 뉴스레터를 확인해 보세요
                     </CardMinTitle>
+                    <CardDeck>
+                        {this.state.pickNews.map((news) => {
+                            return <Card style={{width: '100%', height: '100%'}} key={news.id}>
+                                <Card.Body className="cardBody">
+                                    <Card.Img variant="right" className="heartImg" src={heart}/>
+                                    <Card.Img variant="right" className="cardImg" src={card}/>
 
-                    <CardDeck/>
+                                    <Card.Title className="cardTitle">{news.name}</Card.Title>
+                                    <Card.Text className="cardText cardMinTitle">
+                                        {news.content}
+                                    </Card.Text>
+
+                                    <Card.Text className="cardText">
+                                        <CardCategory>{news.category.name}</CardCategory><CardCount>좋아요 {news.bookmarkedCount}</CardCount>
+                                    </Card.Text>
+                                </Card.Body>
+                            </Card>
+                        })}
+                    </CardDeck>
+
                 </Container>
                 <div>
                     <FooterLetter>
