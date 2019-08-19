@@ -96,6 +96,11 @@ class App extends React.Component {
         this.setState({
             showPopup: !this.state.showPopup
         });
+        if (this.state.showPopup) {
+            $('#appNav').show();
+        } else {
+            $('#appNav').hide();
+        }
     }
 
     componentDidMount() {

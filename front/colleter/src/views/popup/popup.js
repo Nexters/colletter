@@ -139,14 +139,12 @@ class popup extends React.Component {
 
             },
         };
-        console.log(this.state);
     }
 
     componentDidMount() {
 
         axios.get(this.props.url + `/news/` + this.props.popupId).then(
             r => {
-                console.log(r.data);
                 this.setState({
                     news: r.data
                 });
@@ -184,7 +182,6 @@ class popup extends React.Component {
                             </ContainerCardTextFooter>
                         </ContainerCardText>
                     </Container>
-                    })}
                 </div>
             </div>
         );

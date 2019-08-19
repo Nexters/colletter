@@ -187,6 +187,12 @@ class home extends React.Component {
         this.setState({
             showPopup: !this.state.showPopup
         });
+
+        if (this.state.showPopup) {
+            $('#appNav').show();
+        } else {
+            $('#appNav').hide();
+        }
     }
 
     changeId(id) {
@@ -194,9 +200,12 @@ class home extends React.Component {
             popupId: id,
             showPopup: !this.state.showPopup
         });
-    }
 
-    cardPopup() {
+        if (this.state.showPopup) {
+            $('#appNav').show();
+        } else {
+            $('#appNav').hide();
+        }
     }
 
     componentWillMount() {
@@ -207,7 +216,6 @@ class home extends React.Component {
                 this.setState({
                     bestNews: r.data
                 });
-                this.cardPopup();
             }
         );
 
@@ -216,7 +224,6 @@ class home extends React.Component {
                 this.setState({
                     latestNews: r.data
                 });
-                this.cardPopup();
             }
         );
 
@@ -225,7 +232,6 @@ class home extends React.Component {
                 this.setState({
                     pickNews: r.data
                 });
-                this.cardPopup();
             }
         );
     }
