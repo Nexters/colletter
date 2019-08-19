@@ -46,6 +46,8 @@
 .navbar {
     border-bottom: solid 1px #e8e8e8;
     height: 90px;
+    background: white;
+    z-index: 100;
 }
 #categoryNav {
     border-bottom: solid 1px #e8e8e8;
