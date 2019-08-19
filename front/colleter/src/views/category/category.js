@@ -13,6 +13,12 @@ import Popup from '../popup/popup';
 import CardColum from '../card/cardColum';
 import jQuery from "jquery";
 import {CardColumns} from 'react-bootstrap';
+import axios from 'axios';
+import {Nav, Navbar} from 'react-bootstrap';
+import logo from '../../img/logo.png';
+import {BrowserRouter as Router, Link} from 'react-router-dom';
+import searching from '../../img/ic-searching.png';
+import registerImg from '../../img/ic-arrow.png';
 
 const $ = jQuery;
 
@@ -20,10 +26,10 @@ const Container = styled.div`
   display: flex;
   align-items: left;
   justify-content: left;
-  margin: 80px 16% 0px 16%;
+  margin: 180px auto 0px auto;
   flex-direction: column;
+   width:1280px;
 `;
-
 const Title = styled.div`
  font-family: NotoSansCJKkr;
   font-size: 44px;
@@ -126,21 +132,15 @@ width: 20px;
 `;
 
 class category extends React.Component {
-    categoryData = [
-        {name: '디자인', id: 1},
-        {name: '개발', id: 2},
-        {name: 'IT/스타트업', id: 3},
-        {name: '예술/문화', id: 4},
-        {name: '정치/경제', id: 5},
-        {name: '금융', id: 6},
-        {name: '경제/경영', id: 7},
-        {name: '시사/상식', id: 8},
-    ];
 
     constructor(props) {
         super(props);
         this.state = {
-            showPopup: false
+            showPopup: false,
+            categoryData: [],
+            categoryId: 'c_0',
+            height: '300px',
+            url: 'http://15.164.112.144:8080'
         };
     }
 
@@ -150,30 +150,80 @@ class category extends React.Component {
         });
     }
 
+    changeId(id) {
+        this.setState({
+            categoryId: id
+        });
+    }
+
     componentDidMount() {
+        $('#categoryNav').hide();
+        $('#appNav').show();
+
         $('#btnShowPopup').hide();
 
         $('.cardBody').click(function () {
             $('#btnShowPopup').trigger('click');
         });
+
+        axios.get(this.state.url + `/category`).then(
+            r => {
+                this.setState({
+                    categoryData: r.data
+                });
+            }
+        );
     }
 
+
     render() {
+        $(window).scroll(function (event) {
+            if ($(this).scrollTop() > 400) {
+                $('#categoryNav').show();
+                $('#appNav').hide();
+            } else {
+                $('#categoryNav').hide();
+                $('#appNav').show();
+
+            }
+        });
+
         return (
             <div>
+
+                <Navbar id="categoryNav" fixed="top">
+                    {this.state.categoryData.map((categoryData) => {
+                        if (categoryData.id === this.state.categoryId) {
+                            return <PickCategory key={categoryData.id}
+                                                 id={categoryData.id}
+                                                 onClick={this.changeId.bind(this, categoryData.id)}
+                            > <span className="spnCategory">{categoryData.name}</span></PickCategory>
+                        } else {
+                            return <TitleCategory key={categoryData.id}
+                                                  onClick={this.changeId.bind(this, categoryData.id)}
+                                                  id={categoryData.id}><span
+                                className="spnCategory"> {categoryData.name}</span></TitleCategory>
+                        }
+                    })}
+                </Navbar>
+
                 <Container>
                     <Title>
                         원하는 주제를 선택하고<br/>
                         지식을 넓혀보세요
                     </Title>
                     <DivCategory>
-                        {this.categoryData.map((categoryData) => {
-                            if (categoryData.id === 1) {
+                        {this.state.categoryData.map((categoryData) => {
+                            if (categoryData.id === this.state.categoryId) {
                                 return <PickCategory key={categoryData.id}
-                                                     id={categoryData.id}> {categoryData.name}</PickCategory>
+                                                     id={categoryData.id}
+                                                     onClick={this.changeId.bind(this, categoryData.id)}
+                                > <span className="spnCategory">{categoryData.name}</span></PickCategory>
                             } else {
                                 return <TitleCategory key={categoryData.id}
-                                                      id={categoryData.id}> {categoryData.name}</TitleCategory>
+                                                      onClick={this.changeId.bind(this, categoryData.id)}
+                                                      id={categoryData.id}><span
+                                    className="spnCategory"> {categoryData.name}</span></TitleCategory>
                             }
                         })}
                     </DivCategory>
@@ -189,9 +239,6 @@ class category extends React.Component {
                     </CountNews>
                     <CardColum/>
                 </Container>
-
-                <button id="btnShowPopup" onClick={this.togglePopup.bind(this)}>show popup</button>
-
                 {this.state.showPopup ?
                     <Popup
                         text='Close Me'
@@ -199,6 +246,8 @@ class category extends React.Component {
                     />
                     : null
                 }
+                <button id="btnShowPopup" onClick={this.togglePopup.bind(this)}>show popup</button>
+
             </div>
         );
     }

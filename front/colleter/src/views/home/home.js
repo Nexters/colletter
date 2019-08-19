@@ -25,8 +25,9 @@ const Container = styled.div`
   display: flex;
   align-items: left;
   justify-content: left;
-  margin: 80px 16% 0px 16%;
+  margin: 180px auto 0px auto;
   flex-direction: column;
+  width:1280px;
 `;
 
 const ColletterPick = styled.div`
@@ -177,6 +178,7 @@ class home extends React.Component {
             bestNews: [],
             latestNews: [],
             pickNews: [],
+            popupId: 0,
             url: 'http://15.164.112.144:8080'
         };
     }
@@ -187,7 +189,17 @@ class home extends React.Component {
         });
     }
 
-    componentDidMount() {
+    changeId(id) {
+        this.setState({
+            popupId: id,
+            showPopup: !this.state.showPopup
+        });
+    }
+
+    cardPopup() {
+    }
+
+    componentWillMount() {
         $('#btnShowPopup').hide();
 
         axios.get(this.state.url + `/news/best/3`).then(
@@ -195,6 +207,7 @@ class home extends React.Component {
                 this.setState({
                     bestNews: r.data
                 });
+                this.cardPopup();
             }
         );
 
@@ -203,6 +216,7 @@ class home extends React.Component {
                 this.setState({
                     latestNews: r.data
                 });
+                this.cardPopup();
             }
         );
 
@@ -211,28 +225,57 @@ class home extends React.Component {
                 this.setState({
                     pickNews: r.data
                 });
+                this.cardPopup();
             }
         );
-
-
-        $('.cardBody').on("click", function () {
-            $('#btnShowPopup').trigger('click');
-        });
     }
 
     render() {
+
+        var bannerText = [
+            {
+                title: '   매일 매일 배달되는 신선한<br/>' +
+                    '                            디자인 & 아트 작업물, 비헨스',
+                minTitle: '  세상 돌아가는 소식, 알고는 싶지만 신문 볼 새 없이 <br/>\n' +
+                    '                            바쁜 게 우리 탓은 아니잖아요!'
+
+            }, {
+                title: '     매일 아침 출근길,<br/>' +
+                    '                          꼭 필요한 돈 이야기를 만나보세요.',
+                minTitle: ' 사회초년생들을 위한 금융경제 뉴스레터를 <br/>\n' +
+                    '                              매일 아침 출근길에 뉴스레터로 받아보실 수 있습니다.'
+            },
+            {
+                title: '     해외 디자인 아티클을<br/>' +
+                    '                           쉽게 읽는 방법!',
+                minTitle: '사이트가 넘치는 해외 디자인 아티클을 번역하여 <br/>\n' +
+                    '                           뉴스레터로 보내드립니다.'
+            }
+        ];
+        setInterval(function () {
+            $('.carousel-indicators li').each(function (e) {
+                if ($($('.carousel-indicators li')[e]).hasClass('active')) {
+                    $('#title').html(bannerText[e].title);
+                    $('#minTitle').html(bannerText[e].minTitle);
+                }
+            });
+        }, 1000);
 
         return (
             <div>
                 <Container>
                     <ColletterPickTitle>Colletter Pick</ColletterPickTitle>
                     <Title>
-                        매일 매일 배달되는 신선한<br/>
-                        디자인 & 아트 작업물, 비헨스
+                        <p id="title">
+                            매일 매일 배달되는 신선한<br/>
+                            디자인 & 아트 작업물, 비헨스
+                        </p>
                     </Title>
                     <MinTitle>
-                        세상 돌아가는 소식, 알고는 싶지만 신문 볼 새 없이 <br/>
-                        바쁜 게 우리 탓은 아니잖아요!
+                        <p id="minTitle">
+                            세상 돌아가는 소식, 알고는 싶지만 신문 볼 새 없이 <br/>
+                            바쁜 게 우리 탓은 아니잖아요!
+                        </p>
                     </MinTitle>
                 </Container>
                 <Carousel/>
@@ -252,8 +295,9 @@ class home extends React.Component {
 
                     <CardDeck>
                         {this.state.latestNews.map((news) => {
-                            return <Card style={{width: '100%', height: '100%'}} key={news.id}>
-                                <Card.Body className="cardBody">
+                            return <Card style={{width: '415px', height: '415px'}} key={news.id}>
+                                <Card.Body className="cardBody" data-id={news.id}
+                                           onClick={this.changeId.bind(this, news.id)}>
                                     <Card.Img variant="right" className="heartImg" src={heart}/>
                                     <Card.Img variant="right" className="cardImg" src={card}/>
 
@@ -278,8 +322,8 @@ class home extends React.Component {
 
                     <CardDeck>
                         {this.state.bestNews.map((news) => {
-                            return <Card style={{width: '100%', height: '100%'}} key={news.id}>
-                                <Card.Body className="cardBody">
+                            return <Card style={{width: '415px', height: '415px'}} key={news.id}>
+                                <Card.Body className="cardBody" onClick={this.changeId.bind(this, news.id)}>
                                     <Card.Img variant="right" className="heartImg" src={heart}/>
                                     <Card.Img variant="right" className="cardImg" src={card}/>
 
@@ -302,8 +346,8 @@ class home extends React.Component {
                     </CardMinTitle>
                     <CardDeck>
                         {this.state.pickNews.map((news) => {
-                            return <Card style={{width: '100%', height: '100%'}} key={news.id}>
-                                <Card.Body className="cardBody">
+                            return <Card style={{width: '415px', height: '415px'}} key={news.id}>
+                                <Card.Body className="cardBody" onClick={this.changeId.bind(this, news.id)}>
                                     <Card.Img variant="right" className="heartImg" src={heart}/>
                                     <Card.Img variant="right" className="cardImg" src={card}/>
 
@@ -340,10 +384,12 @@ class home extends React.Component {
                     </FooterRegister>
                     <Register src={bg} alt="register"/>
                 </div>
-                <button id="btnShowPopup" onClick={this.togglePopup.bind(this)}>show popup</button>
+                <button id="btnShowPopup" onClick={this.togglePopup.bind(this)} data-id='0'>show popup</button>
                 {this.state.showPopup ?
                     <Popup
                         text='Close Me'
+                        popupId={this.state.popupId}
+                        url={this.state.url}
                         closePopup={this.togglePopup.bind(this)}
                     />
                     : null

@@ -1,7 +1,7 @@
 import React, {Component, Fragment} from 'react';
 import {BrowserRouter as Router, Route, Switch, Link} from 'react-router-dom';
 import home from './views/home/home';
-import {Nav} from 'react-bootstrap';
+import {Nav, Navbar} from 'react-bootstrap';
 import './App.css';
 import styled from 'styled-components';
 import logo from './img/logo.png';
@@ -119,7 +119,7 @@ class App extends React.Component {
         return (
             <div className="app">
                 <Router basename={process.env.PUBLIC_URL}>
-                    <Nav>
+                    <Navbar fixed="top" id="appNav">
                         <Nav.Item className="navImg">
                             <a href={process.env.PUBLIC_URL + '/'}>
                                 <LogoImg src={logo} alt="logo"/>
@@ -152,7 +152,7 @@ class App extends React.Component {
                                 <RegisterLetter>등록요청</RegisterLetter> <RegisterArrow src={registerImg}/>
                             </Nav.Link>
                         </Nav.Item>
-                    </Nav>
+                    </Navbar>
                     <div>
                         <Route exact path="/" component={home}/>
                         <Route path="/mypage" component={mypage}/>
