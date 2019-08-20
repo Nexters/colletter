@@ -38,6 +38,11 @@ public class NewsController {
         return newsService.getAllRequestNews();
     }
 
+    @GetMapping("/category/{category_id}")
+    public List<News> getAllNewsByCategory(@PathVariable String category_id) {
+        return newsService.getAllNewsByCategory(category_id);
+    }
+
     @GetMapping("/{id}")
     public News getNews(@PathVariable long id) {
         return newsService.getNewsById(id);

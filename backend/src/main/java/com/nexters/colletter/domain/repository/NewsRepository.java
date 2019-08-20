@@ -1,6 +1,8 @@
 package com.nexters.colletter.domain.repository;
 
+import com.nexters.colletter.domain.model.Category;
 import com.nexters.colletter.domain.model.News;
+import com.nexters.colletter.domain.value.CategoryType;
 import com.nexters.colletter.domain.value.NewsStatus;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -15,4 +17,5 @@ public interface NewsRepository extends JpaRepository<News, Long> {
     int countAllByStatus(NewsStatus status);
     Page<News> findAllByStatus(NewsStatus status, Pageable p);
     List<News> findAllByStatus(NewsStatus status);
+    List<News> findAllByCategory(Category category);
 }

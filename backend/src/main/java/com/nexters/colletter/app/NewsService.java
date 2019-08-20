@@ -99,6 +99,14 @@ public class NewsService {
         return newsRepository.findAllByStatus(NewsStatus.REQUEST);
     }
 
+    public List<News> getAllNewsByCategory(String categoryId) {
+        return newsRepository.findAllByCategory(
+                Category.builder()
+                        .id(categoryId)
+                        .build()
+        );
+    }
+
     public List<News> getAllLatestNews() {
         return newsRepository.findAll(new Sort(Sort.Direction.DESC, "updatedAt"));
     }

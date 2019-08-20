@@ -71,5 +71,8 @@ logging:
 ---
 
 
+# Set base url
 server:
+  servlet:
+    context-path: /api
   port: 8080
