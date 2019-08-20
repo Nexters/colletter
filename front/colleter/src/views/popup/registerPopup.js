@@ -9,7 +9,11 @@ import React from 'react';
 import close from '../../img/ic-closed.png';
 import {FormControl, Form} from 'react-bootstrap';
 import styled from 'styled-components';
-import arrow from '../../img/ic-arrow-popup.png';
+import axios from 'axios';
+
+import jQuery from "jquery";
+
+const $ = jQuery;
 
 /**
  * colleter
@@ -57,33 +61,46 @@ const MinTitle = styled.div`
    margin-top : 2%;
   `;
 
-const RectangleRegister = styled.div`
+const RectangleRegister = styled.button`
+    border: 0px;
     width: 80%;
     height: 60px;
     border-radius: 3.4px;
     background-color: #3bd277;
     margin-left: 22px;
     text-align: center;
-        margin-top: 6%;
+    margin-top: 6%;
     margin-left: 9%;
 `;
 
 const SpanRegister = styled.p`
- font-family: NotoSansCJKkr;
-  font-size: 15px;
-  font-weight: 300;
-  font-style: normal;
-  font-stretch: normal;
-  line-height: normal;
-  letter-spacing: normal;
-  color: #ffffff;
-  margin-top:10px;
+    line-height: 60px;
+    font-family: NotoSansCJKkr;
+    font-size: 15px;
+    font-weight: 300;
+    font-style: normal;
+    font-stretch: normal;
+    -webkit-letter-spacing: normal;
+    -moz-letter-spacing: normal;
+    -ms-letter-spacing: normal;
+    letter-spacing: normal;
+    color: #ffffff;
     text-align: center;
-        padding-top: 18px;
   `;
 
 
 class RegisterPopup extends React.Component {
+
+    register(e) {
+        e.preventDefault();
+        axios.post('http://15.164.112.144:8080/news', {
+            params: {
+                categoryType: $('#categoryType').val(),
+                description: $('#description').val(),
+                uri: $('#uri').val()
+            }
+          }).then();
+    }
 
     render() {
         return (
@@ -98,12 +115,13 @@ class RegisterPopup extends React.Component {
                         모두와 함께 마구마구 공유해주세요!
                     </MinTitle>
 
-                    <Form>
+                    <Form onSubmit={this.register}>
                         <FormControl
                             placeholder="어떤 카테고리의 뉴스레터인가요?"
                             aria-label="Username"
                             aria-describedby="basic-addon1"
                             className="inputName"
+                            id="categoryType"
                         />
 
                         <FormControl
@@ -111,6 +129,7 @@ class RegisterPopup extends React.Component {
                             aria-label="Username"
                             aria-describedby="basic-addon1"
                             className="inputName"
+                            id="uri"
                         />
 
                         <FormControl
@@ -118,12 +137,13 @@ class RegisterPopup extends React.Component {
                             aria-label="Username"
                             aria-describedby="basic-addon1"
                             className="inputText"
+                            id="description"
                         />
-                    </Form>
 
-                    <RectangleRegister>
-                        <SpanRegister>등록요청하기 </SpanRegister>
-                    </RectangleRegister>
+                        <RectangleRegister>
+                            <SpanRegister>등록요청하기 </SpanRegister>
+                        </RectangleRegister>
+                    </Form>
                 </div>
             </div>
         );
