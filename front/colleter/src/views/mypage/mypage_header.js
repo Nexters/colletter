@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 
 import Profile from './mypage_profile'
-import Logout from './mypage_logout'
 
 import '../../css/mypage_header.css'
 
@@ -10,7 +9,6 @@ class Header extends Component {
         return (
             <div className='header'>
                 <Profile />
-                <Logout />
             </div>
         )
     }
