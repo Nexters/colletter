@@ -201,13 +201,21 @@ const CsSub = styled.div `
     color: #686868;  
     margin-bottom: 48px;
 `
+ 
+let play = false;
 
 class about extends React.Component {
+    playVideo() {
+        if(play)    this.refs.vidRef.play();
+        else    this.refs.vidRef.pause();
+        play = !play;
+    }
+
     render() {
         return (
             <div>
             <WWA>
-                <video ref="vidRef" src={video} type="video/mp4" autoPlay="autoplay" loop="loop" width="100%" />
+                <video ref="vidRef" src={video} type="video/mp4" autoPlay="autoplay" loop="loop" width="100%" onClick={this.playVideo.bind(this)} />
             </WWA>
             <OM>
                 <Title>our mission</Title>
