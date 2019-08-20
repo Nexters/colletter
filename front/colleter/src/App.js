@@ -12,6 +12,7 @@ import mypage from './views/mypage/mypage';
 import category from './views/category/category';
 import jQuery from "jquery";
 import RegisterPopup from './views/popup/registerPopup';
+import LoginPopup from './views/popup/loginPopup';
 
 const $ = jQuery;
 
@@ -19,10 +20,6 @@ const LogoImg = styled.img`
   margin-left: 70px;
 `;
 
-const Login = styled.div`
-  position: absolute;
-    right: 100px;
-`;
 
 const Footer = styled.div`
 width:100%;
@@ -64,10 +61,14 @@ const LoginButton = styled.p`
     right: 0;
 `;
 
-const googleLogin = (
-    <Login className="g-signin2" data-onsuccess="onSignIn" data-theme="dark"></Login>
+const login = (
+    <Nav.Item className="loginPopup">
+        로그인
+    </Nav.Item>
 );
-
+const goggleLogin = (
+    <div className="g-signin2" data-onsuccess="onSignIn"></div>
+);
 const loginComplete = (
     <div className='nav_user'><img id='user_profile' src={localStorage.getItem('img')} alt='user'/>
         <p id='user_name'>{localStorage.getItem('name')} <br/> <span
@@ -88,7 +89,8 @@ class App extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            showPopup: false
+            showPopup: false,
+            showLoginPopup: false
         };
     }
 
@@ -103,11 +105,26 @@ class App extends React.Component {
         }
     }
 
+    toggleLoginPopup() {
+        this.setState({
+            showLoginPopup: !this.state.showLoginPopup
+        });
+        if (this.state.showLoginPopup) {
+            $('#appNav').show();
+        } else {
+            $('#appNav').hide();
+        }
+    }
+
     componentDidMount() {
         rightNavHide();
 
         $('.newsRegister').click(function () {
             $('#btnShowRegisterPopup').trigger('click');
+        });
+
+        $('.loginPopup').click(function () {
+            $('#btnShowLoginPopup').trigger('click');
         });
     }
 
@@ -150,7 +167,7 @@ class App extends React.Component {
                             검색
                         </Nav.Item>
                         <Nav.Item className="rightNav navText">
-                            {(bLogin === false) ? googleLogin : loginComplete}
+                            {(bLogin === false) ? login : loginComplete}
                         </Nav.Item>
                         <Nav.Item className="rightNav navImg">
                             <Nav.Link className="newsRegister">
@@ -169,10 +186,22 @@ class App extends React.Component {
                 </Footer>
 
                 <button id="btnShowRegisterPopup" onClick={this.togglePopup.bind(this)}>show popup</button>
+                <button id="btnShowLoginPopup" onClick={this.toggleLoginPopup.bind(this)} goggle={goggleLogin}>show
+                    popup
+                </button>
+
                 {this.state.showPopup ?
                     <RegisterPopup
                         text='Close Me'
                         closePopup={this.togglePopup.bind(this)}
+                    />
+                    : null
+                }
+
+                {this.state.showLoginPopup ?
+                    <LoginPopup
+                        text='Close Me'
+                        closePopup={this.toggleLoginPopup.bind(this)}
                     />
                     : null
                 }
