@@ -10,6 +10,7 @@ import registerImg from './img/ic-arrow.png';
 import footerImg from './img/logo-footer.png';
 import mypage from './views/mypage/mypage';
 import category from './views/category/category';
+import about from './views/about/about';
 import jQuery from "jquery";
 import RegisterPopup from './views/popup/registerPopup';
 
@@ -131,7 +132,7 @@ class App extends React.Component {
                             </a>
                         </Nav.Item>
                         <Nav.Item className="about navText">
-                            <Link to="/" className="link">
+                            <Link to="/about" className="link">
                                 어바웃
                             </Link>
                         </Nav.Item>
@@ -160,6 +161,7 @@ class App extends React.Component {
                     </Navbar>
                     <div>
                         <Route exact path="/" component={home}/>
+                        <Route path="/about" component={about}/>
                         <Route path="/mypage" component={mypage}/>
                         <Route path="/category" component={category}/>
                     </div>
