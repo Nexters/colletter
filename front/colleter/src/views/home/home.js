@@ -22,6 +22,8 @@ import card from '../../img/cardImg.PNG';
 
 import '../../css/home.css'
 
+let heartImg = heart;
+
 const $ = jQuery;
 
 const Container = styled.div`
@@ -181,8 +183,11 @@ class home extends React.Component {
             bestNews: [],
             latestNews: [],
             pickNews: [],
+            userBookmark: [],
             popupId: 0,
-            url: 'http://15.164.112.144:8080'
+            url: 'http://15.164.112.144:8080',
+            userHeader: localStorage.getItem('access_token'),
+            arrBookmarkNewId : [],
         };
     }
 
@@ -235,6 +240,37 @@ class home extends React.Component {
                 this.setState({
                     pickNews: r.data
                 });
+            }
+        );
+
+        let url = this.state.url + `/users/bookmark`;
+        axios({
+            method: 'get',
+            url,
+            headers: {'Content-Type': 'application/json', 'Bearer': this.state.userHeader}
+        }).then(
+            r => {
+                this.setState({ userBookmark: r.data });
+                let arr = [];
+                this.state.userBookmark.forEach(el => arr.push(el.id));
+                this.setState({ arrBookmarkNewId: arr });
+            }
+        );
+    }
+
+    bookmark(id, e) {
+        e.stopPropagation();
+        let url = this.state.url + `/users/bookmark/${id}`;
+        axios({
+            method: 'put',
+            url,
+            headers: {'Content-Type': 'application/json', 'Bearer': this.state.userHeader}
+        }).then(
+            r => {
+                // if (this.state.arrBookmarkNewId.includes(id)) heartImg = heart;
+                // else heartImg = heartPicked;
+                // document.getElementById(id).src = heartImg;
+                window.location.reload();
             }
         );
     }
@@ -304,10 +340,12 @@ class home extends React.Component {
 
                     <CardDeck>
                         {this.state.latestNews.map((news) => {
+                            if (this.state.arrBookmarkNewId.includes(news.id)) heartImg = heartPicked
+                            else heartImg = heart
                             return <Card style={{width: '415px', height: '415px'}} key={news.id}>
                                 <Card.Body className="cardBody" data-id={news.id}
                                            onClick={this.changeId.bind(this, news.id)}>
-                                    <Card.Img variant="right" className="heartImg" src={heart}/>
+                                    <Card.Img variant="right" className="heartImg" id={news.id} src={heartImg} onClick={this.bookmark.bind(this, news.id)}/>
                                     <Card.Img variant="right" className="cardImg" src={card}/>
 
                                     <Card.Title className="cardTitle">{news.name}</Card.Title>
@@ -333,7 +371,7 @@ class home extends React.Component {
                         {this.state.bestNews.map((news) => {
                             return <Card style={{width: '415px', height: '415px'}} key={news.id}>
                                 <Card.Body className="cardBody" onClick={this.changeId.bind(this, news.id)}>
-                                    <Card.Img variant="right" className="heartImg" src={heart}/>
+                                    <Card.Img variant="right" className="heartImg" src={heartImg} />
                                     <Card.Img variant="right" className="cardImg" src={card}/>
 
                                     <Card.Title className="cardTitle">{news.name}</Card.Title>
@@ -357,7 +395,7 @@ class home extends React.Component {
                         {this.state.pickNews.map((news) => {
                             return <Card style={{width: '415px', height: '415px'}} key={news.id}>
                                 <Card.Body className="cardBody" onClick={this.changeId.bind(this, news.id)}>
-                                    <Card.Img variant="right" className="heartImg" src={heart}/>
+                                    <Card.Img variant="right" className="heartImg" src={heartImg} />
                                     <Card.Img variant="right" className="cardImg" src={card}/>
 
                                     <Card.Title className="cardTitle">{news.name}</Card.Title>
