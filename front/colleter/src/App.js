@@ -90,7 +90,8 @@ class App extends React.Component {
         super(props);
         this.state = {
             showPopup: false,
-            showLoginPopup: false
+            showLoginPopup: false,
+            userBookmark: [],
         };
     }
 
@@ -157,11 +158,13 @@ class App extends React.Component {
                                 카테고리
                             </Link>
                         </Nav.Item>
-                        <Nav.Item className="navText">
-                            <Link to="/mypage" className="link">
-                                마이페이지
-                            </Link>
-                        </Nav.Item>
+                        {(bLogin === false) ? '' :
+                            <Nav.Item className="navText">
+                                <Link to="/mypage" className="link">
+                                    마이페이지
+                                </Link>
+                            </Nav.Item>
+                        }
                         <Nav.Item className=" navText">
                             <img src={searching} alt=" searching"/>
                             검색
@@ -186,7 +189,7 @@ class App extends React.Component {
                 </Footer>
 
                 <button id="btnShowRegisterPopup" onClick={this.togglePopup.bind(this)}>show popup</button>
-                <button id="btnShowLoginPopup" onClick={this.toggleLoginPopup.bind(this)} goggle={goggleLogin}>show
+                <button id="btnShowLoginPopup" onClick={this.toggleLoginPopup.bind(this)}>show
                     popup
                 </button>
 
@@ -202,6 +205,7 @@ class App extends React.Component {
                     <LoginPopup
                         text='Close Me'
                         closePopup={this.toggleLoginPopup.bind(this)}
+                        goggle={goggleLogin}
                     />
                     : null
                 }

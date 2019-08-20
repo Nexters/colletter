@@ -179,7 +179,8 @@ class home extends React.Component {
             latestNews: [],
             pickNews: [],
             popupId: 0,
-            url: 'http://15.164.112.144:8080'
+            url: 'http://15.164.112.144:8080',
+            userHeader: localStorage.getItem('access_token')
         };
     }
 
@@ -210,6 +211,8 @@ class home extends React.Component {
 
     componentWillMount() {
         $('#btnShowPopup').hide();
+        let params = {};
+        let headers = {'access_token': this.state.userHeader};
 
         axios.get(this.state.url + `/news/best/3`).then(
             r => {
