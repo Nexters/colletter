@@ -88,22 +88,50 @@ const SpanRegister = styled.p`
     text-align: center;
   `;
 
+const Select = styled.select`
+    width: 80%;
+    padding: .375rem .75rem;
+    margin-top: 4%;
+    margin-left: 9%;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #495057;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    border-radius: .25rem;
+    transition: border-color .15s 
+`
+const Option = styled.option`
+`
 
 class RegisterPopup extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {};
+        this.state = {
+            userHeader: localStorage.getItem('access_token')
+        };
     }
-
+ 
     register(e) {
         e.preventDefault();
-        axios.post('http://15.164.112.144:8080/news', {
-            params: {
-                categoryType: $('#categoryType').val(),
-                description: $('#description').val(),
-                uri: $('#uri').val()
+        const params = JSON.stringify({
+            "categoryType": $('#categoryType').val(),
+            "description": $('#description').val(),
+            "uri": $('#uri').val()
+        });
+        const url = 'http://15.164.112.144:8080/news';
+
+        axios({
+            method: 'post',
+            url,
+            data: params,
+            headers: {'Content-Type': 'application/json'}
+        }).then(
+            r => {
             }
-          }).then();
+        );
     }
 
     render() {
@@ -120,13 +148,14 @@ class RegisterPopup extends React.Component {
                     </MinTitle>
 
                     <Form onSubmit={this.register}>
-                        <FormControl
-                            placeholder="어떤 카테고리의 뉴스레터인가요?"
-                            aria-label="Username"
-                            aria-describedby="basic-addon1"
-                            className="inputName"
-                            id="categoryType"
-                        />
+                        <Select id="categoryType" placeholder="어떤 카테고리의 뉴스레터인가요?">
+                            <Option value="DESIGN">디자인</Option>
+                            <Option value="GAME">게임</Option>
+                            <Option value="FOOD">음식</Option>
+                            <Option value="EDUCATION">교육</Option>
+                            <Option value="DEVELOPMENT">개발</Option>
+                            <Option value="PLAN">기획</Option>
+                        </Select>
 
                         <FormControl
                             placeholder="추천할 뉴스레터 사이트의 링크를 붙여넣어주세요"
