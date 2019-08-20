@@ -1,0 +1,8 @@
+.cardBody {
+    cursor: pointer;
+}
+
+.heartImg:hover {
+    opacity: 0.5;
+    content:url("../img/ic-heart-picked.png");
+}
