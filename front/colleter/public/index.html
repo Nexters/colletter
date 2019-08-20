@@ -34,7 +34,6 @@
     function onSignIn(googleUser) {
         // Useful data for your client-side scripts:
         let profile = googleUser.getBasicProfile();
-
         // The ID token you need to pass to your backend:
         let id_token = googleUser.getAuthResponse().id_token;
 
@@ -61,10 +60,9 @@
             },
             success: function (data) {
                 localStorage.setItem('access_token', data.data);
-                window.location.reload();
+                location.reload();
             },
             error: function (error) {
-                alert(error);
             }
         });
     }

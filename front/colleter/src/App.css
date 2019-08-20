@@ -19,6 +19,12 @@
     color: white;
 }
 
+.loginPopup {
+    margin-top: 0px !important;
+    position: absolute;
+    right: 31%;
+}
+
 .App-link {
     color: #61dafb;
 }
@@ -70,7 +76,7 @@
     line-height: 1.33;
     letter-spacing: normal;
     color: #121212;
-    margin-top: 2px;
+    margin-top: -18px;
 }
 .nav-item > a {
     color: black;
@@ -81,7 +87,7 @@
     margin-left: 3%;
 }
 .navImg {
-    margin-top: 21px;
+    margin-top: -3px;
 }
 .nav-item > .newsRegister {
     width: 128px;
@@ -180,6 +186,9 @@
     letter-spacing: normal;
     color: #686868;
     margin-top: 0px !important;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 .spnCategory:hover {
@@ -235,6 +244,18 @@
     height: 70%;
     width: 40%;
 }
+
+.popup_inner_login {
+    position: absolute;
+    left: 25%;
+    right: 25%;
+    top: 25%;
+    bottom: 25%;
+    margin: auto;
+    background: white;
+    height: 40%;
+    width: 43%;
+}
 .popupCardTitle {
     width: 680px;
     height: 56px;
@@ -275,6 +296,10 @@ img:hover {
 }
 
 #btnShowPopup {
+    display: none;
+}
+
+#btnShowLoginPopup {
     display: none;
 }
 

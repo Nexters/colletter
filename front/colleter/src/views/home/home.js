@@ -182,7 +182,6 @@ class home extends React.Component {
             latestNews: [],
             pickNews: [],
             popupId: 0,
-            userBookmark: [],
             url: 'http://15.164.112.144:8080'
         };
     }
@@ -238,27 +237,9 @@ class home extends React.Component {
                 });
             }
         );
-
-        axios.get(this.state.url + `/users/bookmark`).then(
-            r => {
-                this.setState({
-                    userBookmark: r.data
-                });
-            }
-        )
-    }
-
-    
-    bookmark(id, e) {
-        console.log(id);
-        e.stopPropagation();
-        axios.put(this.state.url + `/users/bookmark/${id}`).then(
-            
-        );
     }
 
     render() {
-        
 
         var bannerText = [
             {
@@ -326,7 +307,7 @@ class home extends React.Component {
                             return <Card style={{width: '415px', height: '415px'}} key={news.id}>
                                 <Card.Body className="cardBody" data-id={news.id}
                                            onClick={this.changeId.bind(this, news.id)}>
-                                    <Card.Img variant="right" className="heartImg" src={heart} onClick={this.bookmark.bind(this, news.id)}/>
+                                    <Card.Img variant="right" className="heartImg" src={heart}/>
                                     <Card.Img variant="right" className="cardImg" src={card}/>
 
                                     <Card.Title className="cardTitle">{news.name}</Card.Title>
@@ -347,6 +328,7 @@ class home extends React.Component {
                     <CardMinTitle>
                         콜레티언에게 가장 많은 좋아요를 받은 뉴스레터예요
                     </CardMinTitle>
+
                     <CardDeck>
                         {this.state.bestNews.map((news) => {
                             return <Card style={{width: '415px', height: '415px'}} key={news.id}>
