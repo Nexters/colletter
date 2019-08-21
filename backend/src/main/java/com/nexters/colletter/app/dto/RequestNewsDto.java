@@ -1,6 +1,5 @@
 package com.nexters.colletter.app.dto;
 
-import com.nexters.colletter.domain.value.CategoryType;
 import lombok.*;
 
 import javax.validation.constraints.NotBlank;
@@ -12,7 +11,7 @@ import javax.validation.constraints.NotNull;
 @Builder
 public class RequestNewsDto {
     @NotNull
-    private CategoryType categoryType;
+    private long categoryId;
     @NotNull
     @NotBlank
     private String uri;

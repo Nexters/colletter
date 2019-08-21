@@ -4,7 +4,6 @@ import com.nexters.colletter.app.dto.NewsDto;
 import com.nexters.colletter.domain.model.News;
 import com.nexters.colletter.domain.repository.CategoryRepository;
 import com.nexters.colletter.domain.repository.NewsRepository;
-import com.nexters.colletter.domain.value.CategoryType;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -36,14 +35,14 @@ public class NewsServiceTest {
                 "name",
                 "uri",
                 "image",
-                CategoryType.DESIGN,
+                1,
                 "content"
         );
         s3Service = mock(S3Service.class);
         when(s3Service.upload(
                 null,
                 "news",
-                newsDto.getName() + "." + newsDto.getCategoryType().getName()
+                newsDto.getName() + "." + newsDto.getCategoryId()
         )).thenReturn("imageUrl");
         newsService = new NewsService(
                 newsRepository,

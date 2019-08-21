@@ -2,13 +2,10 @@ package com.nexters.colletter.domain.repository;
 
 import com.nexters.colletter.domain.model.Category;
 import com.nexters.colletter.domain.model.News;
-import com.nexters.colletter.domain.value.CategoryType;
 import com.nexters.colletter.domain.value.NewsStatus;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
 

@@ -6,6 +6,8 @@ import com.nexters.colletter.domain.error.AlreadyExistException;
 import com.nexters.colletter.domain.error.InvalidValueException;
 import com.nexters.colletter.app.NewsService;
 import com.nexters.colletter.domain.model.News;
+import com.nexters.colletter.domain.model.RequestNews;
+import com.nexters.colletter.domain.repository.RequestNewsRepository;
 import com.nexters.colletter.domain.value.NewsStatus;
 import com.nexters.colletter.domain.value.Response;
 import com.nexters.colletter.web.dto.CustomUserDetail;
@@ -22,11 +24,11 @@ import javax.validation.constraints.Size;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = "/news", produces = "application/json")
+@RequestMapping("/news")
 @Validated
 public class NewsController {
     @Autowired
-    NewsService newsService;
+    private NewsService newsService;
 
     @GetMapping()
     public List<News> getAllNews() {
@@ -34,12 +36,12 @@ public class NewsController {
     }
 
     @GetMapping("/request")
-    public List<News> getAllRequestNews() {
+    public List<RequestNews> getAllRequestNews() {
         return newsService.getAllRequestNews();
     }
 
     @GetMapping("/category/{category_id}")
-    public List<News> getAllNewsByCategory(@PathVariable String category_id) {
+    public List<News> getAllNewsByCategory(@PathVariable long category_id) {
         return newsService.getAllNewsByCategory(category_id);
     }
 
@@ -76,14 +78,5 @@ public class NewsController {
     @GetMapping("/pick/{count}")
     public List<News> getPickedNews(@PathVariable @Min(1) int count) {
         return newsService.getPickedNews(count);
-    }
-
-    @PostMapping()
-    public Response requestNews(@RequestBody @Valid RequestNewsDto requestNewsDto) {
-        // TODO : validation
-        newsService.requestNews(
-                requestNewsDto
-        );
-        return new Response("Success", null);
     }
 }

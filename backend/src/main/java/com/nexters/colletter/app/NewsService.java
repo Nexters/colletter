@@ -10,10 +10,7 @@ import com.nexters.colletter.domain.model.RequestNews;
 import com.nexters.colletter.domain.repository.CategoryRepository;
 import com.nexters.colletter.domain.repository.NewsRepository;
 import com.nexters.colletter.domain.repository.RequestNewsRepository;
-import com.nexters.colletter.domain.value.CategoryType;
 import com.nexters.colletter.domain.value.NewsStatus;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -24,7 +21,6 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class NewsService {
@@ -42,19 +38,9 @@ public class NewsService {
         this.s3Service = s3Service;
     }
 
-    public long requestNews(RequestNewsDto newsDto) {
-        RequestNews requestNews = RequestNews.builder()
-                .category(toCategoryEntity(newsDto.getCategoryType()))
-                .uri(newsDto.getUri())
-                .description(newsDto.getDescription())
-                .build();
-
-        return requestNewsRepository.save(requestNews).getId();
-    }
-
     public long registerNews(NewsDto newsDto, MultipartFile imageFile) throws IOException {
         News news = News.builder()
-                .category(toCategoryEntity(newsDto.getCategoryType()))
+                .category(findCategoryById(newsDto.getCategoryId()))
                 .name(newsDto.getName())
                 .uri(newsDto.getUri())
                 .content(newsDto.getContent())
@@ -91,15 +77,25 @@ public class NewsService {
         return newsRepository.findById(id).get();
     }
 
+    public long requestNews(RequestNewsDto newsDto) {
+        RequestNews requestNews = RequestNews.builder()
+                .category(findCategoryById(newsDto.getCategoryId()))
+                .uri(newsDto.getUri())
+                .description(newsDto.getDescription())
+                .build();
+
+        return requestNewsRepository.save(requestNews).getId();
+    }
+    public List<RequestNews> getAllRequestNews() {
+        return requestNewsRepository.findAll();
+    }
+
+
     public List<News> getAllNews() {
         return newsRepository.findAll();
     }
 
-    public List<News> getAllRequestNews() {
-        return newsRepository.findAllByStatus(NewsStatus.REQUEST);
-    }
-
-    public List<News> getAllNewsByCategory(String categoryId) {
+    public List<News> getAllNewsByCategory(long categoryId) {
         return newsRepository.findAllByCategory(
                 Category.builder()
                         .id(categoryId)
@@ -177,12 +173,12 @@ public class NewsService {
         return false;
     }
 
-    private Category toCategoryEntity(CategoryType categoryType) {
-        return categoryRepository.findByName(categoryType.getName()).orElseThrow(() -> new InvalidValueException("No Match category name"));
+    private Category findCategoryById(long categoryId) {
+        return categoryRepository.findById(categoryId).orElseThrow(() -> new InvalidValueException("No Match category name"));
     }
 
     // TODO
     private String imageName(NewsDto newsDto) {
-        return newsDto.getName() + "." + newsDto.getCategoryType().getName();
+        return newsDto.getName() + "." + newsDto.getCategoryId();
     }
 }

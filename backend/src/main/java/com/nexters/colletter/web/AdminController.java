@@ -2,24 +2,21 @@ package com.nexters.colletter.web;
 
 import com.nexters.colletter.app.AuthenticationService;
 import com.nexters.colletter.app.BannerService;
+import com.nexters.colletter.app.CategoryService;
 import com.nexters.colletter.app.NewsService;
 import com.nexters.colletter.app.dto.BannerDto;
+import com.nexters.colletter.app.dto.CategoryDto;
 import com.nexters.colletter.app.dto.NewsDto;
-import com.nexters.colletter.app.dto.UserDto;
-import com.nexters.colletter.domain.error.AlreadyExistException;
-import com.nexters.colletter.domain.error.InvalidValueException;
 import com.nexters.colletter.domain.model.Banner;
 import com.nexters.colletter.domain.model.News;
+import com.nexters.colletter.domain.model.RequestNews;
 import com.nexters.colletter.domain.value.NewsStatus;
 import com.nexters.colletter.domain.value.Response;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 import java.io.IOException;
 import java.util.List;
 
@@ -32,6 +29,8 @@ public class AdminController {
     private BannerService bannerService;
     @Autowired
     private NewsService newsService;
+    @Autowired
+    private CategoryService categoryService;
 
     // TODO : polish
     @PostMapping("/login")
@@ -62,7 +61,7 @@ public class AdminController {
     }
 
     @GetMapping("/news/request")
-    public List<News> getAllRequestNews() {
+    public List<RequestNews> getAllRequestNews() {
         return newsService.getAllRequestNews();
     }
 
@@ -115,6 +114,24 @@ public class AdminController {
     @DeleteMapping("/banner/{bannerId}")
     public Response deleteBanner(@PathVariable long bannerId) {
         bannerService.deleteBannerById(bannerId);
+        return new Response("Success", null);
+    }
+
+    /*
+        Category Create, Read, Update, Delete
+     */
+    @PostMapping("/category")
+    public Response registerCategory(CategoryDto categoryDto, @RequestParam MultipartFile imageFile) throws IOException {
+        categoryService.registerCategory(
+                categoryDto,
+                imageFile
+        );
+        return new Response("Success", null);
+    }
+
+    @DeleteMapping("/category/{categoryId}")
+    public Response deleteCategoryById(@PathVariable long categoryId) {
+        categoryService.deleteCategoryById(categoryId);
         return new Response("Success", null);
     }
 }

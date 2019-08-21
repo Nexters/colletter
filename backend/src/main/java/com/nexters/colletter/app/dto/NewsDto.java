@@ -1,14 +1,10 @@
 package com.nexters.colletter.app.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.nexters.colletter.domain.model.Category;
-import com.nexters.colletter.domain.value.CategoryType;
-import com.nexters.colletter.domain.value.NewsStatus;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -28,7 +24,7 @@ public class NewsDto {
     @JsonIgnore
     private String image;
     @NotNull
-    private CategoryType categoryType;
+    private long categoryId;
     @NotNull
     @NotBlank
     private String content;

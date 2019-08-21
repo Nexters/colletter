@@ -1,7 +1,9 @@
 package com.nexters.colletter.web;
 
 import com.nexters.colletter.app.AuthenticationService;
+import com.nexters.colletter.app.NewsService;
 import com.nexters.colletter.app.UserService;
+import com.nexters.colletter.app.dto.RequestNewsDto;
 import com.nexters.colletter.app.dto.UserDto;
 import com.nexters.colletter.domain.model.News;
 import com.nexters.colletter.domain.service.BookmarkService;
@@ -28,6 +30,8 @@ import java.util.Set;
 public class UserController {
     @Autowired
     private UserService userService;
+    @Autowired
+    private NewsService newsService;
     @Autowired
     private AuthenticationService authenticationService;
 
@@ -59,5 +63,14 @@ public class UserController {
     @GetMapping("/profile")
     public UserDto getUserProfile(@AuthenticationPrincipal CustomUserDetail userDetail) {
         return userService.getUserProfile(userDetail.getId());
+    }
+
+    @PostMapping("/news")
+    public Response requestNews(@RequestBody @Valid RequestNewsDto requestNewsDto) {
+        // TODO : validation
+        newsService.requestNews(
+                requestNewsDto
+        );
+        return new Response("Success", null);
     }
 }

@@ -1,19 +1,14 @@
 package com.nexters.colletter.domain.model;
 
-import com.nexters.colletter.app.dto.UserDto;
 import com.nexters.colletter.domain.repository.CategoryRepository;
 import com.nexters.colletter.domain.repository.NewsRepository;
 import com.nexters.colletter.domain.repository.UserRepository;
-import com.nexters.colletter.domain.value.CategoryType;
 import com.nexters.colletter.domain.value.ThemeStatus;
-import com.nexters.colletter.domain.value.UserRole;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -36,12 +31,17 @@ public class ModelTest {
     @Before
     public void initCategory() {
         categoryRepository.saveAll(Arrays.asList(
-                new Category("c_0", CategoryType.DESIGN.getName(), null),
-                new Category("c_1", CategoryType.GAME.getName(), null),
-                new Category("c_2", CategoryType.FOOD.getName(), null),
-                new Category("c_3", CategoryType.EDUCATION.getName(), null),
-                new Category("c_4", CategoryType.DEVELOPMENT.getName(), null),
-                new Category("c_5", CategoryType.PLAN.getName(), null)
+                new Category(0, "DESIGN", "디자인", null),
+                new Category(1, "EDUCATION", "교육", null),
+                new Category(2, "DEVELOPMENT", "개발", null),
+                new Category(3, "ART_CULTURE", "문화예술", null),
+                new Category(4, "COMMON_SENSE", "상식", null),
+                new Category(5, "ENTERPRISE", "기업", null),
+                new Category(6, "FINANCE", "금융", null),
+                new Category(7, "IT_STARTUP", "IT-스타트업", null),
+                new Category(8, "POLITICS", "정치", null),
+                new Category(9, "RELIGION", "종교", null),
+                new Category(10, "TREND", "트렌드", null)
         ));
     }
 
@@ -88,13 +88,13 @@ public class ModelTest {
     @Test
     @Transactional
     public void userBookmarkFoodNews() {
-        Category foodCategory = categoryRepository.findById("c_0").get();
+        Category designCategory = categoryRepository.findById((long) 1).get();
         News news = News.builder()
-                .name("food")
-                .uri("food.com")
+                .name("design")
+                .uri("design.com")
                 .image(null)
-                .content("delicious")
-                .category(foodCategory)
+                .content("design")
+                .category(designCategory)
                 .build();
 
         User user = User.builder()

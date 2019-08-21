@@ -1,6 +1,5 @@
 package com.nexters.colletter.domain.model;
 
-import com.nexters.colletter.domain.value.CategoryType;
 import lombok.*;
 
 import javax.persistence.*;
@@ -13,10 +12,23 @@ import javax.persistence.*;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Category {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "category_id")
-    private String id;
-    @Column(name = "name")
-    private String name;
+    private long id;
+    @Column(name = "name_en")
+    private String nameEN;
+    @Column(name = "name_kr")
+    private String nameKR;
     @Column(name = "image")
     private String image;
+
+    public Category(String nameEN, String nameKR, String image) {
+        this.nameEN = nameEN;
+        this.nameKR = nameKR;
+        this.image = image;
+    }
+
+    public void addImage(String imageUrl) {
+        this.image = imageUrl;
+    }
 }
