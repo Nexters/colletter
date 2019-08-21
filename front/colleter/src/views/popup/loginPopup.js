@@ -53,6 +53,11 @@ const MinTitle = styled.div`
      margin-left : 9% 
    margin-top : 2%;
   `;
+const LoginDiv = styled.div`
+margin-left:17%;
+margin-top:9%;
+display:flex;
+  `;
 
 class RegisterPopup extends React.Component {
     constructor(props) {
@@ -68,15 +73,10 @@ class RegisterPopup extends React.Component {
         let name = profile.getName();
         let email = profile.getEmail();
         let img = profile.getImageUrl();
-        localStorage.setItem('id_token', id_token);
-        localStorage.setItem('name', name);
-        localStorage.setItem('img', img);
-        localStorage.setItem('email', email);
-
 
         $.ajax({
             type: "POST",
-            url: "http://15.164.112.144:8080/users/login",
+            url: "https://colletter.com/api/users/login",
             dataType: "json",
             contentType: "application/json",
             data: JSON.stringify({
@@ -88,6 +88,10 @@ class RegisterPopup extends React.Component {
                 xhr.setRequestHeader("accept", "*/*");
             },
             success: function (data) {
+                localStorage.setItem('id_token', id_token);
+                localStorage.setItem('name', name);
+                localStorage.setItem('img', img);
+                localStorage.setItem('email', email);
                 localStorage.setItem('access_token', data.data);
                 window.location.reload();
             },
@@ -108,13 +112,16 @@ class RegisterPopup extends React.Component {
                         로그인하고 더 많은 뉴스레터들을<br/>
                         마음껏 수집해보시지요오!
                     </MinTitle>
-                    <GoogleLogin
-                        clientId="765093244572-6a5pf561h2rqmh977qqlum0ia916u8re.apps.googleusercontent.com"
-                        buttonText="Login"
-                        onSuccess={this.responseGoogle}
-                        onFailure={this.responseGoogle}
-                        cookiePolicy={'single_host_origin'}
-                    />,
+
+                    <LoginDiv>
+                        <GoogleLogin
+                            clientId="765093244572-6a5pf561h2rqmh977qqlum0ia916u8re.apps.googleusercontent.com"
+                            buttonText="Login"
+                            onSuccess={this.responseGoogle}
+                            onFailure={this.responseGoogle}
+                            cookiePolicy={'single_host_origin'}
+                        />
+                    </LoginDiv>
                 </div>
             </div>
         );

@@ -113,7 +113,7 @@ class RegisterPopup extends React.Component {
             userHeader: localStorage.getItem('access_token')
         };
     }
- 
+
     register(e) {
         e.preventDefault();
         const params = JSON.stringify({
@@ -121,7 +121,7 @@ class RegisterPopup extends React.Component {
             "description": $('#description').val(),
             "uri": $('#uri').val()
         });
-        const url = 'http://15.164.112.144:8080/news';
+        const url = 'https://colletter.com/api/news';
 
         axios({
             method: 'post',
@@ -130,6 +130,7 @@ class RegisterPopup extends React.Component {
             headers: {'Content-Type': 'application/json'}
         }).then(
             r => {
+                window.location.reload();
             }
         );
     }

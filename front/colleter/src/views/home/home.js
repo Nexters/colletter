@@ -185,7 +185,7 @@ class home extends React.Component {
             pickNews: [],
             userBookmark: [],
             popupId: 0,
-            url: 'http://15.164.112.144:8080',
+            url: 'https://colletter.com/api',
             userHeader: localStorage.getItem('access_token'),
             arrBookmarkNewId : [],
         };

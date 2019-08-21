@@ -140,7 +140,7 @@ class category extends React.Component {
             categoryData: [],
             categoryId: 'c_0',
             height: '300px',
-            url: 'http://15.164.112.144:8080'
+            url: 'https://colletter.com/api'
         };
     }
 
