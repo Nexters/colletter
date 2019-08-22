@@ -116,23 +116,34 @@ class RegisterPopup extends React.Component {
 
     register(e) {
         e.preventDefault();
-        const params = JSON.stringify({
-            "categoryType": $('#categoryType').val(),
-            "description": $('#description').val(),
-            "uri": $('#uri').val()
-        });
-        const url = 'https://colletter.com/api/news';
+        if (!this.state.userHeader) {
+            alert('로그인하세요')
+        } else {
+            if (!$('#description').val()) {
+                alert('비었어요');
+            } else if (!$('#uri').val()) {
+                alert('비었다');
+            } else {
+                const params = JSON.stringify({
+                    "categoryType": $('#categoryType').val(),
+                    "description": $('#description').val(),
+                    "uri": $('#uri').val()
+                });
 
-        axios({
-            method: 'post',
-            url,
-            data: params,
-            headers: {'Content-Type': 'application/json'}
-        }).then(
-            r => {
-                window.location.reload();
+                const url = 'https://colletter.com/api/users/news';
+
+                axios({
+                    method: 'post',
+                    url,
+                    data: params,
+                    headers: {'Content-Type': 'application/json', 'Bearer': this.state.userHeader}
+                }).then(
+                    r => {
+                        window.location.reload();
+                    }
+                );
             }
-        );
+        }
     }
 
     render() {
@@ -148,14 +159,19 @@ class RegisterPopup extends React.Component {
                         모두와 함께 마구마구 공유해주세요!
                     </MinTitle>
 
-                    <Form onSubmit={this.register}>
+                    <Form onSubmit={this.register.bind(this)}>
                         <Select id="categoryType" placeholder="어떤 카테고리의 뉴스레터인가요?">
-                            <Option value="DESIGN">디자인</Option>
-                            <Option value="GAME">게임</Option>
-                            <Option value="FOOD">음식</Option>
-                            <Option value="EDUCATION">교육</Option>
-                            <Option value="DEVELOPMENT">개발</Option>
-                            <Option value="PLAN">기획</Option>
+                            <Option value="1">디자인</Option>
+                            <Option value="2">교육</Option>
+                            <Option value="3">개발</Option>
+                            <Option value="4">문화예술</Option>
+                            <Option value="5">상식</Option>
+                            <Option value="6">기업</Option>
+                            <Option value="7">금융</Option>
+                            <Option value="8">IT-스타트업</Option>
+                            <Option value="9">정치</Option>
+                            <Option value="10">종교</Option>
+                            <Option value="11">트렌드</Option>
                         </Select>
 
                         <FormControl

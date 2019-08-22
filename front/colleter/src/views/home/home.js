@@ -243,19 +243,21 @@ class home extends React.Component {
             }
         );
 
-        let url = this.state.url + `/users/bookmark`;
-        axios({
-            method: 'get',
-            url,
-            headers: {'Content-Type': 'application/json', 'Bearer': this.state.userHeader}
-        }).then(
-            r => {
-                this.setState({ userBookmark: r.data });
-                let arr = [];
-                this.state.userBookmark.forEach(el => arr.push(el.id));
-                this.setState({ arrBookmarkNewId: arr });
-            }
-        );
+        if (this.state.userHeader) {
+            let url = this.state.url + `/users/bookmark`;
+            axios({
+                method: 'get',
+                url,
+                headers: {'Content-Type': 'application/json', 'Bearer': this.state.userHeader}
+            }).then(
+                r => {
+                    this.setState({ userBookmark: r.data });
+                    let arr = [];
+                    this.state.userBookmark.forEach(el => arr.push(el.id));
+                    this.setState({ arrBookmarkNewId: arr });
+                }
+            );
+        }
     }
 
     bookmark(id, e) {
