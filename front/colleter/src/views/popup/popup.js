@@ -133,8 +133,9 @@ class popup extends React.Component {
                 category: {
                     name: '디자인'
                 },
-                bookmarkedCount: 34
+                bookmarkedCount: 34,
             },
+            userHeader: localStorage.getItem('access_token'),
         };
     }
 
@@ -150,6 +151,19 @@ class popup extends React.Component {
         if (this.props.bookmark) {
             document.getElementById("box").style.backgroundColor='#3bd277';
         }
+    }
+
+    bookmark() {
+        const url = this.props.url + `/users/bookmark/${this.props.popupId}`;
+        axios({
+            method: 'put',
+            url,
+            headers: {'Content-Type': 'application/json', 'Bearer': this.state.userHeader}
+        }).then(
+            r => {
+                window.location.reload();
+            }
+        );
     }
 
     render() {
@@ -172,7 +186,7 @@ class popup extends React.Component {
                             </Card.Text>
 
                             <ContainerCardTextFooter>
-                                <Rectangle id='box'>
+                                <Rectangle id='box' onClick={this.bookmark.bind(this)}>
                                     <HeartImg src={heart}/>
                                 </Rectangle>
                                 <RectangleRegister>
