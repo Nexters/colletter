@@ -158,12 +158,19 @@ let heartImg = heart;
 class category extends React.Component {
 
     constructor(props) {
+        let search = new URLSearchParams(window.location.search);
+
+        let id = search.get("id");
+
+        if (id === null) {
+            id = 1;
+        }
         super(props);
         this.state = {
             showPopup: false,
             categoryData: [],
             categoryNews: [],
-            categoryId: 1,
+            categoryId: parseInt(id),
             height: '300px',
             url: 'https://colletter.com/api',
             userHeader: localStorage.getItem('access_token'),
@@ -177,11 +184,34 @@ class category extends React.Component {
         });
     }
 
-    changeId(id) {
+    categoryChangeId(id) {
         this.setState({
             categoryId: id
         });
+
+        //카테고리
+        axios.get(this.state.url + `/news/category/` + id).then(
+            r => {
+                this.setState({
+                    categoryNews: r.data
+                });
+            }
+        );
     }
+
+    changeId(id) {
+        this.setState({
+            popupId: id,
+            showPopup: !this.state.showPopup
+        });
+
+        if (this.state.showPopup) {
+            $('#appNav').show();
+        } else {
+            $('#appNav').hide();
+        }
+    }
+
 
     componentDidMount() {
         $('#categoryNav').hide();
@@ -259,6 +289,8 @@ class category extends React.Component {
             }
         });
 
+        console.log(this.state.categoryId);
+        let categoryCount = this.state.categoryNews.length;
         return (
             <div>
 
@@ -288,11 +320,11 @@ class category extends React.Component {
                             if (categoryData.id === this.state.categoryId) {
                                 return <PickCategory key={categoryData.id}
                                                      id={categoryData.id}
-                                                     onClick={this.changeId.bind(this, categoryData.id)}
+                                                     onClick={this.categoryChangeId.bind(this, categoryData.id)}
                                 > <span className="spnCategory">{categoryData.nameKR}</span></PickCategory>
                             } else {
                                 return <TitleCategory key={categoryData.id}
-                                                      onClick={this.changeId.bind(this, categoryData.id)}
+                                                      onClick={this.categoryChangeId.bind(this, categoryData.id)}
                                                       id={categoryData.id}><span
                                     className="spnCategory"> {categoryData.nameKR}</span></TitleCategory>
                             }
@@ -302,7 +334,7 @@ class category extends React.Component {
                         등록 뉴스레터
                     </RegisterDiv>
                     <CountNews>
-                        64
+                        {categoryCount}
                         <Rectangle>
                             <RectangleSpan>최신순 </RectangleSpan>
                             <ArrowStyle src={arrow}/>
@@ -316,7 +348,7 @@ class category extends React.Component {
                             return <Card style={{width: '415px', height: '415px'}} key={news.id}>
                                 <Card.Body className="cardBody" data-id={news.id}
                                            onClick={this.changeId.bind(this, news.id)}>
-                                    <Card.Img variant="right" className="heartImg" src={heart}
+                                    <Card.Img variant="right" className="heartImg" src={heartImg}
                                               onClick={this.bookmark.bind(this, news.id)}/>
                                     <Card.Img variant="right" className="cardImg" src={news.image}/>
 
@@ -333,15 +365,17 @@ class category extends React.Component {
                         })}
                     </CardColumns>
                 </Container>
+                <button id="btnShowPopup" onClick={this.togglePopup.bind(this)} data-id='0'>show popup</button>
                 {this.state.showPopup ?
                     <Popup
                         text='Close Me'
+                        popupId={this.state.popupId}
+                        bookmark={(this.state.arrBookmarkNewId.includes(this.state.popupId)) ? true : false}
+                        url={this.state.url}
                         closePopup={this.togglePopup.bind(this)}
                     />
                     : null
                 }
-                <button id="btnShowPopup" onClick={this.togglePopup.bind(this)}>show popup</button>
-
             </div>
         );
     }
