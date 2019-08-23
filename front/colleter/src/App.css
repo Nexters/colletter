@@ -332,6 +332,7 @@ img:hover {
     letter-spacing: normal;
     color: #121212;
     margin-top: 20px;
+    margin-left: 12px;
 }
 
 .nav_user > #user_email {

@@ -7,7 +7,6 @@
 
 import React from 'react';
 import styled from 'styled-components';
-import category from '../../img/category.PNG';
 import Popup from '../popup/popup';
 import {CardDeck} from 'react-bootstrap';
 import Carousel from './carousel';
@@ -18,7 +17,6 @@ import jQuery from "jquery";
 import {Card} from 'react-bootstrap';
 import heart from '../../img/ic-heart-default.png';
 import heartPicked from '../../img/ic-heart-picked.png';
-import card from '../../img/cardImg.PNG';
 
 import '../../css/home.css'
 
@@ -187,7 +185,8 @@ class home extends React.Component {
             popupId: 0,
             url: 'https://colletter.com/api',
             userHeader: localStorage.getItem('access_token'),
-            arrBookmarkNewId : [],
+            arrBookmarkNewId: [],
+            categoryData: [],
         };
     }
 
@@ -219,6 +218,7 @@ class home extends React.Component {
     componentWillMount() {
         $('#btnShowPopup').hide();
 
+        //베스트
         axios.get(this.state.url + `/news/best/3`).then(
             r => {
                 this.setState({
@@ -227,6 +227,7 @@ class home extends React.Component {
             }
         );
 
+        //최근
         axios.get(this.state.url + `/news/latest/3`).then(
             r => {
                 this.setState({
@@ -235,6 +236,7 @@ class home extends React.Component {
             }
         );
 
+        //픽
         axios.get(this.state.url + `/news/pick/3`).then(
             r => {
                 this.setState({
@@ -243,6 +245,7 @@ class home extends React.Component {
             }
         );
 
+        //북마크
         if (this.state.userHeader) {
             let url = this.state.url + `/users/bookmark`;
             axios({
@@ -251,13 +254,23 @@ class home extends React.Component {
                 headers: {'Content-Type': 'application/json', 'Bearer': this.state.userHeader}
             }).then(
                 r => {
-                    this.setState({ userBookmark: r.data });
+                    this.setState({userBookmark: r.data});
                     let arr = [];
                     this.state.userBookmark.forEach(el => arr.push(el.id));
-                    this.setState({ arrBookmarkNewId: arr });
+                    this.setState({arrBookmarkNewId: arr});
                 }
             );
         }
+
+
+        //카테고리
+        axios.get(this.state.url + `/category`).then(
+            r => {
+                this.setState({
+                    categoryData: r.data
+                });
+            }
+        );
     }
 
     bookmark(id, e) {
@@ -308,6 +321,7 @@ class home extends React.Component {
             });
         }, 1000);
 
+        let categoryCount = 0;
         return (
             <div>
                 <Container>
@@ -329,10 +343,15 @@ class home extends React.Component {
                 <Container>
                     <ColletterPick>Category</ColletterPick>
                     <Category>
-                        <CategoryImg src={category} alt="category"/>
-                        <CategoryImg src={category} alt="category"/>
-                        <CategoryImg src={category} alt="category"/>
-                        <CategoryImg className="lastCategory" src={category} alt="category"/>
+                        {this.state.categoryData.map((category) => {
+                            categoryCount++;
+
+                            if (categoryCount < 5) {
+                                return <CategoryImg key={category.id} src={category.image} alt="category"/>;
+                            }
+                        })
+                        }
+
                     </Category>
 
                     <ColletterPick>Lastest Update</ColletterPick>
@@ -347,8 +366,9 @@ class home extends React.Component {
                             return <Card style={{width: '415px', height: '415px'}} key={news.id}>
                                 <Card.Body className="cardBody" data-id={news.id}
                                            onClick={this.changeId.bind(this, news.id)}>
-                                    <Card.Img variant="right" className="heartImg" id={news.id} src={heartImg} onClick={this.bookmark.bind(this, news.id)}/>
-                                    <Card.Img variant="right" className="cardImg" src={card}/>
+                                    <Card.Img variant="right" className="heartImg" id={news.id} src={heartImg}
+                                              onClick={this.bookmark.bind(this, news.id)}/>
+                                    <Card.Img variant="right" className="cardImg" src={news.image}/>
 
                                     <Card.Title className="cardTitle">{news.name}</Card.Title>
                                     <Card.Text className="cardText cardMinTitle">
@@ -375,8 +395,9 @@ class home extends React.Component {
                             else heartImg = heart
                             return <Card style={{width: '415px', height: '415px'}} key={news.id}>
                                 <Card.Body className="cardBody" onClick={this.changeId.bind(this, news.id)}>
-                                    <Card.Img variant="right" className="heartImg" src={heartImg} onClick={this.bookmark.bind(this, news.id)}/>
-                                    <Card.Img variant="right" className="cardImg" src={card}/>
+                                    <Card.Img variant="right" className="heartImg" src={heartImg}
+                                              onClick={this.bookmark.bind(this, news.id)}/>
+                                    <Card.Img variant="right" className="cardImg" src={news.image}/>
 
                                     <Card.Title className="cardTitle">{news.name}</Card.Title>
                                     <Card.Text className="cardText cardMinTitle">
@@ -399,8 +420,8 @@ class home extends React.Component {
                         {this.state.pickNews.map((news) => {
                             return <Card style={{width: '415px', height: '415px'}} key={news.id}>
                                 <Card.Body className="cardBody" onClick={this.changeId.bind(this, news.id)}>
-                                    <Card.Img variant="right" className="heartImg" src={heartImg} />
-                                    <Card.Img variant="right" className="cardImg" src={card}/>
+                                    <Card.Img variant="right" className="heartImg" src={heartImg}/>
+                                    <Card.Img variant="right" className="cardImg" src={news.image}/>
 
                                     <Card.Title className="cardTitle">{news.name}</Card.Title>
                                     <Card.Text className="cardText cardMinTitle">
@@ -440,7 +461,7 @@ class home extends React.Component {
                     <Popup
                         text='Close Me'
                         popupId={this.state.popupId}
-                        bookmark={ (this.state.arrBookmarkNewId.includes(this.state.popupId)) ? true : false }
+                        bookmark={(this.state.arrBookmarkNewId.includes(this.state.popupId)) ? true : false}
                         url={this.state.url}
                         closePopup={this.togglePopup.bind(this)}
                     />
