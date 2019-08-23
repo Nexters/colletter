@@ -205,8 +205,8 @@ class mypage extends React.Component {
                 </BookmarkCnt>
                 <CardColumns className="list" style={{marginBottom: '200px'}}>
                     {this.state.bookmark.map((news) => {
-                        return <Card style={{width: '415px', height: '415px'}} key={news.id}>
-                            <Card.Body style={{ cursor: 'pointer' }} data-id={news.id} onClick={this.changeId.bind(this, news.id)}>
+                        return <Card style={{width: '415px', height: '415px', marginBottom:'18px'}} key={news.id}>
+                            <Card.Body className="cardBody" data-id={news.id} onClick={this.changeId.bind(this, news.id)}>
                                 <Card.Img variant="right" className="heartImg" src={heart} onClick={this.bookmark.bind(this, news.id)}/>
                                 <Card.Img variant="right" className="cardImg" src={news.image}/>
 

@@ -11,8 +11,6 @@ import {Card} from 'react-bootstrap';
 import heart from '../../img/ic-heart-default.png';
 import heartPicked from '../../img/ic-heart-picked.png';
 
-import '../../css/home.css'
-
 let heartImg = heart;
 
 const $ = jQuery;
@@ -362,7 +360,7 @@ class home extends React.Component {
                             if (this.state.arrBookmarkNewId.includes(news.id)) heartImg = heartPicked
                             else heartImg = heart
                             return <Card style={{width: '415px', height: '415px'}} key={news.id}>
-                                <Card.Body style={{ cursor: 'pointer' }} onClick={this.changeId.bind(this, news.id)}>
+                                <Card.Body className="cardBody" onClick={this.changeId.bind(this, news.id)}>
                                     <Card.Img variant="right" className="heartImg" id={news.id} src={heartImg}
                                               onClick={this.bookmark.bind(this, news.id)}/>
                                     <Card.Img variant="right" className="cardImg" src={news.image}/>
@@ -392,7 +390,7 @@ class home extends React.Component {
                             if (this.state.arrBookmarkNewId.includes(news.id)) heartImg = heartPicked;
                             else heartImg = heart;
                             return <Card style={{width: '415px', height: '415px'}} key={news.id}>
-                                <Card.Body style={{ cursor: 'pointer' }} onClick={this.changeId.bind(this, news.id)}>
+                                <Card.Body className="cardBody" onClick={this.changeId.bind(this, news.id)}>
                                     <Card.Img variant="right" className="heartImg" src={heartImg} onClick={this.bookmark.bind(this, news.id)}/>
                                     <Card.Img variant="right" className="cardImg" src={news.image}/>
 
@@ -417,7 +415,7 @@ class home extends React.Component {
                     <CardDeck>
                         {this.state.pickNews.map((news) => {
                             return <Card style={{width: '415px', height: '415px'}} key={news.id}>
-                                <Card.Body style={{ cursor: 'pointer' }} onClick={this.changeId.bind(this, news.id)}>
+                                <Card.Body className="cardBody" onClick={this.changeId.bind(this, news.id)}>
                                     <Card.Img variant="right" className="heartImg" src={heartImg}/>
                                     <Card.Img variant="right" className="cardImg" src={news.image}/>
 

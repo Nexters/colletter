@@ -110,11 +110,15 @@
 .heartImg {
     margin-left: 90%;
 }
-.card {
-    margin-bottom: 10px;
+
+.heartImg:hover {
+    opacity: 0.5;
+    content: url('./img/ic-heart-picked.png');
 }
 .cardImg {
-    margin-bottom: 10px;
+    width: 97px;
+    height: 97px;
+    margin-bottom: 24.5px;
 }
 
 .cardTitle {
@@ -201,6 +205,11 @@
 
 .googleLogin {
     width: 240px;
+}
+
+.cardBody {
+    padding: 30px 38px;
+    cursor: pointer;
 }
 
 .carousel-control-prev-icon {
