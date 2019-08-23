@@ -29,43 +29,5 @@
 </head>
 <body>
 <div id="root"></div>
-
-<script>
-    function onSignIn(googleUser) {
-        // Useful data for your client-side scripts:
-        let profile = googleUser.getBasicProfile();
-        // The ID token you need to pass to your backend:
-        let id_token = googleUser.getAuthResponse().id_token;
-
-        let name = profile.getName();
-        let email = profile.getEmail();
-        let img = profile.getImageUrl();
-        localStorage.setItem('id_token', id_token);
-        localStorage.setItem('name', name);
-        localStorage.setItem('img', img);
-        localStorage.setItem('email', email);
-
-        $.ajax({
-            type: "POST",
-            url: "https://colletter.com/users/login",
-            dataType: "json",
-            contentType: "application/json",
-            data: JSON.stringify({
-                email: email,
-                image: img,
-                name: name,
-            }),
-            beforeSend: function (xhr) {
-                xhr.setRequestHeader("accept", "*/*");
-            },
-            success: function (data) {
-                localStorage.setItem('access_token', data.data);
-                location.reload();
-            },
-            error: function (error) {
-            }
-        });
-    }
-</script>
 </body>
 </html>

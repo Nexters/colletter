@@ -4,6 +4,7 @@ import close from '../../img/ic-closed.png';
 import styled from 'styled-components';
 import {GoogleLogin} from 'react-google-login';
 import jQuery from "jquery";
+import FacebookLogin from 'react-facebook-login';
 
 const $ = jQuery;
 /**
@@ -54,8 +55,8 @@ const MinTitle = styled.div`
    margin-top : 2%;
   `;
 const LoginDiv = styled.div`
-margin-left:17%;
-margin-top:9%;
+    margin-left: 13%;
+    margin-top: 6%;
 display:flex;
   `;
 
@@ -100,6 +101,41 @@ class RegisterPopup extends React.Component {
         });
     }
 
+    responseFacebook(response) {
+        console.log(response);
+
+        let id_token = response.access_token;
+
+        let name = response.name;
+        let email = response.email;
+        let img = response.picture.data.url;
+
+        $.ajax({
+            type: "POST",
+            url: "https://colletter.com/api/users/login",
+            dataType: "json",
+            contentType: "application/json",
+            data: JSON.stringify({
+                email: email,
+                image: img,
+                name: name,
+            }),
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader("accept", "*/*");
+            },
+            success: function (data) {
+                localStorage.setItem('id_token', id_token);
+                localStorage.setItem('name', name);
+                localStorage.setItem('img', img);
+                localStorage.setItem('email', email);
+                localStorage.setItem('access_token', data.data);
+                window.location.reload();
+            },
+            error: function (error) {
+            }
+        });
+    }
+
     render() {
         return (
             <div className='popup'>
@@ -116,11 +152,17 @@ class RegisterPopup extends React.Component {
                     <LoginDiv>
                         <GoogleLogin
                             clientId="765093244572-6a5pf561h2rqmh977qqlum0ia916u8re.apps.googleusercontent.com"
-                            buttonText="Login"
+                            buttonText="LOGIN WITH GOOGLE"
+                            className="googleLogin"
                             onSuccess={this.responseGoogle}
                             onFailure={this.responseGoogle}
                             cookiePolicy={'single_host_origin'}
                         />
+                        <FacebookLogin
+                            appId="502053433905625"
+                            autoLoad={false}
+                            fields="name,email,picture"
+                            callback={this.responseFacebook}/>
                     </LoginDiv>
                 </div>
             </div>

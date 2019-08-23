@@ -195,6 +195,14 @@
     white-space: nowrap;
 }
 
+.kep-login-facebook.metro {
+    margin-left: 50px;
+}
+
+.googleLogin {
+    width: 240px;
+}
+
 .carousel-control-prev-icon {
     background-image: url('./img/icon-arrow-2-left.svg');
 }
