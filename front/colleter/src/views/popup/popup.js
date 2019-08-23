@@ -93,17 +93,17 @@ const Rectangle = styled.div`
     background-color: #ffffff;
 `;
 const RectangleRegister = styled.div`
+cursor: pointer;
 width: 374px;
   height: 84px;
   border-radius: 3.4px;
   background-color: #3bd277;
     margin-left: 22px;
     margin-top:45px;
-    text-align: center;
+    padding-top: 25px;
+    display: flex;
 `;
 const SpanRegister = styled.p`
-      width: 252px;
-    height: 34px;
     font-family: NotoSansCJKkr;
     font-size: 23px;
     font-weight: 300;
@@ -115,12 +115,14 @@ const SpanRegister = styled.p`
     -ms-letter-spacing: normal;
     letter-spacing: normal;
     color: #ffffff;
-    color: #ffffff;
     display: flex;
-    margin-top: 24px;
-    text-align: center;
-    margin-left: 83px;
+    margin-left: 23px;
   `;
+const Arrow = styled.img`
+    width: 36px;
+    height: 36px;
+    margin-left: 36.8px;
+`
 
 class popup extends React.Component {
     constructor(props) {
@@ -191,7 +193,7 @@ class popup extends React.Component {
                                     <HeartImg src={heart}/>
                                 </Rectangle>
                                 <RectangleRegister>
-                                    <SpanRegister>뉴스레터 신청하기 <img src={arrow}/></SpanRegister>
+                                    <SpanRegister>✌️ 뉴스레터 신청하러 가기</SpanRegister> <Arrow src={arrow}/>
                                 </RectangleRegister>
 
                             </ContainerCardTextFooter>

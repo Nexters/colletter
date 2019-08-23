@@ -375,7 +375,7 @@ class home extends React.Component {
                             else heartImg = heart
                             return <Card style={{width: '415px', height: '415px'}} key={news.id}>
                                 <Card.Body className="cardBody" onClick={this.changeId.bind(this, news.id)}>
-                                    <Card.Img variant="right" className="heartImg" src={heartImg} />
+                                    <Card.Img variant="right" className="heartImg" src={heartImg} onClick={this.bookmark.bind(this, news.id)}/>
                                     <Card.Img variant="right" className="cardImg" src={card}/>
 
                                     <Card.Title className="cardTitle">{news.name}</Card.Title>
