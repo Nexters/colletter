@@ -191,7 +191,7 @@ class popup extends React.Component {
                         <ContainerCardText>
                             <Card.Title className="popupCardTitle">{this.state.news.name}</Card.Title>
                             <div className="cardMinTitle">
-                                <CardCategory>{this.state.news.category.name}</CardCategory><CardCount>좋아요 {this.state.news.bookmarkedCount}</CardCount>
+                                <CardCategory>{this.state.news.category.nameKR}</CardCategory><CardCount>좋아요 {this.state.news.bookmarkedCount}</CardCount>
                             </div>
                             <Card.Text className="popupCardText">
                                 {this.state.news.content}

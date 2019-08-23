@@ -106,12 +106,12 @@ const CardCategory = styled.span`
 const CardCount = styled.span`
     font-family: NotoSansCJKkr;
     font-size: 18px;
-    font-weight: normal;
+    font-weight: 300;
     font-style: normal;
     font-stretch: normal;
     line-height: normal;
     letter-spacing: normal;
-    color: #4e4e4e;
+    color: #686868;
     margin-left : 15px;
 `;
 
@@ -211,7 +211,7 @@ class mypage extends Component {
                         return <Card style={{width: '415px', height: '415px'}} key={news.id}>
                             <Card.Body className="cardBody" data-id={news.id} onClick={this.changeId.bind(this, news.id)}>
                                 <Card.Img variant="right" className="heartImg" src={heart} onClick={this.bookmark.bind(this, news.id)}/>
-                                <Card.Img variant="right" className="cardImg" src={card}/>
+                                <Card.Img variant="right" className="cardImg" src={news.image}/>
 
                                 <Card.Title className="cardTitle">{news.name}</Card.Title>
                                 <Card.Text className="cardText cardMinTitle">
@@ -219,7 +219,8 @@ class mypage extends Component {
                                 </Card.Text>
 
                                 <Card.Text className="cardText">
-                                    <CardCategory>{news.category.name}</CardCategory><CardCount>좋아요 {news.bookmarkedCount}</CardCount>
+                                    <CardCategory>{news.category.nameKR}</CardCategory>
+                                    <CardCount>좋아요 <span style={{color: '#424242', fontWeight: '300'}}>{news.bookmarkedCount}</span></CardCount>
                                 </Card.Text>
                             </Card.Body>
                         </Card>
