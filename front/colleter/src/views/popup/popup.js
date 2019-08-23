@@ -154,6 +154,7 @@ class popup extends React.Component {
     }
 
     bookmark() {
+        if (!this.state.userHeader) return alert('북마크 등록은 로그인 후 가능합니다.')
         const url = this.props.url + `/users/bookmark/${this.props.popupId}`;
         axios({
             method: 'put',
