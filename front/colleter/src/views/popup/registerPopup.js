@@ -122,7 +122,7 @@ class RegisterPopup extends React.Component {
             alert('링크를 입력해주세요.');
         } else {
             const params = JSON.stringify({
-                "categoryType": $('#categoryType').val(),
+                "categoryId": $('#categoryType').val(),
                 "description": $('#description').val(),
                 "uri": $('#uri').val()
             });
@@ -134,6 +134,8 @@ class RegisterPopup extends React.Component {
                 headers: {'Content-Type': 'application/json', 'Bearer': this.state.userHeader}
             }).then(
                 r => {
+                    alert('등록이 요청되었습니다!');
+                    //자동으로 꺼지게하고싶은데..
                     window.location.reload();
                 }
             );
