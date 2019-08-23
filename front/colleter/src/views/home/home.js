@@ -259,7 +259,9 @@ class home extends React.Component {
                     this.state.userBookmark.forEach(el => arr.push(el.id));
                     this.setState({arrBookmarkNewId: arr});
                 }
-            );
+            ).catch(function (error) {
+                localStorage.clear();
+            });
         }
 
 
@@ -287,7 +289,11 @@ class home extends React.Component {
                 // document.getElementById(id).src = heartImg;
                 window.location.reload();
             }
-        );
+        ).catch(function (error) {
+            alert('북마크 등록은 로그인 후 가능합니다.');
+            localStorage.clear();
+            window.location.reload();
+        });
     }
 
     render() {

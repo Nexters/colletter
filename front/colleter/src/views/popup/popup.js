@@ -124,6 +124,11 @@ const Arrow = styled.img`
     margin-left: 36.8px;
 `
 
+const NewsA = styled.a`
+    text-decoration: none !important; 
+    
+`;
+
 class popup extends React.Component {
     constructor(props) {
         super(props);
@@ -151,7 +156,7 @@ class popup extends React.Component {
         );
 
         if (this.props.bookmark) {
-            document.getElementById("box").style.backgroundColor='#3bd277';
+            document.getElementById("box").style.backgroundColor = '#3bd277';
         }
     }
 
@@ -166,7 +171,12 @@ class popup extends React.Component {
             r => {
                 window.location.reload();
             }
-        );
+        ).catch(function (error) {
+            alert('북마크 등록은 로그인 후 가능합니다.');
+            localStorage.clear();
+            window.location.reload();
+        });
+
     }
 
     render() {
@@ -177,7 +187,7 @@ class popup extends React.Component {
 
                     <Container>
                         <ContainerCardImg>
-                            <CardImg src={card}/>
+                            <CardImg src={this.state.news.image}/>
                         </ContainerCardImg>
                         <ContainerCardText>
                             <Card.Title className="popupCardTitle">{this.state.news.name}</Card.Title>
@@ -193,7 +203,9 @@ class popup extends React.Component {
                                     <HeartImg src={heart}/>
                                 </Rectangle>
                                 <RectangleRegister>
-                                    <SpanRegister>✌️ 뉴스레터 신청하러 가기</SpanRegister> <Arrow src={arrow}/>
+                                    <NewsA href={this.state.news.uri} target={'_blank'}>
+                                        <SpanRegister>✌️ 뉴스레터 신청하러 가기</SpanRegister> <Arrow src={arrow}/>
+                                    </NewsA>
                                 </RectangleRegister>
 
                             </ContainerCardTextFooter>
