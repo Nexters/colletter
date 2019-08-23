@@ -281,12 +281,12 @@ class category extends React.Component {
                         if (categoryData.id === this.state.categoryId) {
                             return <PickCategory key={categoryData.id}
                                                  id={categoryData.id}
-                                                 onClick={this.changeId.bind(this, categoryData.id)}>
+                                                 onClick={this.categoryChangeId.bind(this, categoryData.id)}>
                                         <span className="spnCategory">{categoryData.nameKR}</span>
                                     </PickCategory>
                         } else {
                             return <TitleCategory key={categoryData.id}
-                                                  onClick={this.changeId.bind(this, categoryData.id)}
+                                                  onClick={this.categoryChangeId.bind(this, categoryData.id)}
                                                   id={categoryData.id}>
                                         <span className="spnCategory"> {categoryData.nameKR}</span>
                                     </TitleCategory>
