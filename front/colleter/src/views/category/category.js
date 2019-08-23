@@ -1,132 +1,125 @@
-/**
- * colleter
- *
- * @author shjang02 < shjang02@simplexi.com >
- * @since 2019. 08. 10.
- */
-
-
 import React from 'react';
 import styled from 'styled-components';
 import arrow from '../../img/ic-arrow-dropdown.png';
 import Popup from '../popup/popup';
 import jQuery from "jquery";
-import {Card, CardColumns} from 'react-bootstrap';
+import { Card, CardColumns } from 'react-bootstrap';
 import axios from 'axios';
-import {Nav, Navbar} from 'react-bootstrap';
-
-import card from '../../img/cardImg.PNG';
+import { Navbar } from 'react-bootstrap';
 import heart from '../../img/ic-heart-default.png';
 import heartPicked from '../../img/ic-heart-picked.png';
+
+let heartImg = heart;
 
 const $ = jQuery;
 
 const Container = styled.div`
-  display: flex;
-  align-items: left;
-  justify-content: left;
-  margin: 180px auto 0px auto;
-  flex-direction: column;
-   width:1280px;
+    display: flex;
+    align-items: left;
+    justify-content: left;
+    margin: 180px auto 0px auto;
+    flex-direction: column;
+    width: 1280px;
 `;
 const Title = styled.div`
- font-family: NotoSansCJKkr;
-  font-size: 44px;
-  font-weight: 500;
-  font-style: normal;
-  font-stretch: normal;
-  line-height: 1.41;
-  letter-spacing: normal;
-  color: #121212;
-  margin-bottom:55px;
-   `;
+    font-family: NotoSansCJKkr;
+    font-size: 44px;
+    font-weight: 500;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.41;
+    letter-spacing: normal;
+    color: #121212;
+    margin-bottom: 55px;
+`;
 
 const TitleCategory = styled.div`
-  font-family: NotoSansCJKkr;
-  font-size: 24px;
-  font-weight: 300;
-  font-style: normal;
-  font-stretch: normal;
-  line-height: 1.08;
-  letter-spacing: normal;
-  color: #a2a2a2;
-  margin-right:30px;
-  `;
+    font-family: NotoSansCJKkr;
+    font-size: 24px;
+    font-weight: 300;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.08;
+    letter-spacing: normal;
+    color: #a2a2a2;
+    margin-right: 30px;
+`;
 
 const PickCategory = styled.div`
     font-family: NotoSansCJKkr;
-  font-size: 24px;
-  font-weight: bold;
-  font-style: normal;
-  font-stretch: normal;
-  line-height: 1.08;
-  letter-spacing: normal;
-  color: #3bd277;
-  margin-right:30px;
-  `;
+    font-size: 24px;
+    font-weight: bold;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.08;
+    letter-spacing: normal;
+    color: #3bd277;
+    margin-right: 30px;
+`;
 
 const DivCategory = styled.div`
-display:flex;
-flex-direction:colum;
-margin-bottom:216px;
+    display: flex;
+    flex-direction: colum;
+    margin-bottom: 130px;
 `;
 
 const RegisterDiv = styled.div`
-width: 110px;
-  height: 20px;
-  font-family: NotoSansCJKkr;
-  font-size: 14px;
-  font-weight: normal;
-  font-style: normal;
-  font-stretch: normal;
-  line-height: normal;
-  letter-spacing: normal;
-  color: #b8b8b8;
+    width: 110px;
+    height: 20px;
+    font-family: NotoSansCJKkr;
+    font-size: 14px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    color: #b8b8b8;
 `;
+
 const CountNews = styled.div`
- 
-  height: 36px;
-  font-family: NotoSansCJKkr;
-  font-size: 24px;
-  font-weight: 300;
-  font-style: normal;
-  font-stretch: normal;
-  line-height: normal;
-  letter-spacing: normal;
-  color: #0f0f0f;
-  margin-bottom:22px;
-  `;
+    height: 36px;
+    font-family: NotoSansCJKkr;
+    font-size: 24px;
+    font-weight: 300;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    color: #0f0f0f;
+    margin-bottom:22px;
+`;
 
 const Rectangle = styled.div`
- width: 190px;
-  height: 50px;
-  border-radius: 2px;
-  background-color: #3bd277;
-      position: relative;
+    width: 190px;
+    height: 50px;
+    border-radius: 2px;
+    background-color: #3bd277;
+    position: relative;
     float: right;
-    display:flex;
+    display: flex;
 `;
+
 const RectangleSpan = styled.div`
- width: 60px;
-  height: 24px;
-  font-family: NotoSansCJKkr;
-  font-size: 16px;
-  font-weight: 500;
-  font-style: normal;
-  font-stretch: normal;
-  line-height: normal;
-  letter-spacing: normal;
-  color: #ffffff;
-  margin-left:20px;
-  margin-top:13px;
-  margin-bottom:13px;
+    width: 60px;
+    height: 24px;
+    font-family: NotoSansCJKkr;
+    font-size: 16px;
+    font-weight: 500;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    color: #ffffff;
+    margin-left:20px;
+    margin-top:13px;
+    margin-bottom:13px;
 `;
 
 const ArrowStyle = styled.img`
-width: 20px;
-  height: 20px;
-  object-fit: contain;
-      margin-top: 15px;
+    width: 20px;
+    height: 20px;
+    object-fit: contain;
+    margin-top: 15px;
     margin-left: 64px;
 `;
 
@@ -144,24 +137,19 @@ const CardCategory = styled.span`
 const CardCount = styled.span`
     font-family: NotoSansCJKkr;
     font-size: 18px;
-    font-weight: normal;
+    font-weight: 300;
     font-style: normal;
     font-stretch: normal;
     line-height: normal;
     letter-spacing: normal;
-    color: #4e4e4e;
+    color: #686868;
     margin-left : 15px;
 `;
 
-let heartImg = heart;
-
 class category extends React.Component {
-
     constructor(props) {
         let search = new URLSearchParams(window.location.search);
-
         let id = search.get("id");
-
         if (id === null) {
             id = 1;
         }
@@ -268,9 +256,6 @@ class category extends React.Component {
             headers: {'Content-Type': 'application/json', 'Bearer': this.state.userHeader}
         }).then(
             r => {
-                // if (this.state.arrBookmarkNewId.includes(id)) heartImg = heart;
-                // else heartImg = heartPicked;
-                // document.getElementById(id).src = heartImg;
                 window.location.reload();
             }
         );
@@ -285,27 +270,26 @@ class category extends React.Component {
             } else {
                 $('#categoryNav').hide();
                 $('#appNav').show();
-
             }
         });
 
-        console.log(this.state.categoryId);
         let categoryCount = this.state.categoryNews.length;
         return (
             <div>
-
                 <Navbar id="categoryNav" fixed="top">
                     {this.state.categoryData.map((categoryData) => {
                         if (categoryData.id === this.state.categoryId) {
                             return <PickCategory key={categoryData.id}
                                                  id={categoryData.id}
-                                                 onClick={this.changeId.bind(this, categoryData.id)}
-                            > <span className="spnCategory">{categoryData.nameKR}</span></PickCategory>
+                                                 onClick={this.changeId.bind(this, categoryData.id)}>
+                                        <span className="spnCategory">{categoryData.nameKR}</span>
+                                    </PickCategory>
                         } else {
                             return <TitleCategory key={categoryData.id}
                                                   onClick={this.changeId.bind(this, categoryData.id)}
-                                                  id={categoryData.id}><span
-                                className="spnCategory"> {categoryData.nameKR}</span></TitleCategory>
+                                                  id={categoryData.id}>
+                                        <span className="spnCategory"> {categoryData.nameKR}</span>
+                                    </TitleCategory>
                         }
                     })}
                 </Navbar>
@@ -320,13 +304,15 @@ class category extends React.Component {
                             if (categoryData.id === this.state.categoryId) {
                                 return <PickCategory key={categoryData.id}
                                                      id={categoryData.id}
-                                                     onClick={this.categoryChangeId.bind(this, categoryData.id)}
-                                > <span className="spnCategory">{categoryData.nameKR}</span></PickCategory>
+                                                     onClick={this.categoryChangeId.bind(this, categoryData.id)}>
+                                            <span className="spnCategory">{categoryData.nameKR}</span>
+                                    </PickCategory>
                             } else {
                                 return <TitleCategory key={categoryData.id}
                                                       onClick={this.categoryChangeId.bind(this, categoryData.id)}
-                                                      id={categoryData.id}><span
-                                    className="spnCategory"> {categoryData.nameKR}</span></TitleCategory>
+                                                      id={categoryData.id}>
+                                            <span className="spnCategory"> {categoryData.nameKR}</span>
+                                    </TitleCategory>
                             }
                         })}
                     </DivCategory>
@@ -340,25 +326,21 @@ class category extends React.Component {
                             <ArrowStyle src={arrow}/>
                         </Rectangle>
                     </CountNews>
-                    <CardColumns className="list">
-
+                    <CardColumns className="list" style={{marginBottom: '200px'}}>
                         {this.state.categoryNews.map((news) => {
-                            if (this.state.arrBookmarkNewId.includes(news.id)) heartImg = heartPicked
-                            else heartImg = heart
+                            if (this.state.arrBookmarkNewId.includes(news.id)) heartImg = heartPicked;
+                            else heartImg = heart;
                             return <Card style={{width: '415px', height: '415px'}} key={news.id}>
-                                <Card.Body className="cardBody" data-id={news.id}
-                                           onClick={this.changeId.bind(this, news.id)}>
-                                    <Card.Img variant="right" className="heartImg" src={heartImg}
-                                              onClick={this.bookmark.bind(this, news.id)}/>
+                                <Card.Body style={{ cursor: 'pointer' }} data-id={news.id} onClick={this.changeId.bind(this, news.id)}>
+                                    <Card.Img variant="right" className="heartImg" src={heartImg} onClick={this.bookmark.bind(this, news.id)}/>
                                     <Card.Img variant="right" className="cardImg" src={news.image}/>
 
                                     <Card.Title className="cardTitle">{news.name}</Card.Title>
-                                    <Card.Text className="cardText cardMinTitle">
-                                        {news.content}
-                                    </Card.Text>
+                                    <Card.Text className="cardText cardMinTitle">{news.content}</Card.Text>
 
                                     <Card.Text className="cardText">
-                                        <CardCategory>{news.category.name}</CardCategory><CardCount>좋아요 {news.bookmarkedCount}</CardCount>
+                                        <CardCategory>{news.category.nameKR}</CardCategory>
+                                        <CardCount>좋아요 <span style={{color: '#424242', fontWeight: '300'}}>{news.bookmarkedCount}</span></CardCount>
                                     </Card.Text>
                                 </Card.Body>
                             </Card>

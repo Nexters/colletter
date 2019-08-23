@@ -1,10 +1,3 @@
-/**
- * colleter
- *
- * @author shjang02 < shjang02@simplexi.com >
- * @since 2019. 07. 26.
- */
-
 import React from 'react';
 import styled from 'styled-components';
 import Popup from '../popup/popup';
@@ -25,151 +18,151 @@ let heartImg = heart;
 const $ = jQuery;
 
 const Container = styled.div`
-  display: flex;
-  align-items: left;
-  justify-content: left;
-  margin: 180px auto 0px auto;
-  flex-direction: column;
-  width:1280px;
+    display: flex;
+    align-items: left;
+    justify-content: left;
+    margin: 180px auto 0px auto;
+    flex-direction: column;
+    width:1280px;
 `;
 
 const ColletterPick = styled.div`
- font-family: Roboto;
-  font-size: 20px;
-  font-weight: 600;
-  font-style: italic;
-  font-stretch: normal;
-  line-height: 1.3;
-  letter-spacing: normal;
-  color: #3bd277;
-  margin-bottom: 10px;
- `;
+    font-family: Roboto;
+    font-size: 20px;
+    font-weight: 600;
+    font-style: italic;
+    font-stretch: normal;
+    line-height: 1.3;
+    letter-spacing: normal;
+    color: #3bd277;
+    margin-bottom: 10px;
+`;
 
 const ColletterPickTitle = styled.div`
- font-family: Baskerville;
-  font-size: 20px;
-  font-weight: 600;
-  font-style: italic;
-  font-stretch: normal;
-  line-height: 1.3;
-  letter-spacing: normal;
-  color: #3bd277;
-  margin-bottom: 10px;
- `;
+    font-family: Baskerville;
+    font-size: 20px;
+    font-weight: 600;
+    font-style: italic;
+    font-stretch: normal;
+    line-height: 1.3;
+    letter-spacing: normal;
+    color: #3bd277;
+    margin-bottom: 10px;
+`;
 
 const Title = styled.div`
- font-family: NotoSansCJKkr;
-  font-size: 40px;
-  font-weight: 300;
-  font-style: normal;
-  font-stretch: normal;
-  line-height: 1.35;
-  letter-spacing: normal;
-  color: #121212;
-  margin-bottom: 13px;
-   `;
+    font-family: NotoSansCJKkr;
+    font-size: 40px;
+    font-weight: 300;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.35;
+    letter-spacing: normal;
+    color: #121212;
+    margin-bottom: 13px;
+`;
 
 const MinTitle = styled.div`
- font-family: NotoSansCJKkr;
-  font-size: 16px;
-  font-weight: normal;
-  font-style: normal;
-  font-stretch: normal;
-  line-height: normal;
-  letter-spacing: normal;
-  color: #686868;
-  margin-bottom:80px;
-  `;
+    font-family: NotoSansCJKkr;
+    font-size: 16px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    color: #686868;
+    margin-bottom: 80px;
+`;
 
 const CardMinTitle = styled.div`
- font-family: NotoSansCJKkr;
-  font-size: 16px;
-  font-weight: normal;
-  font-style: normal;
-  font-stretch: normal;
-  line-height: normal;
-  letter-spacing: normal;
-  color: #686868;
-  `;
+    font-family: NotoSansCJKkr;
+    font-size: 16px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    color: #686868;
+    margin-bottom: 30px;
+`;
 
 const Category = styled.div`
-margin-bottom:150px;
+    margin-bottom:150px;
 `;
 
 const CategoryImg = styled.img`
-      width: 23%;
+    width: 23%;
     height: 23%;
     background-color: #ed754a;
-    /* margin-left: 16px; */
     margin-top: 25px;
     margin-right: 16px;
 `;
 
 const Register = styled.img`
-width:100%;
+    width:100%;
 `;
 
 const FooterLetter = styled.div`
-position :absolute;
-margin-top: 128px;
-left:16%;
+    position: absolute;
+    margin-top: 128px;
+    left:16%;
 `;
 
 const FooterRegister = styled.div`
-position :absolute;
-margin-top: 128px;
-left:63%;
+    position: absolute;
+    margin-top: 128px;
+    left:63%;
 `;
 
 const RegisterRectangle = styled.div`
-width: 386px;
-  height: 64px;
-  border: solid 1px #121212;
-  background-color: #ffffff;
-  
+    width: 386px;
+    height: 64px;
+    border: solid 1px #121212;
+    background-color: #ffffff;
 `;
 
 const MailBoxImg = styled.img` 
-  width: 90px;
-  height: 90px;
-      margin-left: 100px;
+    width: 90px;
+    height: 90px;
+    margin-left: 100px;
 `;
 
 const RegisterMailLetter = styled.p`
-  width: 240px;
-  height: 30px;
-  font-family: NotoSansCJKkr;
-  font-size: 15px;
-  font-weight: normal;
-  font-style: normal;
-  font-stretch: normal;
-  line-height: 1.67;
-  letter-spacing: normal;
-  color: #686868;
-      margin: 17px;    
-      display:flex;
+    width: 240px;
+    height: 30px;
+    font-family: NotoSansCJKkr;
+    font-size: 15px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.67;
+    letter-spacing: normal;
+    color: #686868;
+    margin: 17px;    
+    display:flex;
 `;
+
 const CardCategory = styled.span`
-  font-family: NotoSansCJKkr;
-  font-size: 14px;
-  font-weight: 300;
-  font-style: normal;
-  font-stretch: normal;
-  line-height: normal;
-  letter-spacing: normal;
-  color: #3bd277;
+    font-family: NotoSansCJKkr;
+    font-size: 18px;
+    font-weight: 300;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    color: #3bd277;
 `;
 
 const CardCount = styled.span`
-   font-family: NotoSansCJKkr;
-  font-size: 14px;
-  font-weight: 300;
-  font-style: normal;
-  font-stretch: normal;
-  line-height: normal;
-  letter-spacing: normal;
-  color: #686868;
-  margin-left : 15px;
+    font-family: NotoSansCJKkr;
+    font-size: 18px;
+    font-weight: 300;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    color: #686868;
+    margin-left : 15px;
 `;
 
 
@@ -288,9 +281,6 @@ class home extends React.Component {
             headers: {'Content-Type': 'application/json', 'Bearer': this.state.userHeader}
         }).then(
             r => {
-                // if (this.state.arrBookmarkNewId.includes(id)) heartImg = heart;
-                // else heartImg = heartPicked;
-                // document.getElementById(id).src = heartImg;
                 window.location.reload();
             }
         ).catch(function (error) {
@@ -301,7 +291,6 @@ class home extends React.Component {
     }
 
     render() {
-
         var bannerText = [
             {
                 title: '   매일 매일 배달되는 신선한<br/>' +
@@ -351,19 +340,16 @@ class home extends React.Component {
                 </Container>
                 <Carousel/>
                 <Container>
-                    <ColletterPick>Category</ColletterPick>
+                    <ColletterPick style={{ marginBottom: '15px' }}>Category</ColletterPick>
                     <Category>
                         {this.state.categoryData.map((category) => {
                             categoryCount++;
-
                             if (categoryCount < 5) {
                                 return <CategoryImg key={category.id} src={category.image}
                                                     onClick={this.categoryLink.bind(this, category.id)}
                                                     alt="category"/>;
                             }
-                        })
-                        }
-
+                        })}
                     </Category>
 
                     <ColletterPick>Lastest Update</ColletterPick>
@@ -376,8 +362,7 @@ class home extends React.Component {
                             if (this.state.arrBookmarkNewId.includes(news.id)) heartImg = heartPicked
                             else heartImg = heart
                             return <Card style={{width: '415px', height: '415px'}} key={news.id}>
-                                <Card.Body className="cardBody" data-id={news.id}
-                                           onClick={this.changeId.bind(this, news.id)}>
+                                <Card.Body style={{ cursor: 'pointer' }} onClick={this.changeId.bind(this, news.id)}>
                                     <Card.Img variant="right" className="heartImg" id={news.id} src={heartImg}
                                               onClick={this.bookmark.bind(this, news.id)}/>
                                     <Card.Img variant="right" className="cardImg" src={news.image}/>
@@ -388,7 +373,8 @@ class home extends React.Component {
                                     </Card.Text>
 
                                     <Card.Text className="cardText">
-                                        <CardCategory>{news.category.name}</CardCategory><CardCount>좋아요 {news.bookmarkedCount}</CardCount>
+                                        <CardCategory>{news.category.nameKR}</CardCategory>
+                                        <CardCount>좋아요 <span style={{color: '#424242', fontWeight: '300'}}>{news.bookmarkedCount}</span></CardCount>
                                     </Card.Text>
                                 </Card.Body>
                             </Card>
@@ -403,12 +389,11 @@ class home extends React.Component {
 
                     <CardDeck>
                         {this.state.bestNews.map((news) => {
-                            if (this.state.arrBookmarkNewId.includes(news.id)) heartImg = heartPicked
-                            else heartImg = heart
+                            if (this.state.arrBookmarkNewId.includes(news.id)) heartImg = heartPicked;
+                            else heartImg = heart;
                             return <Card style={{width: '415px', height: '415px'}} key={news.id}>
-                                <Card.Body className="cardBody" onClick={this.changeId.bind(this, news.id)}>
-                                    <Card.Img variant="right" className="heartImg" src={heartImg}
-                                              onClick={this.bookmark.bind(this, news.id)}/>
+                                <Card.Body style={{ cursor: 'pointer' }} onClick={this.changeId.bind(this, news.id)}>
+                                    <Card.Img variant="right" className="heartImg" src={heartImg} onClick={this.bookmark.bind(this, news.id)}/>
                                     <Card.Img variant="right" className="cardImg" src={news.image}/>
 
                                     <Card.Title className="cardTitle">{news.name}</Card.Title>
@@ -417,7 +402,8 @@ class home extends React.Component {
                                     </Card.Text>
 
                                     <Card.Text className="cardText">
-                                        <CardCategory>{news.category.name}</CardCategory><CardCount>좋아요 {news.bookmarkedCount}</CardCount>
+                                        <CardCategory>{news.category.nameKR}</CardCategory>
+                                        <CardCount>좋아요 <span style={{color: '#424242', fontWeight: '300'}}>{news.bookmarkedCount}</span></CardCount>
                                     </Card.Text>
                                 </Card.Body>
                             </Card>
@@ -431,7 +417,7 @@ class home extends React.Component {
                     <CardDeck>
                         {this.state.pickNews.map((news) => {
                             return <Card style={{width: '415px', height: '415px'}} key={news.id}>
-                                <Card.Body className="cardBody" onClick={this.changeId.bind(this, news.id)}>
+                                <Card.Body style={{ cursor: 'pointer' }} onClick={this.changeId.bind(this, news.id)}>
                                     <Card.Img variant="right" className="heartImg" src={heartImg}/>
                                     <Card.Img variant="right" className="cardImg" src={news.image}/>
 
@@ -441,7 +427,8 @@ class home extends React.Component {
                                     </Card.Text>
 
                                     <Card.Text className="cardText">
-                                        <CardCategory>{news.category.name}</CardCategory><CardCount>좋아요 {news.bookmarkedCount}</CardCount>
+                                        <CardCategory>{news.category.nameKR}</CardCategory>
+                                        <CardCount>좋아요 <span style={{color: '#424242', fontWeight: '300'}}>{news.bookmarkedCount}</span></CardCount>
                                     </Card.Text>
                                 </Card.Body>
                             </Card>

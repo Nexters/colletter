@@ -1,13 +1,10 @@
-import React, { Component } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
 import Popup from '../popup/popup';
 import jQuery from "jquery";
 import {Card, CardColumns} from "react-bootstrap";
 import heart from '../../img/ic-heart-picked.png';
-import card from '../../img/cardImg.PNG';
-
-import '../../css/cardColum.css'
 
 const $ = jQuery;
 
@@ -115,7 +112,7 @@ const CardCount = styled.span`
     margin-left : 15px;
 `;
 
-class mypage extends Component {
+class mypage extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -206,10 +203,10 @@ class mypage extends Component {
                     <BMText>좋아한 뉴스레터</BMText>
                     <BMCnt>{this.state.cnt}</BMCnt>
                 </BookmarkCnt>
-                <CardColumns className="list">
+                <CardColumns className="list" style={{marginBottom: '200px'}}>
                     {this.state.bookmark.map((news) => {
                         return <Card style={{width: '415px', height: '415px'}} key={news.id}>
-                            <Card.Body className="cardBody" data-id={news.id} onClick={this.changeId.bind(this, news.id)}>
+                            <Card.Body style={{ cursor: 'pointer' }} data-id={news.id} onClick={this.changeId.bind(this, news.id)}>
                                 <Card.Img variant="right" className="heartImg" src={heart} onClick={this.bookmark.bind(this, news.id)}/>
                                 <Card.Img variant="right" className="cardImg" src={news.image}/>
 

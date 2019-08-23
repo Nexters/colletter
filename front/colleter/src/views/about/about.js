@@ -6,8 +6,10 @@ import oval1 from "../../img/oval-1.png";
 import oval2 from "../../img/oval-2.png";
 import soon from "../../img/soon-2.png";
 
+let play = false;
+
 const WWA = styled.div`
-  margin-top: 80px;
+    margin-top: 80px;
 `;
 
 const OM = styled.div`
@@ -29,7 +31,7 @@ const Title = styled.div`
     line-height: 1.3;
     letter-spacing: normal;
     color: #3bd277;
-`
+`;
 
 const Text1 = styled.div`
     margin-left: 400px;
@@ -45,10 +47,11 @@ const Text1 = styled.div`
     line-height: 1.2;
     letter-spacing: normal;
     color: rgba(32, 36, 53, 0.1);
-`
+`;
+
 const Bold1 = styled.span`
     color: #202435;
-`
+`;
 
 const Text2 = styled.div`
     padding-top: 412px;
@@ -63,10 +66,11 @@ const Text2 = styled.div`
     line-height: 1.71;
     letter-spacing: normal;
     color: #202435;
-`
+`;
+
 const Bold2 = styled.span`
     font-weight: bold;
-`
+`;
 
 const WWD = styled.div`
     width: 100%;
@@ -82,7 +86,7 @@ const Collect = styled.div`
     width: 300px;
     height: 320px;
     float:left;
-`
+`;
 
 const Editor = styled.div`
     padding-top: 246px;
@@ -90,7 +94,7 @@ const Editor = styled.div`
     width: 300px;
     height: 320px;
     float:left;
-`
+`;
 
 const Subscribe = styled.div`
     padding-top: 246px;
@@ -98,7 +102,7 @@ const Subscribe = styled.div`
     width: 300px;
     height: 320px;
     float:left;
-`
+`;
 
 const Main = styled.div`
     width: 181px;
@@ -113,7 +117,7 @@ const Main = styled.div`
     line-height: 0.93;
     letter-spacing: normal;
     color: #ffffff;
-`
+`;
 
 const Sub = styled.div`
     width: 300px;
@@ -126,7 +130,7 @@ const Sub = styled.div`
     line-height: 1.5;
     letter-spacing: normal;
     color: #ffffff;
-`
+`;
 
 const CS = styled.div`
     width: 100%;
@@ -150,7 +154,7 @@ const Input = styled.input`
     line-height: 1.63;
     letter-spacing: normal;
     color: #b8b8b8;
-`
+`;
 
 const Button = styled.button`
     display: block;
@@ -167,14 +171,14 @@ const Button = styled.button`
     letter-spacing: normal;
     text-align: center;
     color: #ffffff;
-`
+`;
 
 const CsContainer = styled.div`
     margin: 232px; 
     width: fit-content; 
     margin-left: auto; 
     margin-right: auto;
-`
+`;
 
 const CsTitle = styled.div`
     font-family: NotoSansCJKkr;
@@ -187,7 +191,7 @@ const CsTitle = styled.div`
     text-align: center;
     color: #121212; 
     margin-bottom: 12px;
-`
+`;
 
 const CsSub = styled.div `
     font-family: NotoSansCJKkr; 
@@ -200,9 +204,18 @@ const CsSub = styled.div `
     text-align: center;
     color: #686868;  
     margin-bottom: 48px;
-`
- 
-let play = false;
+`;
+
+const MI = styled.div`
+    display: flex;
+`;
+
+const Soon = styled.img`
+    width: 57px;
+    height: 26px;    
+    margin-top: 58px;
+    margin-left: 8px;
+`;
 
 class about extends React.Component {
     playVideo() {
@@ -247,7 +260,7 @@ class about extends React.Component {
                 </Editor>
                 <Subscribe>
                     <img src={oval2} />
-                    <Main>Subscribe<br/>& unsubscribe</Main>
+                    <MI><Main>Subscribe<br/>& unsubscribe</Main><Soon src={soon} /></MI>
                     <Sub>그만 보고 싶은 뉴스레터를 해지하기 위해<br/>일일이 돌아다니지 마세요.<br/>
                     콜레터에서는 구독과 해지가 간편해집니다.</Sub>
                 </Subscribe>

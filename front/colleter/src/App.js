@@ -23,30 +23,30 @@ const LogoImg = styled.img`
 
 
 const Footer = styled.div`
-width:100%;
-height: 236px;
-background-color: #000000;
+    width:100%;
+    height: 236px;
+    background-color: #000000;
 `;
 
 const FooterImg = styled.img`
-  width: 120px;
-  height: 22px;
-  object-fit: contain;
-  position: absolute;
-                     left: 16%;
-                        margin-top: 56px;
+    width: 120px;
+    height: 22px;
+    object-fit: contain;
+    position: absolute;
+    left: 16%;
+    margin-top: 56px;
 `;
 const RegisterArrow = styled.img`
-width: 20px;
+    width: 20px;
     height: 20px;
     object-fit: contain;
     margin-top: 4px;
     margin-right: 0px;
+`;
 
-  `;
-
-const Search = styled.input`
-  width: 1000px;
+const Search = styled.img`
+    margin-right: 4px;
+    margin-bottom: 1px;
 `;
 
 const RegisterLetter = styled.p`
@@ -120,6 +120,7 @@ class App extends React.Component {
 
     componentDidMount() {
         rightNavHide();
+        $('.loginPopup').css('cursor', 'pointer');
 
         $('.newsRegister').click(function () {
             $('#btnShowRegisterPopup').trigger('click');
@@ -167,7 +168,7 @@ class App extends React.Component {
                             </Nav.Item>
                         }
                         <Nav.Item className=" navText">
-                            <img src={searching} alt=" searching"/>
+                            <Search src={searching} alt=" searching"/>
                             검색
                         </Nav.Item>
                         <Nav.Item className="rightNav navText">
@@ -187,7 +188,7 @@ class App extends React.Component {
                     </div>
                 </Router>
                 <Footer>
-                    <FooterImg src={footerImg}/>
+                    <FooterImg src={footerImg} style={{cursor: 'default'}}/>
                 </Footer>
 
                 <button id="btnShowRegisterPopup" onClick={this.togglePopup.bind(this)}>show popup</button>

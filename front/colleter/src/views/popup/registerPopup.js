@@ -1,65 +1,50 @@
-/**
- * colleter
- *
- * @author shjang02 < shjang02@simplexi.com >
- * @since 2019. 08. 17.
- */
-
 import React from 'react';
 import close from '../../img/ic-closed.png';
 import {FormControl, Form} from 'react-bootstrap';
 import styled from 'styled-components';
 import axios from 'axios';
-
 import jQuery from "jquery";
 
 const $ = jQuery;
 
-/**
- * colleter
- *
- * @author shjang02 < shjang02@simplexi.com >
- * @since 2019. 08. 07.
- */
-
 const CloseImg = styled.img`
-   width: 28px;
-  height: 28px;
-  object-fit: contain;
- position: absolute;
+    width: 28px;
+    height: 28px;
+    object-fit: contain;
+    position: absolute;
     right: 46px;
     top: 46px;
 `;
 
 const Title = styled.div`
- width: 566px;
-  height: 48px;
-  font-family: NotoSansCJKkr;
-  font-size: 2.3em;
-  font-weight: 300;
-  font-style: normal;
-  font-stretch: normal;
-  line-height: 1.26;
-  letter-spacing: normal;
-  color: #121212;
-   margin-left : 9% 
-   margin-top : 10%;
-   `;
+    width: 566px;
+    height: 48px;
+    font-family: NotoSansCJKkr;
+    font-size: 2.3em;
+    font-weight: 300;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.26;
+    letter-spacing: normal;
+    color: #121212;
+    margin-left : 9% 
+    margin-top : 10%;
+`;
 
 const MinTitle = styled.div`
- width: 566px;
-  height: 66px;
-  font-family: NotoSansCJKkr;
-  font-size: 1.4em;
-  font-weight: 300;
-  font-style: normal;
-  font-stretch: normal;
-  line-height: 1.43;
-  letter-spacing: normal;
-  color: #686868;
-     margin-left : 9% 
-   margin-top : 2%;
-  `;
+    width: 566px;
+    height: 66px;
+    font-family: NotoSansCJKkr;
+    font-size: 1.4em;
+    font-weight: 300;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.43;
+    letter-spacing: normal;
+    color: #686868;
+    margin-left : 9% 
+    margin-top : 2%;
+`;
 
 const RectangleRegister = styled.button`
     border: 0px;
@@ -86,7 +71,7 @@ const SpanRegister = styled.p`
     letter-spacing: normal;
     color: #ffffff;
     text-align: center;
-  `;
+`;
 
 const Select = styled.select`
     width: 80%;
@@ -127,33 +112,31 @@ class RegisterPopup extends React.Component {
 
     register(e) {
         e.preventDefault();
-        if (!this.state.userHeader) {
-            alert('로그인하세요')
+        if (!this.state.userHeader) return alert('등록요청은 로그인 후 가능합니다.');
+
+        if (!$('#description').val()) {
+            $('#description').focus();
+            alert('설명을 입력해주세요.');
+        } else if (!$('#uri').val()) {
+            $('#uri').focus();
+            alert('링크를 입력해주세요.');
         } else {
-            if (!$('#description').val()) {
-                alert('비었어요');
-            } else if (!$('#uri').val()) {
-                alert('비었다');
-            } else {
-                const params = JSON.stringify({
-                    "categoryType": $('#categoryType').val(),
-                    "description": $('#description').val(),
-                    "uri": $('#uri').val()
-                });
-
-                const url = 'https://colletter.com/api/users/news';
-
-                axios({
-                    method: 'post',
-                    url,
-                    data: params,
-                    headers: {'Content-Type': 'application/json', 'Bearer': this.state.userHeader}
-                }).then(
-                    r => {
-                        window.location.reload();
-                    }
-                );
-            }
+            const params = JSON.stringify({
+                "categoryType": $('#categoryType').val(),
+                "description": $('#description').val(),
+                "uri": $('#uri').val()
+            });
+            const url = this.state.url + '/users/news';
+            axios({
+                method: 'post',
+                url,
+                data: params,
+                headers: {'Content-Type': 'application/json', 'Bearer': this.state.userHeader}
+            }).then(
+                r => {
+                    window.location.reload();
+                }
+            );
         }
     }
 
@@ -173,19 +156,8 @@ class RegisterPopup extends React.Component {
                     <Form onSubmit={this.register.bind(this)}>
                         <Select id="categoryType" placeholder="어떤 카테고리의 뉴스레터인가요?">
                             {this.state.category.map((c) => {
-                                return <option value={c.id}>{c.nameKR}</option>
+                                return <option value={c.id} key={c.id}>{c.nameKR}</option>
                             })}
-                            {/*<Option value="1">디자인</Option>*/}
-                            {/*<Option value="2">교육</Option>*/}
-                            {/*<Option value="3">개발</Option>*/}
-                            {/*<Option value="4">문화예술</Option>*/}
-                            {/*<Option value="5">상식</Option>*/}
-                            {/*<Option value="6">기업</Option>*/}
-                            {/*<Option value="7">금융</Option>*/}
-                            {/*<Option value="8">IT-스타트업</Option>*/}
-                            {/*<Option value="9">정치</Option>*/}
-                            {/*<Option value="10">종교</Option>*/}
-                            {/*<Option value="11">트렌드</Option>*/}
                         </Select>
 
                         <FormControl
@@ -205,7 +177,7 @@ class RegisterPopup extends React.Component {
                         />
 
                         <RectangleRegister>
-                            <SpanRegister>등록요청하기 </SpanRegister>
+                            <SpanRegister>등록요청하기</SpanRegister>
                         </RectangleRegister>
                     </Form>
                 </div>

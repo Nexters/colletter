@@ -1,27 +1,17 @@
 import React from 'react';
 import close from '../../img/ic-closed.png';
-import card from '../../img/cardImg.PNG';
-
 import styled from 'styled-components';
-
 import heart from '../../img/like-default.png';
 import arrow from '../../img/ic-arrow-popup.png';
 import {Card} from 'react-bootstrap';
 import axios from 'axios';
 
-/**
- * colleter
- *
- * @author shjang02 < shjang02@simplexi.com >
- * @since 2019. 08. 07.
- */
-
 const CloseImg = styled.img`
-  width: 28px;
-  height: 28px;
-  object-fit: contain;
-  margin-left:996px;
-  margin-top:45px
+    width: 28px;
+    height: 28px;
+    object-fit: contain;
+    margin-left:996px;
+    margin-top:45px
 `;
 
 const HeartImg = styled.img`
@@ -29,54 +19,53 @@ const HeartImg = styled.img`
 `;
 
 const CardImg = styled.img`
-width: 144px;
-  height: 144px;
-  margin-left:90px;
-  margin-right:90px;
+    width: 144px;
+    height: 144px;
+    margin-left:90px;
+    margin-right:90px;
 `;
 
 const CardCategory = styled.span`
- width: 64px;
-  height: 34px;
-  font-family: NotoSansCJKkr;
-  font-size: 23px;
-  font-weight: 300;
-  font-style: normal;
-  font-stretch: normal;
-  line-height: normal;
-  letter-spacing: normal;
-  color: #3bd277;
+    width: 64px;
+    height: 34px;
+    font-family: NotoSansCJKkr;
+    font-size: 23px;
+    font-weight: 300;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    color: #3bd277;
 `;
 
 const CardCount = styled.span`
-width: 64px;
-  height: 34px;
-  font-family: NotoSansCJKkr;
-  font-size: 23px;
-  font-weight: 300;
-  font-style: normal;
-  font-stretch: normal;
-  line-height: normal;
-  letter-spacing: normal;
-  color: #686868;
-  margin-left : 15px;
+    width: 64px;
+    height: 34px;
+    font-family: NotoSansCJKkr;
+    font-size: 23px;
+    font-weight: 300;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    color: #686868;
+    margin-left : 15px;
 `;
 
 const Container = styled.div`
-  display: flex;
-  align-items: left;
-  justify-content: left;
-  flex-direction: row;
+    display: flex;
+    align-items: left;
+    justify-content: left;
+    flex-direction: row;
 `;
 
 const ContainerCardText = styled.div`
-   
     margin-right:134px;
 `;
 
 const ContainerCardTextFooter = styled.div`
- margin-top:5%;
- display:flex;
+    margin-top:5%;
+    display:flex;
 `;
 
 
@@ -92,17 +81,19 @@ const Rectangle = styled.div`
     margin-top:45px;
     background-color: #ffffff;
 `;
+
 const RectangleRegister = styled.div`
-cursor: pointer;
-width: 374px;
-  height: 84px;
-  border-radius: 3.4px;
-  background-color: #3bd277;
+    cursor: pointer;
+    width: 374px;
+    height: 84px;
+    border-radius: 3.4px;
+    background-color: #3bd277;
     margin-left: 22px;
     margin-top:45px;
     padding-top: 25px;
     display: flex;
 `;
+
 const SpanRegister = styled.p`
     font-family: NotoSansCJKkr;
     font-size: 23px;
@@ -116,12 +107,13 @@ const SpanRegister = styled.p`
     letter-spacing: normal;
     color: #ffffff;
     margin-left: 23px;
-  `;
+`;
+
 const Arrow = styled.img`
     width: 36px;
     height: 36px;
     margin-left: 36.8px;
-`
+`;
 
 const NewsA = styled.a`
     text-decoration: none !important;
@@ -160,7 +152,7 @@ class popup extends React.Component {
     }
 
     bookmark() {
-        if (!this.state.userHeader) return alert('북마크 등록은 로그인 후 가능합니다.')
+        if (!this.state.userHeader) return alert('북마크 등록은 로그인 후 가능합니다.');
         const url = this.props.url + `/users/bookmark/${this.props.popupId}`;
         axios({
             method: 'put',
@@ -170,12 +162,7 @@ class popup extends React.Component {
             r => {
                 window.location.reload();
             }
-        ).catch(function (error) {
-            alert('북마크 등록은 로그인 후 가능합니다.');
-            localStorage.clear();
-            window.location.reload();
-        });
-
+        );
     }
 
     render() {
@@ -206,7 +193,6 @@ class popup extends React.Component {
                                         <SpanRegister>✌️ 뉴스레터 신청하러 가기</SpanRegister> <Arrow src={arrow}/>
                                     </NewsA>
                                 </RectangleRegister>
-
                             </ContainerCardTextFooter>
                         </ContainerCardText>
                     </Container>
