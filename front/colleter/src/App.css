@@ -136,7 +136,7 @@
     background-color: #3e3e3e;
     /* position: absolute; */
     display: flex;
-    margin-left: 72%;
+    margin-left: 70%;
     margin-top: -30px;
 }
 
@@ -152,6 +152,7 @@
 
 .banner1 {
     background: #0662ca;
+    width: 100%;
 }
 .banner2 {
     background: #ff555c;
@@ -159,14 +160,17 @@
 .banner3 {
     background: #ffda28;
 }
+.carousel-indicators > li {
+    border-radius: 50%;
+}
 .carousel-control-next {
     width: 60px;
     height: 60px;
     background-color: #3e3e3e;
     /* position: absolute; */
     display: flex;
-    /* margin-left: 72%; */
-    margin-left: 76%;
+    margin-left: calc(70% + 59px);
+
     margin-top: -30px;
     left: 0;
 }
@@ -191,6 +195,13 @@
     white-space: nowrap;
 }
 
+.carousel-control-prev-icon {
+    background-image: url('./img/icon-arrow-2-left.svg');
+}
+.carousel-control-next-icon {
+    background-image: url('./img/ic-arrow-popup@2x.png');
+
+}
 .spnCategory:hover {
     cursor: pointer;
 }
@@ -334,6 +345,11 @@ img:hover {
     margin-top: 20px;
     margin-left: 12px;
 }
+
+.banner {
+    width: 1280px !important;
+}
+
 
 .nav_user > #user_email {
     width: 62px;

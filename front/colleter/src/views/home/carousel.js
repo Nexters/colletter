@@ -34,7 +34,9 @@ const Right = styled.img`
 `;
 
 const Center = styled.img`
-width: 100%;
+width: 1024px;
+ margin: 0px auto 0px auto;
+
   height: 480px;
 `;
 
@@ -48,26 +50,32 @@ class carousel extends React.Component {
             <Container>
                 <Carousel className="slider">
                     <Carousel.Item>
-                        <Center
-                            className="d-block w-100 banner1"
-                            src={slider1}
-                            alt="First slide"
+                        <div className="banner1">
+                            <Center
+                                className="d-block w-100 banner1 banner"
+                                src={slider1}
+                                alt="First slide"
 
-                        />
+                            />
+                        </div>
                     </Carousel.Item>
                     <Carousel.Item>
-                        <Center
-                            className="d-block w-100 banner2"
-                            src={slider2}
-                            alt="Third slide"
-                        />
+                        <div className="banner2">
+                            <Center
+                                className="d-block w-100 banner"
+                                src={slider2}
+                                alt="Third slide"
+                            />
+                        </div>
                     </Carousel.Item>
                     <Carousel.Item>
-                        <Center
-                            className="d-block w-100 banner3"
-                            src={slider3}
-                            alt="Third slide"
-                        />
+                        <div className="banner3">
+                            <Center
+                                className="d-block w-100 banner"
+                                src={slider3}
+                                alt="Third slide"
+                            />
+                        </div>
                     </Carousel.Item>
                 </Carousel>
             </Container>
