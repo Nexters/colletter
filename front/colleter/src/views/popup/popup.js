@@ -4,7 +4,7 @@ import card from '../../img/cardImg.PNG';
 
 import styled from 'styled-components';
 
-import heart from '../../img/ic-heart-popup.png';
+import heart from '../../img/like-default.png';
 import arrow from '../../img/ic-arrow-popup.png';
 import {Card} from 'react-bootstrap';
 import axios from 'axios';
@@ -25,7 +25,7 @@ const CloseImg = styled.img`
 `;
 
 const HeartImg = styled.img`
- margin :21px;
+    margin: 25px 23px;
 `;
 
 const CardImg = styled.img`
@@ -85,12 +85,12 @@ const ContainerCardImg = styled.div`
 `;
 
 const Rectangle = styled.div`
-width: 84px;
-  height: 84px;
-  border-radius: 2px;
-  border: solid 2px #3bd277;
-       margin-top:45px;
+    width: 84px;
+    height: 84px;
+    border-radius: 2px;
     border: solid 2px #3bd277;
+    margin-top:45px;
+    background-color: #ffffff;
 `;
 const RectangleRegister = styled.div`
 width: 374px;
@@ -123,8 +123,6 @@ const SpanRegister = styled.p`
   `;
 
 class popup extends React.Component {
-
-
     constructor(props) {
         super(props);
         this.state = {
@@ -136,13 +134,11 @@ class popup extends React.Component {
                     name: '디자인'
                 },
                 bookmarkedCount: 34
-
             },
         };
     }
 
     componentDidMount() {
-
         axios.get(this.props.url + `/news/` + this.props.popupId).then(
             r => {
                 this.setState({
@@ -150,6 +146,10 @@ class popup extends React.Component {
                 });
             }
         );
+
+        if (this.props.bookmark) {
+            document.getElementById("box").style.backgroundColor='#3bd277';
+        }
     }
 
     render() {
@@ -172,7 +172,7 @@ class popup extends React.Component {
                             </Card.Text>
 
                             <ContainerCardTextFooter>
-                                <Rectangle>
+                                <Rectangle id='box'>
                                     <HeartImg src={heart}/>
                                 </Rectangle>
                                 <RectangleRegister>

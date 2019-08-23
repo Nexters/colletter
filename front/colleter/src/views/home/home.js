@@ -440,6 +440,7 @@ class home extends React.Component {
                     <Popup
                         text='Close Me'
                         popupId={this.state.popupId}
+                        bookmark={ (this.state.arrBookmarkNewId.includes(this.state.popupId)) ? true : false }
                         url={this.state.url}
                         closePopup={this.togglePopup.bind(this)}
                     />

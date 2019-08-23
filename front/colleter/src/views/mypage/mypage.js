@@ -1,39 +1,43 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
+import Popup from '../popup/popup';
+import jQuery from "jquery";
 import {Card, CardColumns} from "react-bootstrap";
 import heart from '../../img/ic-heart-picked.png';
 import card from '../../img/cardImg.PNG';
 
 import '../../css/cardColum.css'
 
+const $ = jQuery;
+
 const Container = styled.div`
     width:1280px;
     margin: 180px auto 0px auto;
-`
+`;
 
 const Hr = styled.hr`
     border: 1px solid #eeeeee;
     margin-top: 40px;
     margin-bottom: 60px;
-`
+`;
 
 const Header = styled.div`
     display: flex;
-`
+`;
 
 const ProFile = styled.div`
     width: -webkit-fill-available;
-`
+`;
 
 const UserData = styled.div`
     display: flex;
-`
+`;
 
 const UserProfile = styled.img`
     width: 80px;
     border-radius: 40px;
-`
+`;
 
 const UserName = styled.div`
     margin-left: 20px;
@@ -45,7 +49,7 @@ const UserName = styled.div`
     font-stretch: normal;
     letter-spacing: normal;
     color: #121212;
-`
+`;
 
 const GuideText = styled.div`
     text-align: left;
@@ -58,11 +62,11 @@ const GuideText = styled.div`
     line-height: 1.38;
     letter-spacing: normal;
     color: #0f0f0f;
-`
+`;
 
 const BookmarkCnt = styled.div`
     text-align: left;
-`
+`;
 
 const BMText = styled.div`
     font-family: NotoSansCJKkr;
@@ -73,7 +77,7 @@ const BMText = styled.div`
     line-height: 1.43;
     letter-spacing: normal;
     color: #b8b8b8;
-`
+`;
 
 const BMCnt = styled.div`
     margin-top: 8px;
@@ -86,7 +90,7 @@ const BMCnt = styled.div`
     line-height: 1.25;
     letter-spacing: normal;
     color: #0f0f0f;
-`
+`;
 
 const CardCategory = styled.span`
     font-family: NotoSansCJKkr;
@@ -115,6 +119,7 @@ class mypage extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            showPopup: false,
             bookmark: [],
             cnt: 0,
             url: 'https://colletter.com/api',
@@ -144,6 +149,45 @@ class mypage extends Component {
         );
     }
 
+    togglePopup() {
+        this.setState({
+            showPopup: !this.state.showPopup
+        });
+
+        if (this.state.showPopup) {
+            $('#appNav').show();
+        } else {
+            $('#appNav').hide();
+        }
+    }
+
+    changeId(id) {
+        this.setState({
+            popupId: id,
+            showPopup: !this.state.showPopup
+        });
+
+        if (this.state.showPopup) {
+            $('#appNav').show();
+        } else {
+            $('#appNav').hide();
+        }
+    }
+
+    bookmark(id, e) {
+        e.stopPropagation();
+        let url = this.state.url + `/users/bookmark/${id}`;
+        axios({
+            method: 'put',
+            url,
+            headers: {'Content-Type': 'application/json', 'Bearer': this.state.userHeader}
+        }).then(
+            r => {
+                window.location.reload();
+            }
+        );
+    }
+
     render() {
         return (
             <Container>
@@ -165,8 +209,8 @@ class mypage extends Component {
                 <CardColumns className="list">
                     {this.state.bookmark.map((news) => {
                         return <Card style={{width: '415px', height: '415px'}} key={news.id}>
-                            <Card.Body className="cardBody">
-                                <Card.Img variant="right" className="heartImg" src={heart} />
+                            <Card.Body className="cardBody" data-id={news.id} onClick={this.changeId.bind(this, news.id)}>
+                                <Card.Img variant="right" className="heartImg" src={heart} onClick={this.bookmark.bind(this, news.id)}/>
                                 <Card.Img variant="right" className="cardImg" src={card}/>
 
                                 <Card.Title className="cardTitle">{news.name}</Card.Title>
@@ -181,6 +225,17 @@ class mypage extends Component {
                         </Card>
                     })}
                 </CardColumns>
+
+                {this.state.showPopup ?
+                    <Popup
+                        text='Close Me'
+                        popupId={this.state.popupId}
+                        bookmark={ true }
+                        url={this.state.url}
+                        closePopup={this.togglePopup.bind(this)}
+                    />
+                    : null
+                }
             </Container>
         );
     }
