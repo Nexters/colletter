@@ -115,7 +115,6 @@ const SpanRegister = styled.p`
     -ms-letter-spacing: normal;
     letter-spacing: normal;
     color: #ffffff;
-    display: flex;
     margin-left: 23px;
   `;
 const Arrow = styled.img`
@@ -125,8 +124,8 @@ const Arrow = styled.img`
 `
 
 const NewsA = styled.a`
-    text-decoration: none !important; 
-    
+    text-decoration: none !important;
+    display: flex;
 `;
 
 class popup extends React.Component {

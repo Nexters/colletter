@@ -90,6 +90,7 @@ const SpanRegister = styled.p`
 
 const Select = styled.select`
     width: 80%;
+    height: calc(1.5em + .75rem + 2px);
     padding: .375rem .75rem;
     margin-top: 4%;
     margin-left: 9%;
@@ -102,16 +103,26 @@ const Select = styled.select`
     border: 1px solid #ced4da;
     border-radius: .25rem;
     transition: border-color .15s 
-`
-const Option = styled.option`
-`
+`;
 
 class RegisterPopup extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            userHeader: localStorage.getItem('access_token')
+            category: [],
+            userHeader: localStorage.getItem('access_token'),
+            url: 'https://colletter.com/api',
         };
+    }
+
+    componentDidMount() {
+        axios.get(this.state.url + '/category').then(
+            r => {
+                this.setState({
+                    category: r.data
+                })
+            }
+        )
     }
 
     register(e) {
@@ -161,17 +172,20 @@ class RegisterPopup extends React.Component {
 
                     <Form onSubmit={this.register.bind(this)}>
                         <Select id="categoryType" placeholder="어떤 카테고리의 뉴스레터인가요?">
-                            <Option value="1">디자인</Option>
-                            <Option value="2">교육</Option>
-                            <Option value="3">개발</Option>
-                            <Option value="4">문화예술</Option>
-                            <Option value="5">상식</Option>
-                            <Option value="6">기업</Option>
-                            <Option value="7">금융</Option>
-                            <Option value="8">IT-스타트업</Option>
-                            <Option value="9">정치</Option>
-                            <Option value="10">종교</Option>
-                            <Option value="11">트렌드</Option>
+                            {this.state.category.map((c) => {
+                                return <option value={c.id}>{c.nameKR}</option>
+                            })}
+                            {/*<Option value="1">디자인</Option>*/}
+                            {/*<Option value="2">교육</Option>*/}
+                            {/*<Option value="3">개발</Option>*/}
+                            {/*<Option value="4">문화예술</Option>*/}
+                            {/*<Option value="5">상식</Option>*/}
+                            {/*<Option value="6">기업</Option>*/}
+                            {/*<Option value="7">금융</Option>*/}
+                            {/*<Option value="8">IT-스타트업</Option>*/}
+                            {/*<Option value="9">정치</Option>*/}
+                            {/*<Option value="10">종교</Option>*/}
+                            {/*<Option value="11">트렌드</Option>*/}
                         </Select>
 
                         <FormControl
