@@ -371,6 +371,8 @@ class home extends React.Component {
 
                     <CardDeck>
                         {this.state.bestNews.map((news) => {
+                            if (this.state.arrBookmarkNewId.includes(news.id)) heartImg = heartPicked
+                            else heartImg = heart
                             return <Card style={{width: '415px', height: '415px'}} key={news.id}>
                                 <Card.Body className="cardBody" onClick={this.changeId.bind(this, news.id)}>
                                     <Card.Img variant="right" className="heartImg" src={heartImg} />

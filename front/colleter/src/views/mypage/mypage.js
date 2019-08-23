@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
 import {Card, CardColumns} from "react-bootstrap";
-import heart from "../../img/ic-heart-default.png";
-import card from "../../img/cardImg.PNG";
+import heart from '../../img/ic-heart-picked.png';
+import card from '../../img/cardImg.PNG';
 
 import '../../css/cardColum.css'
 
@@ -116,20 +116,30 @@ class mypage extends Component {
         super(props);
         this.state = {
             bookmark: [],
+            cnt: 0,
             url: 'https://colletter.com/api',
             userHeader: localStorage.getItem('access_token'),
         };
     }
 
     componentWillMount() {
-        const url = this.state.url + '/users/bookmark';
         axios({
             method: 'get',
-            url,
+            url: this.state.url + '/users/bookmark/count',
             headers: {'Content-Type': 'application/json', 'Bearer': this.state.userHeader}
         }).then(
             r => {
-                
+                this.setState({ cnt: r.data.data });
+            },
+        );
+
+        axios({
+            method: 'get',
+            url: this.state.url + '/users/bookmark',
+            headers: {'Content-Type': 'application/json', 'Bearer': this.state.userHeader}
+        }).then(
+            r => {
+                this.setState({ bookmark: r.data });
             },
         );
     }
@@ -150,22 +160,22 @@ class mypage extends Component {
                 <Hr />
                 <BookmarkCnt>
                     <BMText>좋아한 뉴스레터</BMText>
-                    <BMCnt>42</BMCnt>
+                    <BMCnt>{this.state.cnt}</BMCnt>
                 </BookmarkCnt>
                 <CardColumns className="list">
                     {this.state.bookmark.map((news) => {
-                        return <Card style={{width: '100%', height: '100%'}} key={news.id}>
+                        return <Card style={{width: '415px', height: '415px'}} key={news.id}>
                             <Card.Body className="cardBody">
-                                <Card.Img variant="right" className="heartImg" src={heart}/>
+                                <Card.Img variant="right" className="heartImg" src={heart} />
                                 <Card.Img variant="right" className="cardImg" src={card}/>
 
-                                <Card.Title className="cardTitle">{news.title}</Card.Title>
+                                <Card.Title className="cardTitle">{news.name}</Card.Title>
                                 <Card.Text className="cardText cardMinTitle">
                                     {news.content}
                                 </Card.Text>
 
                                 <Card.Text className="cardText">
-                                    <CardCategory>{news.category}</CardCategory><CardCount>좋아요 {news.bookmarkedCount}</CardCount>
+                                    <CardCategory>{news.category.name}</CardCategory><CardCount>좋아요 {news.bookmarkedCount}</CardCount>
                                 </Card.Text>
                             </Card.Body>
                         </Card>
