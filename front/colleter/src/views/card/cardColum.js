@@ -3,7 +3,7 @@ import {Card, CardColumns} from 'react-bootstrap';
 import heart from '../../img/ic-heart-default.png';
 import card from '../../img/cardImg.PNG';
 import styled from 'styled-components';
-import '../../css/mypage_bookmarkList.css'
+import '../../css/cardColum.css'
 
 import jQuery from "jquery";
 
@@ -92,15 +92,9 @@ class cardColum extends React.Component {
             category: '정치/경제',
             bookmarkedCount: 34
         },
+
         {
             id: 8,
-            title: '뉴닉',
-            content: '금주의 핫한 디자인을 빠르게 받아볼 수 있는 디자인 뉴스레터 입니다.',
-            category: '정치/경제',
-            bookmarkedCount: 34
-        },
-        {
-            id: 9,
             title: '뉴닉',
             content: '금주의 핫한 디자인을 빠르게 받아볼 수 있는 디자인 뉴스레터 입니다.',
             category: '정치/경제',

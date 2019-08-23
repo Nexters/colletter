@@ -1,18 +1,177 @@
 import React, { Component } from 'react';
+import styled from 'styled-components';
+import axios from 'axios';
+import {Card, CardColumns} from "react-bootstrap";
+import heart from "../../img/ic-heart-default.png";
+import card from "../../img/cardImg.PNG";
 
-import Body from './mypage_body';
-import Header from './mypage_header';
+import '../../css/cardColum.css'
 
-import '../../css/mypage.css'
+const Container = styled.div`
+    width:1280px;
+    margin: 180px auto 0px auto;
+`
+
+const Hr = styled.hr`
+    border: 1px solid #eeeeee;
+    margin-top: 40px;
+    margin-bottom: 60px;
+`
+
+const Header = styled.div`
+    display: flex;
+`
+
+const ProFile = styled.div`
+    width: -webkit-fill-available;
+`
+
+const UserData = styled.div`
+    display: flex;
+`
+
+const UserProfile = styled.img`
+    width: 80px;
+    border-radius: 40px;
+`
+
+const UserName = styled.div`
+    margin-left: 20px;
+    line-height: 80px;
+    font-family: NotoSansCJKkr;
+    font-size: 20px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    letter-spacing: normal;
+    color: #121212;
+`
+
+const GuideText = styled.div`
+    text-align: left;
+    margin-top: 32px;
+    font-family: NotoSansCJKkr;
+    font-size: 32px;
+    font-weight: 300;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.38;
+    letter-spacing: normal;
+    color: #0f0f0f;
+`
+
+const BookmarkCnt = styled.div`
+    text-align: left;
+`
+
+const BMText = styled.div`
+    font-family: NotoSansCJKkr;
+    font-size: 14px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.43;
+    letter-spacing: normal;
+    color: #b8b8b8;
+`
+
+const BMCnt = styled.div`
+    margin-top: 8px;
+    margin-bottom: 42px;
+    font-family: NotoSansCJKkr;
+    font-size: 24px;
+    font-weight: 300;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.25;
+    letter-spacing: normal;
+    color: #0f0f0f;
+`
+
+const CardCategory = styled.span`
+    font-family: NotoSansCJKkr;
+    font-size: 18px;
+    font-weight: 300;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    color: #3bd277;
+`;
+
+const CardCount = styled.span`
+    font-family: NotoSansCJKkr;
+    font-size: 18px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    color: #4e4e4e;
+    margin-left : 15px;
+`;
 
 class mypage extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            bookmark: [],
+            url: 'https://colletter.com/api',
+            userHeader: localStorage.getItem('access_token'),
+        };
+    }
+
+    componentWillMount() {
+        const url = this.state.url + '/users/bookmark';
+        axios({
+            method: 'get',
+            url,
+            headers: {'Content-Type': 'application/json', 'Bearer': this.state.userHeader}
+        }).then(
+            r => {
+                
+            },
+        );
+    }
+
     render() {
         return (
-            <div className='mypage'>
-                <Header />
-                <hr className='hr'/>
-                <Body />
-            </div>
+            <Container>
+                <Header>
+                    <ProFile>
+                        <UserData>
+                            <UserProfile src={localStorage.getItem('img')} alt='user' />
+                            <UserName>{localStorage.getItem('name')}</UserName>
+                        </UserData>
+                        <GuideText data-onsuccess="onSignIn">어서오세요 {localStorage.getItem('name')}님!<br />
+                            지식보따리 수집은 잘하고 계신가요? :)</GuideText>
+                    </ProFile>
+                </Header>
+                <Hr />
+                <BookmarkCnt>
+                    <BMText>좋아한 뉴스레터</BMText>
+                    <BMCnt>42</BMCnt>
+                </BookmarkCnt>
+                <CardColumns className="list">
+                    {this.state.bookmark.map((news) => {
+                        return <Card style={{width: '100%', height: '100%'}} key={news.id}>
+                            <Card.Body className="cardBody">
+                                <Card.Img variant="right" className="heartImg" src={heart}/>
+                                <Card.Img variant="right" className="cardImg" src={card}/>
+
+                                <Card.Title className="cardTitle">{news.title}</Card.Title>
+                                <Card.Text className="cardText cardMinTitle">
+                                    {news.content}
+                                </Card.Text>
+
+                                <Card.Text className="cardText">
+                                    <CardCategory>{news.category}</CardCategory><CardCount>좋아요 {news.bookmarkedCount}</CardCount>
+                                </Card.Text>
+                            </Card.Body>
+                        </Card>
+                    })}
+                </CardColumns>
+            </Container>
         );
     }
 }
