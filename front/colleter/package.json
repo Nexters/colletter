@@ -18,7 +18,8 @@
     "react-scripts": "3.0.1",
     "router": "^1.3.3",
     "styled": "^1.0.0",
-    "styled-components": "^4.3.2"
+    "styled-components": "^4.3.2",
+    "url-search-params-polyfill": "^7.0.0"
   },
   "scripts": {
     "start": "react-scripts start",

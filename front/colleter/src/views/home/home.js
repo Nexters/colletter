@@ -275,6 +275,10 @@ class home extends React.Component {
         );
     }
 
+    categoryLink(id) {
+        window.location.href = '/category?id=' + id;
+    }
+
     bookmark(id, e) {
         e.stopPropagation();
         let url = this.state.url + `/users/bookmark/${id}`;
@@ -353,7 +357,9 @@ class home extends React.Component {
                             categoryCount++;
 
                             if (categoryCount < 5) {
-                                return <CategoryImg key={category.id} src={category.image} alt="category"/>;
+                                return <CategoryImg key={category.id} src={category.image}
+                                                    onClick={this.categoryLink.bind(this, category.id)}
+                                                    alt="category"/>;
                             }
                         })
                         }
