@@ -5,8 +5,11 @@ import group from "../../img/group-8.png";
 import oval1 from "../../img/oval-1.png";
 import oval2 from "../../img/oval-2.png";
 import soon from "../../img/soon-2.png";
+import jQuery from "jquery";
 
 let play = false;
+
+const $ = jQuery;
 
 const WWA = styled.div`
     margin-top: 80px;
@@ -217,11 +220,40 @@ const Soon = styled.img`
     margin-left: 8px;
 `;
 
+const Select = styled.select`
+    width: 560px;
+    height: 64px;
+    border: solid 1px #e7e7e7;
+    background-color: #ffffff;
+    padding-left: 20px;
+    margin-bottom: 12px;
+    font-family: NotoSansCJKkr;
+    font-size: 16px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.63;
+    letter-spacing: normal;
+    color: #b8b8b8;
+`
+
 class about extends React.Component {
     playVideo() {
         if(play)    this.refs.vidRef.play();
         else    this.refs.vidRef.pause();
         play = !play;
+    }
+
+    register() {
+        if (!$('#title').val()) {
+            $('#title').focus();
+            alert('제목을 입력해주세요.');
+        } else if (!$('#content').val()) {
+            $('#content').focus();
+            alert('내용을 입력해주세요.');
+        } else {
+            alert('문의해주셔서 감사합니다.\n빠른 시일 내에 답변드리겠습니다.');
+        }
     }
 
     render() {
@@ -269,10 +301,13 @@ class about extends React.Component {
                 <CsContainer>
                     <CsTitle> 문의하기</CsTitle> 
                     <CsSub> 콜레터에 궁금한 것들을 자유롭게 문의해주세요!</CsSub>
-                    <Input type="text" placeholder="문의 유형을 선택해주세요."/>
-                    <Input type="text" placeholder="제목을 입력해주세요."/>
-                    <Input type="text" placeholder="내용을 입력해주세요." style={{height: '150px'}}/>
-                    <Button>문의 등록하기</Button>
+                    <Select>
+                        <option>이용 관련</option>
+                        <option>회원정보 관련</option>
+                    </Select>
+                    <Input type="text" id="title" placeholder="제목을 입력해주세요."/>
+                    <Input type="text" id="content" placeholder="내용을 입력해주세요." style={{height: '150px'}}/>
+                    <Button onClick={this.register}>문의 등록하기</Button>
                 </CsContainer>
             </CS>
             </div>
