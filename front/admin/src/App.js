@@ -33,7 +33,7 @@ class App extends React.Component {
         this.state = {
             url: 'https://colletter.com/api',
             registerNews: [],
-            bLogin: true
+            bLogin: false
         };
     }
 
@@ -61,8 +61,6 @@ class App extends React.Component {
     }
 
     requestNews(news) {
-        console.log(news);
-
         $('#uri').val(news.uri);
         $('#category').val(news.category.id);
         $('#description').val(news.description);
