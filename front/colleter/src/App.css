@@ -230,7 +230,12 @@
 .cardMinTitle {
     margin-bottom: 60px !important;
 }
-
+.card-columns {
+    flex-flow: row;
+    display: flex;
+    width: 1300px;
+    flex-wrap: wrap;
+}
 .card-deck {
     margin-bottom: 110px;
 }
