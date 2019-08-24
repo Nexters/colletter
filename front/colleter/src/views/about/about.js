@@ -292,7 +292,7 @@ class about extends React.Component {
                 </Editor>
                 <Subscribe>
                     <img src={oval2} />
-                    <MI><Main>Subscribe<br/>& unsubscribe</Main><Soon src={soon} /></MI>
+                    <MI><Main>Subscribe<br/>& unsubscribe</Main><Soon src={soon} style={{cursor: 'default'}}/></MI>
                     <Sub>그만 보고 싶은 뉴스레터를 해지하기 위해<br/>일일이 돌아다니지 마세요.<br/>
                     콜레터에서는 구독과 해지가 간편해집니다.</Sub>
                 </Subscribe>

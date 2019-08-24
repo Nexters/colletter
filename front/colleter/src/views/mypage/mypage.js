@@ -92,7 +92,7 @@ const BMCnt = styled.div`
 const CardCategory = styled.span`
     font-family: NotoSansCJKkr;
     font-size: 18px;
-    font-weight: 300;
+    font-weight: 400;
     font-style: normal;
     font-stretch: normal;
     line-height: normal;
@@ -103,7 +103,7 @@ const CardCategory = styled.span`
 const CardCount = styled.span`
     font-family: NotoSansCJKkr;
     font-size: 18px;
-    font-weight: 300;
+    font-weight: 400;
     font-style: normal;
     font-stretch: normal;
     line-height: normal;
@@ -217,7 +217,7 @@ class mypage extends React.Component {
 
                                 <Card.Text className="cardText">
                                     <CardCategory>{news.category.nameKR}</CardCategory>
-                                    <CardCount>좋아요 <span style={{color: '#424242', fontWeight: '300'}}>{news.bookmarkedCount}</span></CardCount>
+                                    <CardCount>좋아요 <span style={{color: '#424242'}}>{news.bookmarkedCount}</span></CardCount>
                                 </Card.Text>
                             </Card.Body>
                         </Card>

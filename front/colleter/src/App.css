@@ -112,7 +112,6 @@
 }
 
 .heartImg:hover {
-    opacity: 0.5;
     content: url('./img/ic-heart-picked.png');
 }
 .cardImg {
@@ -126,7 +125,7 @@
     height: 38px;
     font-family: NotoSansCJKkr;
     font-size: 26px;
-    font-weight: 300;
+    font-weight: 400;
     font-style: normal;
     font-stretch: normal;
     line-height: normal;
@@ -138,7 +137,6 @@
     width: 60px;
     height: 60px;
     background-color: #3e3e3e;
-    /* position: absolute; */
     display: flex;
     margin-left: 70%;
     margin-top: -30px;
@@ -187,12 +185,12 @@
     height: 58px;
     font-family: NotoSansCJKkr;
     font-size: 20px;
-    font-weight: 300;
+    font-weight: 400;
     font-style: normal;
     font-stretch: normal;
     line-height: normal;
     letter-spacing: normal;
-    color: #686868;
+    color: #878787;
     margin-top: 0px !important;
     overflow: hidden;
     text-overflow: ellipsis;

@@ -75,7 +75,7 @@ const MinTitle = styled.div`
 const CardMinTitle = styled.div`
     font-family: NotoSansCJKkr;
     font-size: 16px;
-    font-weight: normal;
+    font-weight: 500;
     font-style: normal;
     font-stretch: normal;
     line-height: normal;
@@ -120,7 +120,7 @@ const RegisterRectangle = styled.div`
 `;
 
 const MailBoxImg = styled.img` 
-    width: 90px;
+    width: 70px;
     height: 90px;
     margin-left: 100px;
 `;
@@ -143,7 +143,7 @@ const RegisterMailLetter = styled.p`
 const CardCategory = styled.span`
     font-family: NotoSansCJKkr;
     font-size: 18px;
-    font-weight: 300;
+    font-weight: 400;
     font-style: normal;
     font-stretch: normal;
     line-height: normal;
@@ -154,7 +154,7 @@ const CardCategory = styled.span`
 const CardCount = styled.span`
     font-family: NotoSansCJKkr;
     font-size: 18px;
-    font-weight: 300;
+    font-weight: 400;
     font-style: normal;
     font-stretch: normal;
     line-height: normal;
@@ -372,7 +372,7 @@ class home extends React.Component {
 
                                     <Card.Text className="cardText">
                                         <CardCategory>{news.category.nameKR}</CardCategory>
-                                        <CardCount>좋아요 <span style={{color: '#424242', fontWeight: '300'}}>{news.bookmarkedCount}</span></CardCount>
+                                        <CardCount>좋아요 <span style={{color: '#424242'}}>{news.bookmarkedCount}</span></CardCount>
                                     </Card.Text>
                                 </Card.Body>
                             </Card>
@@ -401,7 +401,7 @@ class home extends React.Component {
 
                                     <Card.Text className="cardText">
                                         <CardCategory>{news.category.nameKR}</CardCategory>
-                                        <CardCount>좋아요 <span style={{color: '#424242', fontWeight: '300'}}>{news.bookmarkedCount}</span></CardCount>
+                                        <CardCount>좋아요 <span style={{color: '#424242'}}>{news.bookmarkedCount}</span></CardCount>
                                     </Card.Text>
                                 </Card.Body>
                             </Card>
@@ -426,7 +426,7 @@ class home extends React.Component {
 
                                     <Card.Text className="cardText">
                                         <CardCategory>{news.category.nameKR}</CardCategory>
-                                        <CardCount>좋아요 <span style={{color: '#424242', fontWeight: '300'}}>{news.bookmarkedCount}</span></CardCount>
+                                        <CardCount>좋아요 <span style={{color: '#424242'}}>{news.bookmarkedCount}</span></CardCount>
                                     </Card.Text>
                                 </Card.Body>
                             </Card>
