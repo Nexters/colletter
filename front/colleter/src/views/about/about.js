@@ -37,7 +37,6 @@ const Title = styled.div`
 `;
 
 const Text1 = styled.div`
-    margin-left: 400px;
     padding-top: 226px;
     padding-bottom: 222px;
     object-fit: contain;
@@ -84,7 +83,6 @@ const WWD = styled.div`
 
 const Collect = styled.div`
     padding-top: 246px;
-    margin-left: 400px;
     margin-bottom: 352px;
     width: 300px;
     height: 320px;
@@ -234,7 +232,10 @@ const Select = styled.select`
     font-stretch: normal;
     line-height: 1.63;
     letter-spacing: normal;
-    color: #b8b8b8;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    padding: 20px;
 `
 
 class about extends React.Component {
@@ -264,38 +265,42 @@ class about extends React.Component {
             </WWA>
             <OM>
                 <Title>our mission</Title>
-                <Text1>
-                    <Bold1>Colle</Bold1>ct<br />
-                    newsle<Bold1>tter</Bold1><br />
-                    for<br/>broad and<br/>deeper<br/>knowledge.
-                </Text1>
-                <Text2>
-                    <Bold2>넓고 깊은<br />
-                    지식 전달</Bold2>을 위해<br />
-                    세상의 모든 <Bold2>뉴스레터</Bold2>를<br />
-                    <Bold2>모아</Bold2>드립니다.
-                </Text2>
+                <div style={{width: '1120px', margin:'0 auto'}}>
+                    <Text1>
+                        <Bold1>Colle</Bold1>ct<br />
+                        newsle<Bold1>tter</Bold1><br />
+                        for<br/>broad and<br/>deeper<br/>knowledge.
+                    </Text1>
+                    <Text2>
+                        <Bold2>넓고 깊은<br />
+                        지식 전달</Bold2>을 위해<br />
+                        세상의 모든 <Bold2>뉴스레터</Bold2>를<br />
+                        <Bold2>모아</Bold2>드립니다.
+                    </Text2>
+                </div>
             </OM>
             <WWD>
                 <Title>What we do,</Title>
-                <Collect>
-                    <img src={group} />
-                    <Main>Collect<br/>newsletter</Main>
-                    <Sub>뉴스레터는 더 깊고 알찬 지식을 전달합니다.<br/>
-                    콜레터는 세상에 흩어져 있는 모든 뉴스레터를<br/>모아서 보여드립니다. </Sub>
-                </Collect>
-                <Editor>
-                    <img src={oval1} />
-                    <Main>Editor’s<br/>picky pick</Main>
-                    <Sub>콜레티언은 어떤 뉴스레터를 받아볼까요?<br/>
-                    매주 일요일, 입맛 까다로운 에디터가 선정한<br/>뉴스레터를 추천받을 수 있습니다.</Sub>
-                </Editor>
-                <Subscribe>
-                    <img src={oval2} />
-                    <MI><Main>Subscribe<br/>& unsubscribe</Main><Soon src={soon} style={{cursor: 'default'}}/></MI>
-                    <Sub>그만 보고 싶은 뉴스레터를 해지하기 위해<br/>일일이 돌아다니지 마세요.<br/>
-                    콜레터에서는 구독과 해지가 간편해집니다.</Sub>
-                </Subscribe>
+                <div style={{width: '1120px', margin:'0 auto'}}>
+                    <Collect>
+                        <img src={group} />
+                        <Main>Collect<br/>newsletter</Main>
+                        <Sub>뉴스레터는 더 깊고 알찬 지식을 전달합니다.<br/>
+                        콜레터는 세상에 흩어져 있는 모든 뉴스레터를<br/>모아서 보여드립니다. </Sub>
+                    </Collect>
+                    <Editor>
+                        <img src={oval1} />
+                        <Main>Editor’s<br/>picky pick</Main>
+                        <Sub>콜레티언은 어떤 뉴스레터를 받아볼까요?<br/>
+                        매주 일요일, 입맛 까다로운 에디터가 선정한<br/>뉴스레터를 추천받을 수 있습니다.</Sub>
+                    </Editor>
+                    <Subscribe>
+                        <img src={oval2} />
+                        <MI><Main>Subscribe<br/>& unsubscribe</Main><Soon src={soon} style={{cursor: 'default'}}/></MI>
+                        <Sub>그만 보고 싶은 뉴스레터를 해지하기 위해<br/>일일이 돌아다니지 마세요.<br/>
+                        콜레터에서는 구독과 해지가 간편해집니다.</Sub>
+                    </Subscribe>
+                </div>
             </WWD>
             <CS>
                 <CsContainer>
@@ -305,8 +310,8 @@ class about extends React.Component {
                         <option>이용 관련</option>
                         <option>회원정보 관련</option>
                     </Select>
-                    <Input type="text" id="title" placeholder="제목을 입력해주세요."/>
-                    <Input type="text" id="content" placeholder="내용을 입력해주세요." style={{height: '150px'}}/>
+                    <Input type="text" className="inputName" id="title" placeholder="제목을 입력해주세요."/>
+                    <Input type="text" className="inputText" id="content" placeholder="내용을 입력해주세요." style={{height: '150px'}}/>
                     <Button onClick={this.register}>문의 등록하기</Button>
                 </CsContainer>
             </CS>

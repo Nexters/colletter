@@ -48,46 +48,66 @@ const MinTitle = styled.div`
 
 const RectangleRegister = styled.button`
     border: 0px;
-    width: 80%;
-    height: 60px;
-    border-radius: 3.4px;
     background-color: #3bd277;
     margin-left: 22px;
     text-align: center;
-    margin-top: 6%;
+    margin-top: 12px;
     margin-left: 9%;
-`;
-
-const SpanRegister = styled.p`
-    line-height: 60px;
+    display: block;
+    width: 80%;
+    height: 72px;
+    background-color: #3bd277;
+    border: 0px;
     font-family: NotoSansCJKkr;
-    font-size: 15px;
-    font-weight: 300;
+    font-size: 16px;
+    font-weight: bold;
     font-style: normal;
     font-stretch: normal;
-    -webkit-letter-spacing: normal;
-    -moz-letter-spacing: normal;
-    -ms-letter-spacing: normal;
+    line-height: 1.63;
     letter-spacing: normal;
-    color: #ffffff;
     text-align: center;
+    color: #ffffff;
 `;
 
 const Select = styled.select`
     width: 80%;
-    height: calc(1.5em + .75rem + 2px);
-    padding: .375rem .75rem;
-    margin-top: 4%;
     margin-left: 9%;
-    font-size: 1rem;
-    font-weight: 400;
-    line-height: 1.5;
-    color: #495057;
-    background-color: #fff;
-    background-clip: padding-box;
-    border: 1px solid #ced4da;
-    border-radius: .25rem;
-    transition: border-color .15s 
+    margin-top: 56px;
+    height: 64px;
+    border: solid 1px #e7e7e7;
+    background-color: #ffffff;
+    padding-left: 20px;
+    margin-bottom: 12px;
+    font-family: NotoSansCJKkr;
+    font-size: 16px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.63;
+    letter-spacing: normal;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    padding: 20px;
+    border-radius: 1px;
+`;
+
+const Input = styled.input`
+    padding-left: 20px;
+    margin-left: 9%;
+    margin-bottom: 12px;
+    display: block;
+    width: 80%;
+    height: 64px;
+    border: solid 1px #e7e7e7;
+    background-color: #ffffff;
+    font-family: NotoSansCJKkr;
+    font-size: 16px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.63;
+    letter-spacing: normal;
 `;
 
 class RegisterPopup extends React.Component {
@@ -162,7 +182,7 @@ class RegisterPopup extends React.Component {
                             })}
                         </Select>
 
-                        <FormControl
+                        <Input
                             placeholder="추천할 뉴스레터 사이트의 링크를 붙여넣어주세요"
                             aria-label="Username"
                             aria-describedby="basic-addon1"
@@ -170,7 +190,7 @@ class RegisterPopup extends React.Component {
                             id="uri"
                         />
 
-                        <FormControl
+                        <Input
                             placeholder="간단한 설명을 적어주시면 정말 감사하겠습니다!!"
                             aria-label="Username"
                             aria-describedby="basic-addon1"
@@ -179,7 +199,8 @@ class RegisterPopup extends React.Component {
                         />
 
                         <RectangleRegister>
-                            <SpanRegister>등록요청하기</SpanRegister>
+                            등록요청하기
+                            {/*<SpanRegister>등록요청하기</SpanRegister>*/}
                         </RectangleRegister>
                     </Form>
                 </div>

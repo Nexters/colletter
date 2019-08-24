@@ -322,7 +322,7 @@ class category extends React.Component {
                     <CountNews>
                         {categoryCount}
                         <Rectangle>
-                            <RectangleSpan>최신순 </RectangleSpan>
+                            <RectangleSpan>최신순</RectangleSpan>
                             <ArrowStyle src={arrow}/>
                         </Rectangle>
                     </CountNews>

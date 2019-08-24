@@ -28,7 +28,6 @@ const ColletterPick = styled.div`
     font-family: Roboto;
     font-size: 20px;
     font-weight: 600;
-    font-style: italic;
     font-stretch: normal;
     line-height: 1.3;
     letter-spacing: normal;

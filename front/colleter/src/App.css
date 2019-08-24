@@ -142,6 +142,10 @@
     margin-top: -30px;
 }
 
+.carousel-control-prev:hover {
+    background-color: #0f0f0f;
+}
+
 .carousel-indicators > li {
     width: 12px;
     height: 12px;
@@ -169,13 +173,16 @@
     width: 60px;
     height: 60px;
     background-color: #3e3e3e;
-    /* position: absolute; */
     display: flex;
     margin-left: calc(70% + 59px);
-
     margin-top: -30px;
     left: 0;
 }
+
+.carousel-control-next:hover {
+    background-color: #0f0f0f;
+}
+
 
 .carousel-indicators {
     margin-bottom: -57px;
@@ -248,18 +255,18 @@
     margin-top: 234px;
 }
 
-.inputName {
-    width: 80%;
-    margin-top: 4%;
-    margin-left: 9%;
+.inputName::placeholder {
+    color: #b8b8b8;
 }
 
 .inputText {
-    width: 80%;
-    height: 131px;;
-    margin-top: 4%;
-    margin-left: 9%;
+    height: 131px;
 }
+
+.inputText::placeholder {
+    color: #b8b8b8;
+}
+
 .popup_inner_register {
     position: absolute;
     left: 25%;
