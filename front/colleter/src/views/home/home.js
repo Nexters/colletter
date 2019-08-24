@@ -338,11 +338,11 @@ class home extends React.Component {
                 </Container>
                 <Carousel/>
                 <Container>
-                    <ColletterPick style={{ marginBottom: '15px' }}>Category</ColletterPick>
+                    <ColletterPick style={{marginBottom: '15px'}}>Category</ColletterPick>
                     <Category>
                         {this.state.categoryData.map((category) => {
                             categoryCount++;
-                            if (categoryCount < 5) {
+                            if (1 < categoryCount && categoryCount < 6) {
                                 return <CategoryImg key={category.id} src={category.image}
                                                     onClick={this.categoryLink.bind(this, category.id)}
                                                     alt="category"/>;
@@ -372,7 +372,8 @@ class home extends React.Component {
 
                                     <Card.Text className="cardText">
                                         <CardCategory>{news.category.nameKR}</CardCategory>
-                                        <CardCount>좋아요 <span style={{color: '#424242', fontWeight: '300'}}>{news.bookmarkedCount}</span></CardCount>
+                                        <CardCount>좋아요 <span
+                                            style={{color: '#424242', fontWeight: '300'}}>{news.bookmarkedCount}</span></CardCount>
                                     </Card.Text>
                                 </Card.Body>
                             </Card>
@@ -391,7 +392,8 @@ class home extends React.Component {
                             else heartImg = heart;
                             return <Card style={{width: '415px', height: '415px'}} key={news.id}>
                                 <Card.Body className="cardBody" onClick={this.changeId.bind(this, news.id)}>
-                                    <Card.Img variant="right" className="heartImg" src={heartImg} onClick={this.bookmark.bind(this, news.id)}/>
+                                    <Card.Img variant="right" className="heartImg" src={heartImg}
+                                              onClick={this.bookmark.bind(this, news.id)}/>
                                     <Card.Img variant="right" className="cardImg" src={news.image}/>
 
                                     <Card.Title className="cardTitle">{news.name}</Card.Title>
@@ -401,7 +403,8 @@ class home extends React.Component {
 
                                     <Card.Text className="cardText">
                                         <CardCategory>{news.category.nameKR}</CardCategory>
-                                        <CardCount>좋아요 <span style={{color: '#424242', fontWeight: '300'}}>{news.bookmarkedCount}</span></CardCount>
+                                        <CardCount>좋아요 <span
+                                            style={{color: '#424242', fontWeight: '300'}}>{news.bookmarkedCount}</span></CardCount>
                                     </Card.Text>
                                 </Card.Body>
                             </Card>
@@ -426,7 +429,8 @@ class home extends React.Component {
 
                                     <Card.Text className="cardText">
                                         <CardCategory>{news.category.nameKR}</CardCategory>
-                                        <CardCount>좋아요 <span style={{color: '#424242', fontWeight: '300'}}>{news.bookmarkedCount}</span></CardCount>
+                                        <CardCount>좋아요 <span
+                                            style={{color: '#424242', fontWeight: '300'}}>{news.bookmarkedCount}</span></CardCount>
                                     </Card.Text>
                                 </Card.Body>
                             </Card>

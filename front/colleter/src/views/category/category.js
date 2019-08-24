@@ -3,9 +3,9 @@ import styled from 'styled-components';
 import arrow from '../../img/ic-arrow-dropdown.png';
 import Popup from '../popup/popup';
 import jQuery from "jquery";
-import { Card, CardColumns } from 'react-bootstrap';
+import {Card, CardColumns} from 'react-bootstrap';
 import axios from 'axios';
-import { Navbar } from 'react-bootstrap';
+import {Navbar} from 'react-bootstrap';
 import heart from '../../img/ic-heart-default.png';
 import heartPicked from '../../img/ic-heart-picked.png';
 
@@ -282,14 +282,14 @@ class category extends React.Component {
                             return <PickCategory key={categoryData.id}
                                                  id={categoryData.id}
                                                  onClick={this.categoryChangeId.bind(this, categoryData.id)}>
-                                        <span className="spnCategory">{categoryData.nameKR}</span>
-                                    </PickCategory>
+                                <span className="spnCategory">{categoryData.nameKR}</span>
+                            </PickCategory>
                         } else {
                             return <TitleCategory key={categoryData.id}
                                                   onClick={this.categoryChangeId.bind(this, categoryData.id)}
                                                   id={categoryData.id}>
-                                        <span className="spnCategory"> {categoryData.nameKR}</span>
-                                    </TitleCategory>
+                                <span className="spnCategory"> {categoryData.nameKR}</span>
+                            </TitleCategory>
                         }
                     })}
                 </Navbar>
@@ -305,14 +305,14 @@ class category extends React.Component {
                                 return <PickCategory key={categoryData.id}
                                                      id={categoryData.id}
                                                      onClick={this.categoryChangeId.bind(this, categoryData.id)}>
-                                            <span className="spnCategory">{categoryData.nameKR}</span>
-                                    </PickCategory>
+                                    <span className="spnCategory">{categoryData.nameKR}</span>
+                                </PickCategory>
                             } else {
                                 return <TitleCategory key={categoryData.id}
                                                       onClick={this.categoryChangeId.bind(this, categoryData.id)}
                                                       id={categoryData.id}>
-                                            <span className="spnCategory"> {categoryData.nameKR}</span>
-                                    </TitleCategory>
+                                    <span className="spnCategory"> {categoryData.nameKR}</span>
+                                </TitleCategory>
                             }
                         })}
                     </DivCategory>
@@ -330,9 +330,13 @@ class category extends React.Component {
                         {this.state.categoryNews.map((news) => {
                             if (this.state.arrBookmarkNewId.includes(news.id)) heartImg = heartPicked;
                             else heartImg = heart;
-                            return <Card style={{width: '415px', height: '415px', marginBottom:'60px'}} key={news.id}>
-                                <Card.Body className="cardBody" data-id={news.id} onClick={this.changeId.bind(this, news.id)}>
-                                    <Card.Img variant="right" className="heartImg" src={heartImg} onClick={this.bookmark.bind(this, news.id)}/>
+                            return <Card
+                                style={{width: '415px', height: '415px', marginBottom: '60px', marginRight: '18px'}}
+                                key={news.id}>
+                                <Card.Body className="cardBody" data-id={news.id}
+                                           onClick={this.changeId.bind(this, news.id)}>
+                                    <Card.Img variant="right" className="heartImg" src={heartImg}
+                                              onClick={this.bookmark.bind(this, news.id)}/>
                                     <Card.Img variant="right" className="cardImg" src={news.image}/>
 
                                     <Card.Title className="cardTitle">{news.name}</Card.Title>
@@ -340,7 +344,8 @@ class category extends React.Component {
 
                                     <Card.Text className="cardText">
                                         <CardCategory>{news.category.nameKR}</CardCategory>
-                                        <CardCount>좋아요 <span style={{color: '#424242', fontWeight: '300'}}>{news.bookmarkedCount}</span></CardCount>
+                                        <CardCount>좋아요 <span
+                                            style={{color: '#424242', fontWeight: '300'}}>{news.bookmarkedCount}</span></CardCount>
                                     </Card.Text>
                                 </Card.Body>
                             </Card>
