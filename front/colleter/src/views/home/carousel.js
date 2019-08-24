@@ -2,7 +2,7 @@ import React from 'react';
 import {Carousel} from 'react-bootstrap';
 import slider1 from '../../img/img-retail-brew.png';
 import slider2 from '../../img/imgdd.png';
-import slider3 from '../../img/img.png';
+import slider3 from '../../img/dedock.png';
 
 import leftImg from '../../img/leftImg.PNG';
 import rightImg from '../../img/rightImg.PNG';
