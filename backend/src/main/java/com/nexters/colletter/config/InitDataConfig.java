@@ -24,6 +24,7 @@ public class InitDataConfig {
     @PostConstruct
     public void initData() {
         categoryRepository.saveAll(Arrays.asList(
+                new Category("ALL", "전체보기", null),
                 new Category("DESIGN", "디자인", null),
                 new Category("EDUCATION", "교육", null),
                 new Category("DEVELOPMENT", "개발", null),

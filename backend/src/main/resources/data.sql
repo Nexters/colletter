@@ -1,3 +1,4 @@
+INSERT INTO category (name_en, name_kr, image) VALUES ('ALL', '전체보기', null)
 INSERT INTO category (name_en, name_kr, image) VALUES ('DESIGN', '디자인', null)
 INSERT INTO category (name_en, name_kr, image) VALUES ('EDUCATION', '교육', null)
 INSERT INTO category (name_en, name_kr, image) VALUES ('DEVELOPMENT', '개발', null)

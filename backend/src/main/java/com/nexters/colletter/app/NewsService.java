@@ -95,11 +95,46 @@ public class NewsService {
         return newsRepository.findAll();
     }
 
+    // TODO : 리팩토링 - 전체 확인
     public List<News> getAllNewsByCategory(long categoryId) {
+        if (findCategoryById(categoryId).getNameKR().equals("전체")) {
+            return newsRepository.findAll();
+        }
+
         return newsRepository.findAllByCategory(
                 Category.builder()
                         .id(categoryId)
                         .build()
+        );
+    }
+
+    public List<News> getAllLatestNewsByCategory(long categoryId) {
+        if (findCategoryById(categoryId).getNameKR().equals("전체")) {
+            return newsRepository.findAll(
+                    new Sort(Sort.Direction.DESC, "updatedAt")
+            );
+        }
+
+        return newsRepository.findAllByCategory(
+                Category.builder()
+                        .id(categoryId)
+                        .build(),
+                new Sort(Sort.Direction.DESC, "updatedAt")
+        );
+    }
+
+    public List<News> getAllHitNewsByCategory(long categoryId) {
+        if (findCategoryById(categoryId).getNameKR().equals("전체")) {
+            return newsRepository.findAll(
+                    new Sort(Sort.Direction.DESC, "updatedAt")
+            );
+        }
+
+        return newsRepository.findAllByCategory(
+                Category.builder()
+                        .id(categoryId)
+                        .build(),
+                new Sort(Sort.Direction.DESC, "bookmarkedCount")
         );
     }
 
